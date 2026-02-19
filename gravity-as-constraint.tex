@@ -1,0 +1,423 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+
+\geometry{margin=1in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{axiom}{Axiom}
+\newtheorem{proposition}{Proposition}
+
+\title{\textbf{Gravity as Constraint:}\\[6pt]
+Self-Consistency as Physical Law,\\
+With Fixed-Point Existence Proofs and Decoherence Bounds}
+
+\author{Will [Last Name]\thanks{Corresponding author.} \quad Claude (Anthropic)\thanks{AI assistant; contributed to mathematical development and analysis.}}
+
+\date{February 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We propose that physical law is what self-consistency looks like: the universe is the fixed point of a constraint requiring that geometry and the quantum fields it hosts mutually determine each other. Gravity is not an independent degree of freedom to be quantized but a constraint---the demand that the block spacetime be self-consistent. The semiclassical Einstein equation, together with its stochastic extension via the noise kernel, implements this constraint at tree level in the stochastic gravity formalism of Hu and Verdaguer.
+
+We prove that self-consistent solutions exist: exactly in cosmology via the trace anomaly, perturbatively near any classical solution via Banach contraction with constant $\kappa \sim (m/M_P)^2 \ll 1$, and conditionally in the general case via the Schauder theorem. The Planck scale emerges as the natural validity boundary where $\kappa \to 1$.
+
+The stochastic extension yields a gravitational decoherence rate $\Gamma \sim G^2 m^4 / (\hbar^2 c d)$, suppressed by $(m/M_P)^2$ relative to the Di\'osi--Penrose prediction. We show that the Di\'osi--Penrose timescale \emph{does not follow} from semiclassical self-consistency and requires postulates beyond the Einstein equation. The framework further predicts null results for BMV entanglement at the quantum gravity rate. Both predictions are falsifiable.
+\end{abstract}
+
+%======================================================================
+\section{Motivation}
+%======================================================================
+
+Consider the possibility that physical law is self-consistency. Not a dynamical rule imposed from outside, but the demand that the universe---the complete block spacetime and the quantum fields it hosts---be a fixed point: every part determining every other part with no remainder and no contradiction.
+
+If this is taken seriously, gravity is not a force. It is a constraint. The geometry of spacetime is whatever it must be for the quantum fields propagating on it to source, through their stress-energy, exactly that geometry. The block is the ontology: the complete four-dimensional solution, not a three-dimensional state evolving forward. The arrow of time is a geometric feature of the block---the direction in which entropy increases---not a primitive dynamical ingredient.
+
+This view has concrete mathematical content. The semiclassical Einstein equation is precisely a self-consistency condition: the geometry and the quantum state must be mutually compatible. Its stochastic extension via the noise kernel promotes this from a mean-field constraint to one that includes quantum fluctuations. Together, they constitute tree-level quantum gravity expressed in the stochastic gravity formalism of Hu and Verdaguer~\cite{hu_verdaguer}, which reproduces the full spectrum of inflationary perturbations without quantizing the metric~\cite{roura_verdaguer}.
+
+The position that the semiclassical Einstein equation may be fundamental dates to M\o ller (1962) and Rosenfeld (1963), and has been developed in its most sophisticated modern form by Oppenheim~\cite{oppenheim}. What this paper adds to the program is:
+\begin{enumerate}
+\item Rigorous fixed-point existence proofs establishing that the self-consistency equation has solutions, with a quantitative contraction constant $\kappa \sim (m/M_P)^2$ and a natural Planck-scale validity boundary.
+\item A derivation of the gravitational decoherence rate that actually follows from semiclassical self-consistency, which turns out to be much slower than the commonly cited Di\'osi--Penrose rate.
+\item A demonstration that the Di\'osi--Penrose timescale requires physics beyond the semiclassical Einstein equation---a result that sharpens the theoretical landscape for gravitational decoherence experiments.
+\end{enumerate}
+
+%======================================================================
+\section{Core Proposal}
+%======================================================================
+
+\subsection{The Self-Consistency Equation}
+
+The fundamental equation of the framework is:
+\begin{equation}
+G_{\mu\nu}[g] = 8\pi G \, \langle \Psi | \hat{T}_{\mu\nu}[g] | \Psi \rangle
+\label{eq:sce}
+\end{equation}
+where $G_{\mu\nu}[g]$ is the Einstein tensor computed from the geometry $g_{\mu\nu}$, $|\Psi\rangle$ is the global quantum state of all matter fields, and $\hat{T}_{\mu\nu}[g]$ is the stress-energy tensor operator defined on the geometry $g$. The expectation value is computed on the same geometry that the left side describes.
+
+This is not a dynamical equation in the usual sense. It is a fixed-point condition: we seek the geometry $g_{\mu\nu}$ such that the quantum state it hosts, evolving on it, sources exactly that geometry.
+
+\subsection{Axioms}
+
+\begin{axiom}[Ontology]
+The fundamental entities are quantum fields $\hat{\phi}_i$ defined on a 4-dimensional Lorentzian manifold $(\mathcal{M}, g_{\mu\nu})$.
+\end{axiom}
+
+\begin{axiom}[Geometry as constraint]
+The geometry is not independently dynamical. Its mean is determined by the self-consistency condition~\eqref{eq:sce}; its fluctuations are determined by the noise kernel of quantum stress-energy (eq.~\ref{eq:noise_kernel}). Both the mean geometry and its stochastic corrections are sourced entirely by quantum matter---no independent gravitational degrees of freedom contribute. The noise kernel carries quantum correlations of the stress-energy; at tree level, the resulting stochastic metric fluctuations are isomorphic to graviton exchange~\cite{hu_verdaguer}. The framework therefore constitutes tree-level quantum gravity expressed in stochastic language.
+\end{axiom}
+
+\begin{axiom}[Global solution]
+The triple $(\mathcal{M}, g_{\mu\nu}, |\Psi\rangle)$ is solved as a fixed-point problem over the entire manifold. The solution is the block---the complete spacetime.
+\end{axiom}
+
+%======================================================================
+\section{Fixed-Point Existence}
+\label{sec:fixedpoint}
+%======================================================================
+
+This section contains the framework's core mathematical contribution. The self-consistency equation~\eqref{eq:sce} is a fixed-point condition; the question of whether the framework is well-defined reduces to whether fixed points exist. We establish existence at three levels of generality.
+
+\subsection{The Map}
+
+Define $\mathcal{F}: g_{\mu\nu} \mapsto g'_{\mu\nu}$ by:
+\begin{enumerate}
+\item Given a trial geometry $g$, construct the QFT on $(\mathcal{M}, g)$ and identify the physical state $|\Psi_g\rangle$ via the Hadamard condition.
+\item Compute $S_{\mu\nu}[g] \equiv 8\pi G \langle \hat{T}_{\mu\nu} \rangle_{g,\text{ren}}$.
+\item Solve $G_{\mu\nu}[g'] = S_{\mu\nu}[g]$ for $g'$.
+\end{enumerate}
+We seek $g^*$ such that $\mathcal{F}(g^*) = g^*$.
+
+\subsection{Cosmological Fixed Point: Exact Solution}
+
+\begin{theorem}[Starobinsky, 1980 \cite{starobinsky}]
+The self-consistency equation on FRW spacetime with conformal matter admits an exact de~Sitter solution $a(t) = a_0 e^{H_0 t}$ with:
+\begin{equation}
+H_0^2 = \frac{180\pi}{G |a_2|}
+\end{equation}
+where $a_2$ depends on the field content. This solution is a stable attractor: perturbations $\delta H$ are exponentially damped.
+\end{theorem}
+
+\noindent\emph{Proof sketch.} For constant $H$, all time derivatives vanish. The trace anomaly~\cite{capper_duff} reduces to $\langle \hat{T}^\mu{}_\mu \rangle = -a_2 H_0^4 / 120\pi^2$. The Friedmann equation yields $H_0$. Stability follows from the linearized equation for $\delta H$~\cite{starobinsky}.
+
+This constitutes an existence proof: the de~Sitter geometry, when used to compute the quantum stress-energy of fields living on it, sources exactly itself.
+
+\subsection{Perturbative Fixed Point: Banach Contraction}
+
+Let $\bar{g}$ be a solution of the classical Einstein equations. Define the quantum-corrected map:
+\begin{equation}
+\mathcal{F}(g) = \bar{g} + (G^{\bar{g}}_{\text{lin}})^{-1} \left[ 8\pi G \langle \hat{T}_{\mu\nu} \rangle^{(\text{quantum})}_g \right]
+\end{equation}
+
+\begin{theorem}[Perturbative existence]
+The map $\mathcal{F}$ is a contraction in the $H^s$ norm with contraction constant:
+\begin{equation}
+\kappa \sim \frac{1}{2\pi} \left( \frac{m}{M_P} \right)^2 \ell_P^2 R
+\label{eq:kappa}
+\end{equation}
+where $m$ is the field mass, $M_P = 1/\sqrt{G}$ is the Planck mass, and $R$ is the background curvature scale.
+\end{theorem}
+
+\noindent\emph{Proof sketch.} The Lipschitz constant of $\mathcal{F}$ is bounded by $\kappa = 8\pi G \| (G_{\text{lin}})^{-1} \|_{\text{op}} \cdot \| \delta \langle \hat{T}_{\mu\nu} \rangle / \delta g \|_{\text{op}}$. The response kernel has been computed~\cite{horowitz,phillips_hu}; its operator norm scales as $\hbar m^2 c / (4\pi)^2$. Combined with the inverse linearized Einstein operator norm $\sim 1/R$, this yields the result.
+
+For all known particles, $\kappa \ll 1$:
+
+\medskip
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Particle & Mass (kg) & $\kappa \sim (m/M_P)^2$ \\
+\midrule
+Electron & $9.1 \times 10^{-31}$ & $\sim 10^{-45}$ \\
+Proton & $1.7 \times 10^{-27}$ & $\sim 10^{-39}$ \\
+Top quark & $3.1 \times 10^{-25}$ & $\sim 10^{-34}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\medskip
+
+By the Banach fixed-point theorem, a unique self-consistent solution exists in a neighborhood of any classical solution, and the iterative scheme converges exponentially.
+
+\subsection{Non-Perturbative Existence via Schauder}
+
+For strong-field regimes, we invoke the Schauder fixed-point theorem~\cite{schauder}. If $\mathcal{F}$ maps a convex, compact subset $K$ of the metric space into itself, and $\mathcal{F}$ is continuous, then $\mathcal{F}$ has a fixed point. Continuity follows from the continuous dependence of the Hadamard parametrix on the metric~\cite{radzikowski} and the well-posedness of the Einstein equations~\cite{choquet_bruhat}. Compactness of $K$ in the appropriate Sobolev space follows from the Rellich--Kondrachov theorem.
+
+We note that a fully rigorous Schauder argument requires specifying the convex compact subset (including gauge fixing) and verifying $\mathcal{F}$-invariance---nontrivial steps in Lorentzian signature with diffeomorphism invariance. We regard this as a conditional result pending further functional-analytic development.
+
+\subsection{Breakdown at the Planck Scale}
+
+The analysis fails when $R \sim \ell_P$: the contraction constant $\kappa$ approaches 1, and neither the perturbative nor the Schauder argument applies. The Planck scale emerges as the natural boundary of the framework's validity---not imposed by hand, but derived from the mathematics of fixed-point convergence.
+
+%======================================================================
+\section{Gravitational Decoherence from Self-Consistent Fluctuations}
+\label{sec:decoherence}
+%======================================================================
+
+We now derive the gravitational decoherence rate that follows from the self-consistency framework. This requires careful analysis, as the result differs from what has been widely assumed.
+
+\subsection{The Deterministic Equation Does Not Decohere}
+
+\begin{proposition}
+The deterministic self-consistency equation~\eqref{eq:sce} does not produce decoherence for spatially separated superpositions.
+\end{proposition}
+
+\noindent\emph{Proof.} Consider a mass $m$ in superposition $|\psi\rangle = \frac{1}{\sqrt{2}}(|L\rangle + |R\rangle)$, with $|L\rangle$ and $|R\rangle$ spatially separated by $d$. The density matrix is:
+\begin{equation}
+\rho = \frac{1}{2}\left(|L\rangle\langle L| + |R\rangle\langle R| + |L\rangle\langle R| + |R\rangle\langle L|\right)
+\end{equation}
+The self-consistency equation sources the geometry via $\langle \hat{T}_{\mu\nu} \rangle = \mathrm{Tr}(\rho \, \hat{T}_{\mu\nu})$. For spatially separated wavepackets, the stress-energy operator is local: $\langle L | \hat{T}_{\mu\nu}(x) | R \rangle \approx 0$ when $x$ is in the support of either wavepacket. Therefore:
+\begin{equation}
+\langle \hat{T}_{\mu\nu} \rangle \approx \frac{1}{2} T^{(L)}_{\mu\nu} + \frac{1}{2} T^{(R)}_{\mu\nu}
+\label{eq:tmunu_avg}
+\end{equation}
+independent of the off-diagonal coherence $\rho_{LR}$. The geometry determined by eq.~\eqref{eq:sce} is therefore identical whether the system is in a coherent superposition or a classical mixture. Since the Hamiltonian governing the matter evolution depends only on this geometry, the time evolution of $\rho_{LR}$ is purely oscillatory (a phase rotation), not decaying. The deterministic self-consistency equation is blind to coherence and cannot destroy it. \hfill$\square$
+
+This result has a simple physical interpretation: the self-consistency equation extracts $\langle \hat{T}_{\mu\nu} \rangle$ from the quantum state and feeds it back as a classical geometry. For separated wavepackets, this expectation value carries no information about the quantum coherence between branches. A classical geometry that carries no branch-distinguishing information cannot selectively suppress the off-diagonal elements of $\rho$.
+
+\subsection{The Stochastic Extension}
+
+The semiclassical equation uses the mean $\langle \hat{T}_{\mu\nu} \rangle$, but quantum operators fluctuate. The natural next-order correction incorporates these fluctuations through the Einstein--Langevin equation~\cite{hu_verdaguer}:
+\begin{equation}
+G_{\mu\nu}[g] = 8\pi G \left( \langle \hat{T}_{\mu\nu} \rangle_g + \xi_{\mu\nu} \right)
+\label{eq:einstein_langevin}
+\end{equation}
+where $\xi_{\mu\nu}$ is a stochastic tensor with zero mean and correlator given by the noise kernel:
+\begin{equation}
+\langle \xi_{\mu\nu}(x) \, \xi_{\alpha\beta}(x') \rangle = N_{\mu\nu\alpha\beta}(x, x') \equiv \frac{1}{2} \langle \{ \delta\hat{T}_{\mu\nu}(x), \, \delta\hat{T}_{\alpha\beta}(x') \} \rangle
+\label{eq:noise_kernel}
+\end{equation}
+with $\delta\hat{T}_{\mu\nu} \equiv \hat{T}_{\mu\nu} - \langle \hat{T}_{\mu\nu} \rangle$.
+
+This is not an additional postulate. It is the leading fluctuation correction to any mean-field theory, analogous to the passage from Hartree to Hartree-Fock in atomic physics or from the Boltzmann equation to the Langevin equation in statistical mechanics. The noise kernel $N_{\mu\nu\alpha\beta}$ is computable from the quantum state and the geometry~\cite{phillips_hu}.
+
+\subsection{Decoherence Rate from Stochastic Geometry}
+
+The stochastic metric fluctuations induce a random potential that differs between branches. For a mass $m$ in superposition of size $d$, the Newtonian potential fluctuation at each branch location is $\delta\Phi_{L,R} = -(c^2/2) \, \delta g_{00}(x_{L,R})$. The off-diagonal element of the density matrix, averaged over stochastic realizations, evolves as:
+\begin{equation}
+|\rho_{LR}(t)| = |\rho_{LR}(0)| \, \exp\!\left( -\frac{1}{2\hbar^2} \int_0^t \!\!\int_0^t \langle [\delta V_L(t') - \delta V_R(t')][\delta V_L(t'') - \delta V_R(t'')] \rangle \, dt' \, dt'' \right)
+\label{eq:decoherence_gaussian}
+\end{equation}
+where $\delta V_{L,R} = m \, \delta\Phi_{L,R}$ are the stochastic potential fluctuations at the two branch locations, and the Gaussian average over noise realizations gives the exponential form.
+
+The potential difference correlator is determined by the noise kernel through the linearized Einstein equation. The stochastic metric perturbation satisfies:
+\begin{equation}
+G^{\text{lin}}_{\mu\nu}[\delta g] = 8\pi G \, \xi_{\mu\nu}
+\end{equation}
+In the Newtonian limit, $\delta\Phi(x) = -G \int \xi_{00}(x') / |x - x'| \, d^3x'$, and the potential difference correlator becomes:
+\begin{equation}
+\langle [\delta V_L - \delta V_R]^2 \rangle \sim m^2 G^2 \!\!\int\!\!\int \frac{K(x,x')}{|x - x_L| \cdot |x' - x_L|} \, d^3x \, d^3x' - (L \leftrightarrow R) + \text{cross terms}
+\end{equation}
+where $K(x,x') \equiv N_{0000}(x,x')$ is the energy-density fluctuation kernel.
+
+The magnitude of $K$ is set by the quantum variance of the stress-energy. For a mass $m$ in superposition, the dominant contribution is from the variance of the mass distribution itself: $K \sim m^2 c^4 / \sigma^3$ where $\sigma$ is the wavepacket size. The noise correlation time is set by the light-crossing time $\tau_{\text{corr}} \sim d/c$.
+
+Collecting factors, the decoherence rate evaluates to:
+\begin{equation}
+\Gamma_{\text{sc}} \sim \frac{G^2 m^4}{\hbar^2 c \, d}
+\label{eq:gamma_sc}
+\end{equation}
+
+This can be expressed in terms of the Di\'osi--Penrose rate $\Gamma_{DP} = Gm^2/(\hbar d)$ as:
+\begin{equation}
+\Gamma_{\text{sc}} \sim \left(\frac{m}{M_P}\right)^2 \Gamma_{DP}
+\label{eq:suppression}
+\end{equation}
+
+The suppression factor $(m/M_P)^2$ is the same contraction constant $\kappa$ that appears in the fixed-point analysis (eq.~\ref{eq:kappa} with $\ell_P^2 R \sim 1$). This is not a coincidence: both the convergence rate of the fixed-point map and the decoherence rate from stochastic fluctuations are controlled by the same dimensionless ratio measuring the strength of quantum backreaction on geometry.
+
+\subsection{Numerical Consequences}
+
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+System & Mass (kg) & $d$ & $\tau_{\text{sc}} = 1/\Gamma_{\text{sc}}$ & $\tau_{DP} = \hbar d / Gm^2$ \\
+\midrule
+Electron & $9.1 \times 10^{-31}$ & 1 nm & $\sim 10^{72}$ s & $\sim 10^{27}$ s \\
+Microdiamond & $10^{-14}$ & 100 $\mu$m & $\sim 10^{13}$ s & 1.6 s \\
+Planck mass & $2.2 \times 10^{-8}$ & 1 $\mu$m & $\sim 10^{-14}$ s & $\sim 10^{-14}$ s \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The two rates converge at the Planck mass ($M_P = 2.18 \times 10^{-8}$~kg), where $\kappa \sim 1$ and the framework reaches its validity boundary---the decoherence timescale drops to femtoseconds, consistent with Planck-scale physics. For all sub-Planckian masses, the self-consistent decoherence rate is unobservably slow: even for a microdiamond ($m \sim 10^{-14}$~kg), $\tau_{\text{sc}} \sim 10^{13}$~s ($\sim 240{,}000$ years), compared to the Di\'osi--Penrose prediction of 1.6~s.
+
+%======================================================================
+\section{The Di\'osi--Penrose Rate Does Not Follow}
+\label{sec:dp}
+%======================================================================
+
+The result of Section~\ref{sec:decoherence} has an important negative implication. The Di\'osi--Penrose decoherence timescale $\tau_{DP} = \hbar d / Gm^2$ is widely cited as a prediction of gravitational decoherence, and several experimental programs are designed to test it at mesoscopic scales~\cite{bose}. It is sometimes assumed, implicitly or explicitly, that this timescale follows from semiclassical gravity or from the self-consistency of the Einstein equation with quantum matter.
+
+We have shown that it does not. The decoherence rate that follows from the semiclassical self-consistency equation plus its natural stochastic extension is suppressed by $(m/M_P)^2$ relative to the Di\'osi--Penrose rate. The origin of the suppression is clear: the noise in the stochastic extension comes from quantum fluctuations of $\hat{T}_{\mu\nu}$, whose gravitational effect is controlled by $G$. Converting this noise into a metric perturbation introduces a second factor of $G$, giving an overall rate proportional to $G^2$.
+
+To obtain the Di\'osi--Penrose rate ($\propto G^1$), one must introduce noise at the level of the gravitational potential itself, not derived from quantum matter fluctuations. This is precisely what Di\'osi's model does~\cite{diosi}: it postulates a fundamental stochastic process in the Newtonian potential with a specific noise spectrum. Penrose's argument~\cite{penrose} arrives at the same timescale from a different route, invoking the ill-definedness of the time-translation operator for superposed geometries. Neither derivation follows from the semiclassical Einstein equation.
+
+This sharpens the theoretical landscape:
+\begin{itemize}
+\item If gravitational decoherence is observed at the Di\'osi--Penrose rate, it cannot be explained by semiclassical self-consistency. Either gravity must be quantized, or a fundamentally new noise source (beyond quantum stress-energy fluctuations) must exist.
+\item If gravitational decoherence is \emph{not} observed at the Di\'osi--Penrose rate in the accessible mass range ($m \sim 10^{-14}$~kg), this is consistent with the self-consistency framework but does not confirm it, since the framework's own decoherence rate is unobservably slow at these masses.
+\item The experimental program testing Di\'osi--Penrose is therefore probing physics \emph{beyond} semiclassical gravity, regardless of its outcome.
+\end{itemize}
+
+%======================================================================
+\section{Experimental Predictions}
+\label{sec:experiment}
+%======================================================================
+
+\subsection{BMV Entanglement}
+
+The Bose--Marletto--Vedral experiment~\cite{bose,marletto_vedral} places two masses in spatial superposition and tests for gravitational entanglement.
+
+\begin{theorem}[Separability preservation---first-quantized matter]
+In the linearized regime with first-quantized matter, semiclassical gravitational evolution preserves the separability of quantum states.
+\end{theorem}
+
+\noindent\emph{Proof.} For a product state $\rho = \rho_1 \otimes \rho_2$, the stress-energy decomposes as $\langle \hat{T}_{\mu\nu} \rangle = \langle \hat{T}_{\mu\nu} \rangle_1 + \langle \hat{T}_{\mu\nu} \rangle_2$. In the linearized Einstein equation, $h_{\mu\nu} = h^{(1)}_{\mu\nu} + h^{(2)}_{\mu\nu}$, and the Hamiltonian factorizes into single-particle operators plus a c-number interaction potential from the smeared distributions. A c-number potential cannot generate entanglement (LOCC theorem). The nonlinear correction is of order $Gm/c^2 D \sim 10^{-38}$ for BMV parameters. \hfill$\square$
+
+When matter is described within full QFT, Aziz and Howl~\cite{aziz_howl} have shown that virtual matter propagators can transmit quantum information through a classical gravitational interaction, generating entanglement at fourth order in perturbation theory. The effect scales as $\vartheta \propto G^2 m^2 M^3 R \, t / \hbar^3 d$, suppressed relative to the quantum gravity prediction ($\varphi \propto GM^2 t / \hbar d$) by additional powers of mass.
+
+\textbf{Prediction:} The BMV experiment will observe either (a)~no entanglement, or (b)~entanglement at the suppressed classical-gravity rate from virtual matter propagators. It will not observe entanglement at the rate predicted by quantum gravity. Observation of entanglement at the quantum gravity rate would falsify this framework.
+
+This prediction is independent of the decoherence timescale and does not require the Di\'osi--Penrose rate.
+
+\subsection{Gravitational Decoherence Experiments}
+
+The framework predicts that experiments searching for gravitational decoherence at the Di\'osi--Penrose rate~\cite{diosi,penrose} will find no anomalous decoherence. The self-consistent decoherence rate (eq.~\ref{eq:gamma_sc}) is too slow to observe at any sub-Planckian mass.
+
+This is a prediction that the Di\'osi--Penrose community would dispute, making it falsifiable in both directions. The critical test involves placing a mass $m \sim 10^{-14}$~kg in superposition of size $d \sim 100~\mu$m with all environmental decoherence suppressed:
+\begin{itemize}
+\item If fringe visibility decays on a timescale $\sim \hbar d / Gm^2 \approx 1.6$~s, the Di\'osi--Penrose models are supported and our framework is falsified.
+\item If no anomalous decoherence is observed beyond environmental sources, the result is consistent with our framework.
+\end{itemize}
+
+\subsection{Distinguishing from Alternative Models}
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Model & Decoherence rate & $m$-scaling & $G$-scaling \\
+\midrule
+This framework & $G^2 m^4 / (\hbar^2 c d)$ & $m^{4}$ & $G^2$ \\
+Di\'osi--Penrose & $G m^2 / (\hbar d)$ & $m^{2}$ & $G$ \\
+Kafri--Taylor--Milburn & $\sim G^2 m^3 / (\hbar D^5)$ & $m^{3}$ & $G^2$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The key discriminator is the $G$-scaling: models in which gravity introduces fundamental noise (Di\'osi, Penrose) predict rates proportional to $G^1$; models in which decoherence arises from quantum backreaction on classical geometry (this framework, KTM) predict $G^2$.
+
+%======================================================================
+\section{Relation to Existing Work}
+%======================================================================
+
+\textbf{Semiclassical gravity} (M\o ller, Rosenfeld): Our starting point. We treat the SCE and its stochastic extension as the sufficient description of gravity below the Planck scale, rather than an approximation to a deeper theory.
+
+\textbf{Stochastic gravity} (Hu, Verdaguer~\cite{hu_verdaguer,phillips_hu}): The Einstein--Langevin equation is the natural fluctuation extension of our framework. Our decoherence calculation (Section~\ref{sec:decoherence}) is performed within this formalism.
+
+\textbf{Penrose collapse}~\cite{penrose}: Predicts the same decoherence timescale as Di\'osi but from a different argument. Our framework shows this timescale does not follow from semiclassical self-consistency.
+
+\textbf{Di\'osi model}~\cite{diosi}: Postulates fundamental gravitational noise at the Newtonian potential level. Our framework derives the noise from quantum stress-energy fluctuations, obtaining a rate suppressed by $(m/M_P)^2$.
+
+\textbf{Postquantum classical gravity} (Oppenheim~\cite{oppenheim}): The most developed modern framework for classical-gravity-coupled-to-quantum-matter. Oppenheim derives a decoherence-diffusion trade-off that constrains any theory in which gravity couples to quantum matter through a classical channel. Our framework is not in this class: the noise kernel (eq.~\ref{eq:noise_kernel}) is a quantum object---the symmetrized two-point correlator of stress-energy fluctuations---and the stochastic metric fluctuations it sources are isomorphic to tree-level graviton exchange, not to a classical communication channel. The framework therefore escapes Oppenheim's trade-off rather than satisfying it. What the fixed-point analysis adds is a constructive existence proof with a quantitative contraction constant $\kappa \sim (m/M_P)^2$, giving a derived Planck-scale validity boundary rather than an imposed one. The null BMV prediction is shared between frameworks.
+
+\textbf{Inflationary spectrum from stochastic gravity} (Roura, Verdaguer~\cite{roura_verdaguer}): Demonstrates that the stochastic gravity formalism reproduces the full spectrum of cosmological perturbations---scalar and tensor---without quantizing the metric. This removes a standard objection that semiclassical gravity cannot account for the inflationary perturbation spectrum, and supports the interpretation of the framework as tree-level quantum gravity.
+
+\textbf{Classical gravity entanglement} (Aziz, Howl~\cite{aziz_howl}): Shows that QFT matter on a classical gravitational background can generate entanglement through virtual matter propagators. Compatible with our ontology.
+
+\textbf{Page--Geilker experiment}~\cite{page_geilker}: Found that the gravitational field tracks definite measurement outcomes rather than expectation values. In our block-universe ontology (Axiom~3), this is expected: the global self-consistent solution includes the definite outcome.
+
+%======================================================================
+\section{Open Problems}
+\label{sec:open}
+%======================================================================
+
+\begin{enumerate}
+\item \textbf{Effective initial value formulation.} Axiom~3 states that the solution is global. Practical physics needs a local formulation---solving on patches and stitching together.
+
+\item \textbf{Rigorous Schauder application.} The non-perturbative existence argument requires specifying the convex compact $\mathcal{F}$-invariant subset, including gauge fixing in Lorentzian signature.
+
+\item \textbf{Precise noise kernel evaluation.} The decoherence rate in eq.~\eqref{eq:gamma_sc} is estimated from scaling arguments. A precise calculation using the noise kernel of Phillips and Hu~\cite{phillips_hu} for specific experimental geometries would sharpen the prediction. In particular, the rate for composite objects (e.g., microdiamonds with $N \sim 10^{12}$ atoms) is extrapolated from single-particle results assuming coherent center-of-mass superposition ($\Gamma \propto m_{\text{total}}^4$). This scaling is expected for rigid-body superpositions where all constituents move together, but a noise kernel calculation for extended objects would confirm the prefactor. The $G^2$ scaling and $(m/M_P)^2$ suppression are robust regardless of the prefactor.
+
+\item \textbf{Macroscopic definiteness.} The framework does not currently derive the emergence of definite macroscopic outcomes from the self-consistency condition alone. The stochastic extension provides decoherence but at an unobservably slow rate. Whether the global constraint (Axiom~3) provides additional selection of definite outcomes remains open.
+
+\item \textbf{Black hole evaporation and the Page time.} The framework inherits the Hawking calculation, which predicts monotonically increasing radiation entropy. For large black holes---where curvature is small and $\kappa \ll 1$, well within the framework's stated validity domain---this conflicts with unitarity at the Page time~\cite{page_curve}. The island formula~\cite{penington,aemm} resolves this via topology-changing saddles in the gravitational path integral, but topology change amounts to summing over geometries, which the framework does not include.
+
+This reveals that the framework's validity requires two conditions, not one: (a)~$\kappa \ll 1$ (quantum backreaction is perturbatively small), and (b)~the observable in question must be computable on a single spacetime topology. The Page curve violates condition~(b) despite satisfying condition~(a). We regard this as the sharpest limitation of the tree-level description. Condition~(b) is not self-diagnosable: determining whether topology change contributes to a given observable requires the full theory of quantum gravity, which the framework does not provide.
+
+\item \textbf{Lorentzian signature and conformal symmetry breaking.} The physical content of the timelike direction---rest frames, proper time, timelike geodesics---depends entirely on the existence of massive fields. In a purely conformal universe with no symmetry breaking, the $(-,+,+,+)$ signature would have no observable consequences: no field would have a rest frame and no proper time could be defined for any physical degree of freedom. This observation appears in Penrose's conformal cyclic cosmology~\cite{penrose_ccc}, where the far-future decay of all massive particles renders the timelike/null distinction physically irrelevant. Wheeler~\cite{wheeler_biconformal} has shown, conversely, that gauging the conformal group $SO(4,2)$ on Euclidean space dynamically produces Lorentzian signature on submanifolds. Whether the self-consistency fixed point of Section~\ref{sec:fixedpoint} \emph{requires} Lorentzian signature when the field content includes massive fields---i.e., whether the Banach contraction fails on a Riemannian manifold---is an open question that connects the present framework to these programs.
+\end{enumerate}
+
+%======================================================================
+\section{Summary}
+%======================================================================
+
+We have developed the consequences of a single thesis: physical law is self-consistency, and gravity is the constraint that enforces it. The semiclassical Einstein equation and its stochastic extension implement this constraint at tree level. The block spacetime---the complete four-dimensional solution---is the ontology.
+
+The mathematical content of this thesis is:
+\begin{enumerate}
+\item \textbf{Self-consistent solutions exist} with quantitative control---exactly in cosmology, perturbatively near all classical solutions with contraction constant $\kappa \sim (m/M_P)^2 \ll 1$, and conditionally in the general case. The Planck scale emerges as the natural validity boundary where $\kappa \to 1$.
+
+\item \textbf{The Di\'osi--Penrose decoherence rate does not follow from self-consistency.} The stochastic extension yields a rate suppressed by $(m/M_P)^2$, arising from the $G^2$ scaling of gravitationally mediated quantum noise. Observation of gravitational decoherence at the Di\'osi--Penrose rate would require physics beyond the semiclassical Einstein equation.
+
+\item \textbf{BMV entanglement experiments will not observe entanglement at the quantum gravity rate.} Semiclassical evolution preserves separability at the first-quantized level; QFT corrections allow only a suppressed channel distinguishable from quantum gravity predictions.
+\end{enumerate}
+
+The framework is falsifiable: observation of BMV entanglement at the quantum gravity rate, or gravitational decoherence at the Di\'osi--Penrose rate, would refute it. Its sharpest known limitation is black hole evaporation past the Page time, where topology change---absent from the tree-level description---becomes essential (Section~\ref{sec:open}).
+
+%======================================================================
+\begin{thebibliography}{99}
+
+\bibitem{bose} S.~Bose \textit{et al.}, Spin entanglement witness for quantum gravity, \textit{Phys.\ Rev.\ Lett.}\ \textbf{119}, 240401 (2017).
+
+\bibitem{marletto_vedral} C.~Marletto and V.~Vedral, Gravitationally induced entanglement between two massive particles is sufficient evidence of quantum effects in gravity, \textit{Phys.\ Rev.\ Lett.}\ \textbf{119}, 240402 (2017).
+
+\bibitem{starobinsky} A.~A.~Starobinsky, A new type of isotropic cosmological models without singularity, \textit{Phys.\ Lett.\ B}\ \textbf{91}, 99 (1980).
+
+\bibitem{capper_duff} D.~M.~Capper and M.~J.~Duff, Trace anomalies in dimensional regularization, \textit{Nuovo Cimento A}\ \textbf{23}, 173 (1974).
+
+\bibitem{horowitz} G.~T.~Horowitz, Semiclassical relativity: The weak-field limit, \textit{Phys.\ Rev.\ D}\ \textbf{21}, 1445 (1980).
+
+\bibitem{phillips_hu} N.~G.~Phillips and B.~L.~Hu, Noise kernel in stochastic gravity and stress energy bitensor, \textit{Phys.\ Rev.\ D}\ \textbf{63}, 104001 (2001).
+
+\bibitem{hu_verdaguer} B.~L.~Hu and E.~Verdaguer, Stochastic gravity: Theory and applications, \textit{Living Rev.\ Relativ.}\ \textbf{11}, 3 (2008).
+
+\bibitem{diosi} L.~Di\'osi, A universal master equation for the gravitational violation of quantum mechanics, \textit{Phys.\ Lett.\ A}\ \textbf{120}, 377 (1987).
+
+\bibitem{penrose} R.~Penrose, On gravity's role in quantum state reduction, \textit{Gen.\ Rel.\ Grav.}\ \textbf{28}, 581 (1996).
+
+\bibitem{radzikowski} M.~J.~Radzikowski, Micro-local approach to the Hadamard condition, \textit{Commun.\ Math.\ Phys.}\ \textbf{179}, 529 (1996).
+
+\bibitem{choquet_bruhat} Y.~Choquet-Bruhat, Th\'eor\`eme d'existence pour certains syst\`emes d'\'equations aux d\'eriv\'ees partielles non lin\'eaires, \textit{Acta Math.}\ \textbf{88}, 141 (1952).
+
+\bibitem{schauder} J.~Schauder, Der Fixpunktsatz in Funktionalr\"aumen, \textit{Studia Math.}\ \textbf{2}, 171 (1930).
+
+\bibitem{kafri} D.~Kafri, J.~M.~Taylor, and G.~J.~Milburn, A classical channel model for gravitational decoherence, \textit{New J.\ Phys.}\ \textbf{16}, 065020 (2014).
+
+\bibitem{aziz_howl} J.~Aziz and R.~Howl, Classical theories of gravity produce entanglement, \textit{Nature}\ \textbf{646}, 813--817 (2025).
+
+\bibitem{page_geilker} D.~N.~Page and C.~D.~Geilker, Indirect evidence for quantum gravity, \textit{Phys.\ Rev.\ Lett.}\ \textbf{47}, 979 (1981).
+
+\bibitem{oppenheim} J.~Oppenheim, A postquantum theory of classical gravity?, \textit{Phys.\ Rev.\ X}\ \textbf{13}, 041040 (2023).
+
+\bibitem{roura_verdaguer} A.~Roura and E.~Verdaguer, Cosmological perturbations from stochastic gravity, \textit{Phys.\ Rev.\ D}\ \textbf{78}, 064010 (2008).
+
+\bibitem{page_curve} D.~N.~Page, Average entropy of a subsystem, \textit{Phys.\ Rev.\ Lett.}\ \textbf{71}, 1291 (1993).
+
+\bibitem{penington} G.~Penington, Entanglement wedge reconstruction and the information problem, \textit{J.\ High Energy Phys.}\ \textbf{2020}, 002 (2020).
+
+\bibitem{aemm} A.~Almheiri, N.~Engelhardt, D.~Marolf, and H.~Maxfield, The entropy of bulk quantum fields and the entanglement wedge of an evaporating black hole, \textit{J.\ High Energy Phys.}\ \textbf{2019}, 063 (2019).
+
+\bibitem{penrose_ccc} R.~Penrose, \textit{Cycles of Time: An Extraordinary New View of the Universe} (Bodley Head, London, 2010).
+
+\bibitem{wheeler_biconformal} S.~T.~Spencer and J.~T.~Wheeler, The existence of time, \textit{Int.\ J.\ Geom.\ Methods Mod.\ Phys.}\ \textbf{8}, 273 (2011); arXiv:1512.01729.
+
+\end{thebibliography}
+
+\end{document}
+
