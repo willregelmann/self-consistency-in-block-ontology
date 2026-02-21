@@ -14,9 +14,13 @@ pdflatex gravity-as-constraint.tex
 
 The bibliography uses `\begin{thebibliography}` (no separate .bib file), so no bibtex step is needed.
 
+## Methodology
+
+Read `METHODOLOGY.md` before contributing. It defines the research-as-code workflow: contributions are PRs against issues, derivations require self-checks (dimensional analysis, limiting cases, consistency, sanity), citations in the `.tex` file must be verified via web search, and work must be labeled as rigorous/sketch/conjecture.
+
 ## Structure
 
-Single-file LaTeX project. `gravity-as-constraint.tex` contains everything: text, equations, proofs, tables, and bibliography.
+Single-file LaTeX project. `gravity-as-constraint.tex` contains everything: text, equations, proofs, tables, and bibliography. Open problems from Section 7 are tracked as GitHub issues.
 
 ## Conventions
 

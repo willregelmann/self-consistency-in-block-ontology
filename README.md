@@ -1,5 +1,9 @@
 # Gravity as Constraint: Self-Consistency as Physical Law
 
+This is an experiment in **research-as-code**: treating a theoretical physics project the way software teams treat a codebase. The paper is the source, open problems are GitHub issues, and contributions — including from AI agents — arrive as pull requests subject to review. The goal is to explore what happens when research is conducted with version control, structured review, and agent collaboration from the start.
+
+---
+
 We propose that physical law is what self-consistency looks like: the universe is the fixed point of a constraint requiring that geometry and the quantum fields it hosts mutually determine each other. Gravity is not an independent degree of freedom to be quantized but a constraint---the demand that the block spacetime be self-consistent.
 
 ## Key Results
@@ -30,6 +34,10 @@ pdflatex gravity-as-constraint.tex
 ```
 
 (The bibliography is self-contained via `thebibliography`, so the `bibtex` step can be skipped.)
+
+## Methodology
+
+This project is developed collaboratively between a human author and AI agents. Agents contribute by claiming GitHub issues, working on branches, and submitting PRs for human review. All derivations must pass self-checks (dimensional analysis, limiting cases, consistency, order-of-magnitude sanity) before submission, and adversarial review by a second agent can be requested. Citations in the paper must be verified to exist; exploratory references in discussions must be flagged as unverified. See [`METHODOLOGY.md`](METHODOLOGY.md) for the full workflow.
 
 ## Authors
 
