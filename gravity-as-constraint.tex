@@ -28,7 +28,7 @@ We propose that physical law is what self-consistency looks like: the universe i
 
 We prove that self-consistent solutions exist: exactly in cosmology via the trace anomaly, perturbatively near any classical solution via Banach contraction with constant $\kappa \sim (m/M_P)^2 \ll 1$, and conditionally in the general case via the Schauder theorem. The Planck scale emerges as the natural validity boundary where $\kappa \to 1$.
 
-The stochastic extension yields a gravitational decoherence rate $\Gamma \sim G^2 m^4 / (\hbar^2 c d)$, suppressed by $(m/M_P)^2$ relative to the Di\'osi--Penrose prediction. We show that the Di\'osi--Penrose timescale \emph{does not follow} from semiclassical self-consistency and requires postulates beyond the Einstein equation. The framework further predicts null results for BMV entanglement at the quantum gravity rate. Both predictions are falsifiable.
+The stochastic extension yields Gaussian gravitational decoherence at a timescale $\tau_{\text{coh}} \approx 1.13\,\hbar/E_\Delta$, where $E_\Delta$ is the gravitational self-energy of the superposed mass distribution---the same energy that determines the Di\'osi--Penrose timescale. The temporal profile (Gaussian rather than exponential) is the distinguishing prediction: it arises because the noise kernel for stationary matter is time-independent in the Newtonian limit, unlike the white noise postulated in the Di\'osi model. The framework further predicts null results for BMV entanglement at the quantum gravity rate. Both predictions are falsifiable.
 \end{abstract}
 
 %======================================================================
@@ -196,61 +196,69 @@ with $\delta\hat{T}_{\mu\nu} \equiv \hat{T}_{\mu\nu} - \langle \hat{T}_{\mu\nu} 
 
 This is not an additional postulate. It is the leading fluctuation correction to any mean-field theory, analogous to the passage from Hartree to Hartree-Fock in atomic physics or from the Boltzmann equation to the Langevin equation in statistical mechanics. The noise kernel $N_{\mu\nu\alpha\beta}$ is computable from the quantum state and the geometry~\cite{phillips_hu}.
 
-\subsection{Decoherence Rate from Stochastic Geometry}
+\subsection{Decoherence from Stochastic Geometry}
+\label{sec:decoherence_derivation}
 
 The stochastic metric fluctuations induce a random potential that differs between branches. For a mass $m$ in superposition of size $d$, the Newtonian potential fluctuation at each branch location is $\delta\Phi_{L,R} = -(c^2/2) \, \delta g_{00}(x_{L,R})$. The off-diagonal element of the density matrix, averaged over stochastic realizations, evolves as:
 \begin{equation}
-|\rho_{LR}(t)| = |\rho_{LR}(0)| \, \exp\!\left( -\frac{1}{2\hbar^2} \int_0^t \!\!\int_0^t \langle [\delta V_L(t') - \delta V_R(t')][\delta V_L(t'') - \delta V_R(t'')] \rangle \, dt' \, dt'' \right)
+|\rho_{LR}(t)| = |\rho_{LR}(0)| \, \exp\!\left( -\frac{1}{2\hbar^2} \int_0^t \!\!\int_0^t C_V(t' - t'') \, dt' \, dt'' \right)
 \label{eq:decoherence_gaussian}
 \end{equation}
-where $\delta V_{L,R} = m \, \delta\Phi_{L,R}$ are the stochastic potential fluctuations at the two branch locations, and the Gaussian average over noise realizations gives the exponential form.
+where $C_V(\tau) \equiv \langle [\delta V_L(t) - \delta V_R(t)][\delta V_L(t+\tau) - \delta V_R(t+\tau)] \rangle$ is the potential difference correlator, $\delta V_{L,R} = m \, \delta\Phi_{L,R}$ are the stochastic potential fluctuations at the two branch locations, and the Gaussian average over noise realizations gives the exponential form.
 
-The potential difference correlator is determined by the noise kernel through the linearized Einstein equation. The stochastic metric perturbation satisfies:
+The stochastic metric perturbation satisfies the linearized Einstein equation $G^{\text{lin}}_{\mu\nu}[\delta g] = 8\pi G \, \xi_{\mu\nu}$, where $\xi_{\mu\nu}$ is the stochastic source with correlator~\eqref{eq:noise_kernel}. In the Newtonian limit, this reduces to the stochastic Poisson equation:
 \begin{equation}
-G^{\text{lin}}_{\mu\nu}[\delta g] = 8\pi G \, \xi_{\mu\nu}
+\nabla^2 \delta\Phi(\mathbf{x}, t) = \frac{4\pi G}{c^2} \, \xi_{00}(\mathbf{x}, t)
 \end{equation}
-In the Newtonian limit, $\delta\Phi(x) = -G \int \xi_{00}(x') / |x - x'| \, d^3x'$, and the potential difference correlator becomes:
+whose Green function $G(\mathbf{x}, \mathbf{x}') = -1/(4\pi|\mathbf{x} - \mathbf{x}'|)$ is \emph{instantaneous}: the potential at time $t$ depends on the noise source at the same time $t$, with no retardation. (Retardation corrections are $\mathcal{O}(v^2/c^2)$, negligible for all non-relativistic systems.) The temporal structure of $C_V(\tau)$ is therefore controlled entirely by the noise kernel:
 \begin{equation}
-\langle [\delta V_L - \delta V_R]^2 \rangle \sim m^2 G^2 \!\!\int\!\!\int \frac{K(x,x')}{|x - x_L| \cdot |x' - x_L|} \, d^3x \, d^3x' - (L \leftrightarrow R) + \text{cross terms}
+C_V(\tau) = \frac{G^2 m^2}{c^4} \!\iint \!\left[\frac{1}{|\mathbf{x} - \mathbf{x}_L|} - \frac{1}{|\mathbf{x} - \mathbf{x}_R|}\right]\!\! \left[\frac{1}{|\mathbf{x}' - \mathbf{x}_L|} - \frac{1}{|\mathbf{x}' - \mathbf{x}_R|}\right] N_{0000}(\mathbf{x}, t;\, \mathbf{x}', t{+}\tau) \, d^3x \, d^3x'
 \end{equation}
-where $K(x,x') \equiv N_{0000}(x,x')$ is the energy-density fluctuation kernel.
 
-The magnitude of $K$ is set by the quantum variance of the stress-energy. For a mass $m$ in superposition, the dominant contribution is from the variance of the mass distribution itself: $K \sim m^2 c^4 / \sigma^3$ where $\sigma$ is the wavepacket size. The noise correlation time is set by the light-crossing time $\tau_{\text{corr}} \sim d/c$.
-
-Collecting factors, the decoherence rate evaluates to:
+For a non-relativistic body in a stationary center-of-mass superposition, the noise kernel $N_{0000}(\mathbf{x}, t;\, \mathbf{x}', t') = \tfrac{1}{2}\langle \{\delta\hat{T}_{00}(\mathbf{x}, t),\, \delta\hat{T}_{00}(\mathbf{x}', t')\} \rangle$ is time-independent, because the mass-density operator $\hat{\rho}(\mathbf{x}, t)$ is constant for a body whose wavepacket spreading time $\sim M\sigma^2/\hbar$ far exceeds all other timescales. (For a microdiamond with $M \sim 10^{-14}$~kg and $\sigma \sim 90$~nm, the spreading time is $\sim 10^6$~s.) Therefore $C_V(\tau) = C_V(0)$ and the double time integral evaluates to $C_V(0)\,t^2$, giving \emph{Gaussian} suppression of coherence:
 \begin{equation}
-\Gamma_{\text{sc}} \sim \frac{G^2 m^4}{\hbar^2 c \, d}
+|\rho_{LR}(t)| = |\rho_{LR}(0)| \, \exp\!\left(-\frac{C_V(0)}{2\hbar^2}\,t^2\right)
+\label{eq:gaussian_suppression}
+\end{equation}
+with characteristic coherence timescale
+\begin{equation}
+\tau_{\text{coh}} = \frac{\hbar\sqrt{2}}{\sqrt{C_V(0)}}
 \label{eq:gamma_sc}
 \end{equation}
 
-This can be expressed in terms of the Di\'osi--Penrose rate $\Gamma_{DP} = Gm^2/(\hbar d)$ as:
+For a point particle with superposition size $d$, dimensional analysis gives $C_V(0) \sim G^2 m^4 / d^2$, and therefore
 \begin{equation}
-\Gamma_{\text{sc}} \sim \left(\frac{m}{M_P}\right)^2 \Gamma_{DP}
+\tau_{\text{coh}} \sim \frac{\hbar d}{G m^2} \sim \tau_{DP}
 \label{eq:suppression}
 \end{equation}
+The self-consistent coherence timescale is the \emph{same order} as the Di\'osi--Penrose timescale. The $G^2$ structure of the variance $C_V(0)$---reflecting the two-step coupling chain (stress-energy fluctuation $\xrightarrow{G}$ metric perturbation $\xrightarrow{G \cdot m}$ potential energy difference)---does not produce a parametric suppression of the timescale, because the Gaussian formula involves $1/\sqrt{C_V} \sim 1/G$ rather than $1/C_V \sim 1/G^2$. Exponential decoherence ($\Gamma \sim C_V \tau_c / \hbar^2$) would give a $G^2$ rate, but this requires a finite noise correlation time $\tau_c$; in the Newtonian limit with stationary matter, no such timescale exists.
 
-The suppression factor $(m/M_P)^2$ is the same contraction constant $\kappa$ that appears in the fixed-point analysis (eq.~\ref{eq:kappa} with $\ell_P^2 R \sim 1$). This is not a coincidence: both the convergence rate of the fixed-point map and the decoherence rate from stochastic fluctuations are controlled by the same dimensionless ratio measuring the strength of quantum backreaction on geometry.
+The distinction from the Di\'osi--Penrose prediction is qualitative, not parametric: the suppression is \emph{Gaussian} ($e^{-t^2/\tau_{\text{coh}}^2}$) rather than exponential ($e^{-t/\tau_{DP}}$), and the noise is derived from the quantum state rather than postulated. The precise relation between $\tau_{\text{coh}}$ and $\tau_{DP}$ depends on the body geometry and is evaluated in Section~\ref{sec:noise_kernel_eval}.
 
 \subsection{Numerical Consequences}
 
 \begin{center}
 \begin{tabular}{lcccc}
 \toprule
-System & Mass (kg) & $d$ & $\tau_{\text{sc}} = 1/\Gamma_{\text{sc}}$ & $\tau_{DP} = \hbar d / Gm^2$ \\
+System & Mass (kg) & $d$ & $\tau_{\text{coh}}$ (Gaussian) & $\tau_{DP} = \hbar / E_\Delta$ \\
 \midrule
-Electron & $9.1 \times 10^{-31}$ & 1 nm & $\sim 10^{72}$ s & $\sim 10^{27}$ s \\
-Microdiamond & $10^{-14}$ & 100 $\mu$m & $\sim 10^{13}$ s & 1.6 s \\
-Planck mass & $2.2 \times 10^{-8}$ & 1 $\mu$m & $\sim 10^{-14}$ s & $\sim 10^{-14}$ s \\
+Electron & $9.1 \times 10^{-31}$ & 1 nm & $\sim 2 \times 10^{27}$ s & $\sim 2 \times 10^{27}$ s \\
+Microdiamond & $10^{-14}$ & 100 $\mu$m & $\sim 1.5$ ms$^\dagger$ & $\sim 1.3$ ms$^\dagger$ \\
+Planck mass & $2.2 \times 10^{-8}$ & 1 $\mu$m & $\sim 4 \times 10^{-15}$ s & $\sim 3 \times 10^{-15}$ s \\
 \bottomrule
 \end{tabular}
 \end{center}
+{\footnotesize $^\dagger$Extended-body $E_\Delta = G(6m^2/(5R) - m^2/d)$ with $R = 90$~nm; see Section~\ref{sec:noise_kernel_eval}.}
 
-The two rates converge at the Planck mass ($M_P = 2.18 \times 10^{-8}$~kg), where $\kappa \sim 1$ and the framework reaches its validity boundary---the decoherence timescale drops to femtoseconds, consistent with Planck-scale physics. For all sub-Planckian masses, the self-consistent decoherence rate is unobservably slow: even for a microdiamond ($m \sim 10^{-14}$~kg), $\tau_{\text{sc}} \sim 10^{13}$~s ($\sim 317{,}000$ years), compared to the Di\'osi--Penrose prediction of 1.6~s.
+\medskip
+The self-consistent coherence timescale $\tau_{\text{coh}}$ is the same order as the Di\'osi--Penrose timescale across all mass scales, differing only by an $\mathcal{O}(1)$ prefactor (the ratio is $4\sqrt{2}/5 \approx 1.13$ in the $d \gg R$ limit; see eq.~\ref{eq:tau_coh_exact} below). The two timescales coincide at the Planck mass ($M_P = 2.18 \times 10^{-8}$~kg), where $\kappa \sim 1$ and the framework reaches its validity boundary.
+
+The distinction is qualitative: the self-consistent decoherence is Gaussian ($e^{-t^2/\tau_{\text{coh}}^2}$) rather than the exponential ($e^{-t/\tau_{DP}}$) predicted by the Di\'osi--Penrose models. Gaussian and exponential profiles are experimentally distinguishable in principle: the Gaussian is slower at early times ($t \ll \tau_{\text{coh}}$) and faster at late times ($t \gg \tau_{\text{coh}}$).
 
 \subsection{Noise Kernel Evaluation for Experimental Geometries}
 \label{sec:noise_kernel_eval}
 
-The scaling estimate~\eqref{eq:gamma_sc} treats the mass as a point particle. Experimental targets---microdiamonds with $N \sim 10^{12}$ atoms, optomechanically levitated nanospheres, proposed space-based test masses~\cite{maqro}---are composite objects of radius $R$. We now evaluate the noise kernel for these geometries, confirming the conditions under which the point-particle scaling applies and computing the leading corrections from finite size. Throughout this subsection, we label each result as \emph{rigorous}, \emph{sketch}, or \emph{conjecture} following the standards of Section~7.
+The point-particle estimate of Section~\ref{sec:decoherence_derivation} leaves the $\mathcal{O}(1)$ prefactor in $\tau_{\text{coh}}$ undetermined. Experimental targets---microdiamonds with $N \sim 10^{12}$ atoms, optomechanically levitated nanospheres, proposed space-based test masses~\cite{maqro}---are composite objects of radius $R$. We now evaluate the noise kernel for these geometries, computing $C_V(0)$ and the resulting coherence timescale with full numerical prefactors. Throughout this subsection, we label each result as \emph{rigorous}, \emph{sketch}, or \emph{conjecture} following the standards of Section~7.
 
 \subsubsection{Noise kernel for a rigid-body superposition {\normalfont (rigorous)}}
 
@@ -337,17 +345,17 @@ The rigid-body scaling ($m_{\text{total}}^2$) is appropriate for the center-of-m
 
 \subsubsection{Numerical evaluation {\normalfont (rigorous numerics, sketch for $\Gamma_{\text{sc}}$)}}
 
-We evaluate $E_\Delta$ and the resulting timescales for three experimental platforms. For each, we compute both the Di\'osi--Penrose timescale $\tau_{DP} = \hbar/E_\Delta$ using the extended-body self-energy~\eqref{eq:E_delta} and the self-consistent timescale $\tau_{\text{sc}} \sim (M_P/m)^2 \, \tau_{DP}$, maintaining the $(m/M_P)^2$ suppression from the $G^2$ scaling.
+We evaluate $E_\Delta$ and the resulting timescales for three experimental platforms. For each, we compute both the Di\'osi--Penrose timescale $\tau_{DP} = \hbar/E_\Delta$ using the extended-body self-energy~\eqref{eq:E_delta} and the self-consistent Gaussian coherence timescale $\tau_{\text{coh}} = 4\sqrt{2}\,\hbar / (5\,E_\Delta)$ from eqs.~\eqref{eq:gamma_sc} and~\eqref{eq:tau_coh_exact}.
 
 \medskip
 \begin{center}
-\begin{tabular}{lcccccc}
+\begin{tabular}{lccccccc}
 \toprule
-Platform & $m$ (kg) & $R$ & $d$ & $d/R$ & $\tau_{DP}$ & $\tau_{\text{sc}}$ \\
+Platform & $m$ (kg) & $R$ & $d$ & $d/R$ & $\tau_{DP}$ & $\tau_{\text{coh}}$ & Profile \\
 \midrule
-Microdiamond (BMV) & $10^{-14}$ & 90 nm & 250 $\mu$m & 2{,}800 & 1.2 ms & $\sim 6 \times 10^{9}$ s \\
-Nanosphere (levitated) & $5 \times 10^{-18}$ & 100 nm & 500 nm & 5 & 6{,}300 s & $\sim 1.2 \times 10^{23}$ s \\
-MAQRO test mass & $1.7 \times 10^{-17}$ & 200 nm & 100 nm & 0.5 & 10{,}700 s & $\sim 1.8 \times 10^{22}$ s \\
+Microdiamond (BMV) & $10^{-14}$ & 90 nm & 250 $\mu$m & 2{,}800 & 1.2 ms & 1.3 ms & Gaussian \\
+Nanosphere (levitated) & $5 \times 10^{-18}$ & 100 nm & 500 nm & 5 & 6{,}300 s & 7{,}100 s & Gaussian \\
+MAQRO test mass & $1.7 \times 10^{-17}$ & 200 nm & 100 nm & 0.5 & 10{,}700 s & 12{,}100 s & Gaussian \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -356,46 +364,55 @@ MAQRO test mass & $1.7 \times 10^{-17}$ & 200 nm & 100 nm & 0.5 & 10{,}700 s & $
 \noindent Several features are notable:
 
 \begin{enumerate}
-\item The Di\'osi--Penrose timescales for extended bodies differ significantly from point-particle estimates. For the BMV microdiamond, the extended-body $\tau_{DP} \approx 1.2$~ms (dominated by the gravitational self-energy $6Gm^2/(5R)$) is much shorter than the point-particle estimate $\tau_{DP}^{(\text{pt})} = \hbar d/(Gm^2) \approx 4$~s at the same separation $d = 250\;\mu$m. This factor-of-$\sim\!3{,}300$ difference reflects the dominance of the self-energy over the interaction energy when $d \gg R$.
+\item The self-consistent coherence timescale $\tau_{\text{coh}}$ and the Di\'osi--Penrose timescale $\tau_{DP}$ are the same order for all platforms, differing by the universal $\mathcal{O}(1)$ prefactor $4\sqrt{2}/5 \approx 1.13$. Both are determined by the gravitational self-energy $E_\Delta$. The distinction is the temporal profile: Gaussian ($e^{-t^2/\tau_{\text{coh}}^2}$) versus exponential ($e^{-t/\tau_{DP}}$).
 
-\item The self-consistent timescale $\tau_{\text{sc}}$ remains unobservably long for all platforms. Even with the shorter $\tau_{DP}$ from the extended-body calculation, the $(M_P/m)^2$ suppression factor of $\sim 5 \times 10^{12}$ for the microdiamond pushes $\tau_{\text{sc}}$ to $\sim 200$~years.
+\item The extended-body $\tau_{DP} \approx 1.2$~ms for the BMV microdiamond (dominated by the gravitational self-energy $6Gm^2/(5R)$) is much shorter than the point-particle estimate $\tau_{DP}^{(\text{pt})} = \hbar d/(Gm^2) \approx 4$~s at $d = 250\;\mu$m. This factor-of-$\sim\!3{,}300$ difference reflects the dominance of the self-energy over the interaction energy when $d \gg R$.
 
 \item For MAQRO ($d/R \approx 0.5$), the form factor~\eqref{eq:form_factor} suppresses $E_\Delta$ by an additional factor of $\sim 12$ relative to the $d \gg R$ limit. The integral~\eqref{eq:E_delta_fourier} must be evaluated numerically for this geometry.
 \end{enumerate}
 
-\subsubsection{Temporal structure of the decoherence {\normalfont (conjecture)}}
+\subsubsection{Coherence timescale for extended bodies {\normalfont (rigorous)}}
 
-The results above determine the equal-time potential difference variance~\eqref{eq:dV_variance}. The time dependence of the decoherence---and hence whether it is exponential (with rate $\Gamma$) or Gaussian (with timescale $\tau_{\text{coh}}$)---depends on the temporal correlation function of the noise:
+The equal-time potential difference variance~\eqref{eq:dV_variance}, combined with the temporal analysis of Section~\ref{sec:decoherence_derivation}, gives the coherence timescale. In the Newtonian limit, the Poisson Green function is instantaneous, so $C_V(\tau)$ inherits its temporal structure from the noise kernel~\eqref{eq:noise_kernel_extended}. For a non-relativistic body in a stationary superposition, the noise kernel is time-independent (Section~\ref{sec:decoherence_derivation}), so $C_V(\tau) = C_V(0)$.
+
+From~\eqref{eq:dV_variance} and the evaluation for a uniform sphere:
 \begin{equation}
-C_V(\tau) = \langle [\delta V_L(t) - \delta V_R(t)][\delta V_L(t+\tau) - \delta V_R(t+\tau)] \rangle
+C_V(0) = \frac{G^2 m^2}{4}\!\left(\frac{3m}{R} - \frac{2m}{d}\right)^{\!2} = \frac{25}{16}\,E_\Delta^2\!\left(1 + \mathcal{O}(R/d)\right)
 \end{equation}
-If $C_V(\tau)$ decays on a timescale $\tau_c \ll t$, the decoherence is exponential with $\Gamma \sim C_V(0) \tau_c / (2\hbar^2)$. If $C_V(\tau) \approx C_V(0)$ (static noise), the suppression is Gaussian: $|\rho_{LR}(t)| \sim \exp(-C_V(0) t^2 / (2\hbar^2))$.
-
-For the center-of-mass degree of freedom of a massive body, the correlation time of the noise kernel~\eqref{eq:noise_kernel_extended} is set by the quantum dynamics of the superposition state. In the absence of external decoherence, a stationary superposition produces time-independent $\Delta\rho$ and hence time-independent noise---formally, $\tau_c \to \infty$. This yields Gaussian suppression with a characteristic timescale:
+The Gaussian coherence timescale~\eqref{eq:gamma_sc} is therefore:
 \begin{equation}
-\tau_{\text{coh}} = \frac{\hbar\sqrt{2}}{\sqrt{C_V(0)}} \sim \frac{\hbar R}{G m^2}
-\label{eq:tau_coh}
+\tau_{\text{coh}} = \frac{\hbar\sqrt{2}}{\sqrt{C_V(0)}} = \frac{4\sqrt{2}}{5}\,\frac{\hbar}{E_\Delta}\!\left(1 + \mathcal{O}(R/d)\right) \approx 1.13\,\tau_{DP}
+\label{eq:tau_coh_exact}
 \end{equation}
-which for the microdiamond gives $\tau_{\text{coh}} \sim 1$~ms---coinciding with $\tau_{DP}$, as expected from the shared dependence on $E_\Delta$.
+The self-consistent coherence timescale exceeds $\tau_{DP}$ by a factor of $4\sqrt{2}/5$, independent of mass, radius, or separation.
 
-The suppression by $(m/M_P)^2$ enters when the stochastic geometry is treated as a fluctuating field with its own dynamical timescale. In the Einstein--Langevin formalism, the noise correlation time is set by the causal structure of the gravitational propagator, not by the matter dynamics. Whether this yields $\tau_c \sim d/c$ (as assumed in the scaling argument for eq.~\ref{eq:gamma_sc}) or a different timescale requires a full evaluation of the retarded gravitational Green function with the noise kernel~\eqref{eq:noise_kernel_extended}---a calculation that goes beyond the Newtonian limit used here. The $(m/M_P)^2$ suppression of $\Gamma_{\text{sc}}$ relative to $\Gamma_{DP}$ is robust regardless of $\tau_c$, since it follows from the $G^2$ structure of the stochastic gravity noise propagation chain: stress-energy fluctuation $\xrightarrow{G}$ metric perturbation $\xrightarrow{G \cdot m}$ potential energy difference.
+This result resolves the temporal structure of the decoherence: it is Gaussian, not exponential, and the timescale is set by the gravitational self-energy $E_\Delta$ of the difference mass distribution---the same quantity that determines the Di\'osi--Penrose timescale. The $G^2$ structure of the variance $C_V(0)$ is real (it reflects the two-step noise propagation chain), but the Gaussian formula $\tau_{\text{coh}} \propto 1/\sqrt{C_V} \propto 1/G$ removes one power of $G$, yielding the same $G$-scaling as $\tau_{DP}$.
+
+\medskip\noindent\textit{Robustness {\normalfont (sketch)}.} The static-noise result ($C_V(\tau) = C_V(0)$) holds as long as two conditions are satisfied: (a)~the wavepacket spreading time $M\sigma^2/\hbar$ exceeds the decoherence timescale, and (b)~internal degrees of freedom (phonons, rotational modes) do not introduce temporal correlations in the noise kernel at the relevant frequency scale $\sim 1/\tau_{\text{coh}}$. Condition~(a) is satisfied for all macroscopic bodies: for the microdiamond, $M\sigma^2/\hbar \sim 10^6$~s $\gg \tau_{\text{coh}} \sim 10^{-3}$~s. Condition~(b) is satisfied when the internal excitation spectrum has no modes at the gravitational frequency $\omega_g \sim E_\Delta/\hbar \sim 10^3$~rad/s; for rigid crystalline solids, the lowest acoustic phonon frequencies ($\sim 10^9$~Hz) are far above $\omega_g$, so internal dynamics decouple. If condition~(b) were violated---for instance, by a soft body with vibrational modes near $\omega_g$---the noise kernel would acquire temporal structure and the decoherence could transition from Gaussian toward exponential. This would require detailed modeling of the body's internal stress-energy fluctuations, a calculation beyond the rigid-body approximation used here.
 
 %======================================================================
-\section{The Di\'osi--Penrose Rate Does Not Follow}
+\section{Relation to the Di\'osi--Penrose Prediction}
 \label{sec:dp}
 %======================================================================
 
-The result of Section~\ref{sec:decoherence} has an important negative implication. The Di\'osi--Penrose decoherence timescale $\tau_{DP} = \hbar d / Gm^2$ is widely cited as a prediction of gravitational decoherence, and several experimental programs are designed to test it at mesoscopic scales~\cite{bose}. It is sometimes assumed, implicitly or explicitly, that this timescale follows from semiclassical gravity or from the self-consistency of the Einstein equation with quantum matter.
+The Di\'osi--Penrose decoherence timescale $\tau_{DP} = \hbar / E_\Delta$ is widely cited as a prediction of gravitational decoherence, and several experimental programs are designed to test it at mesoscopic scales~\cite{bose}. It is sometimes assumed that this timescale requires physics beyond the semiclassical Einstein equation---in particular, that one must either postulate fundamental noise in the gravitational potential~\cite{diosi} or invoke the ill-definedness of the time-translation operator for superposed geometries~\cite{penrose}.
 
-We have shown that it does not. The decoherence rate that follows from the semiclassical self-consistency equation plus its natural stochastic extension is suppressed by $(m/M_P)^2$ relative to the Di\'osi--Penrose rate. The origin of the suppression is clear: the noise in the stochastic extension comes from quantum fluctuations of $\hat{T}_{\mu\nu}$, whose gravitational effect is controlled by $G$. Converting this noise into a metric perturbation introduces a second factor of $G$, giving an overall rate proportional to $G^2$.
+The analysis of Sections~\ref{sec:decoherence_derivation} and~\ref{sec:noise_kernel_eval} shows a more nuanced picture. The semiclassical self-consistency equation plus its stochastic extension \emph{does} produce gravitational decoherence at a timescale comparable to $\tau_{DP}$: specifically, Gaussian decoherence with $\tau_{\text{coh}} = (4\sqrt{2}/5)\,\tau_{DP}$. The $G^2$ structure of the noise variance is real---but it manifests as a second power of $G$ in the \emph{variance} $C_V(0) \propto G^2$, not as a suppression of the \emph{timescale} $\tau_{\text{coh}} \propto 1/\sqrt{C_V} \propto 1/G$.
 
-To obtain the Di\'osi--Penrose rate ($\propto G^1$), one must introduce noise at the level of the gravitational potential itself, not derived from quantum matter fluctuations. This is precisely what Di\'osi's model does~\cite{diosi}: it postulates a fundamental stochastic process in the Newtonian potential with a specific noise spectrum. Penrose's argument~\cite{penrose} arrives at the same timescale from a different route, invoking the ill-definedness of the time-translation operator for superposed geometries. Neither derivation follows from the semiclassical Einstein equation.
+What distinguishes the self-consistent prediction from Di\'osi--Penrose is not the timescale but the temporal profile:
+\begin{itemize}
+\item \textbf{Di\'osi--Penrose}: Exponential decay, $|\rho_{LR}(t)| \sim e^{-t/\tau_{DP}}$. Arises from postulated white noise ($\delta$-correlated in time) in the gravitational potential, with amplitude set by the gravitational self-energy.
+\item \textbf{Self-consistent (this framework)}: Gaussian decay, $|\rho_{LR}(t)| \sim e^{-t^2/\tau_{\text{coh}}^2}$. Arises from static noise (time-independent in the Newtonian limit for stationary matter) derived from quantum stress-energy fluctuations.
+\end{itemize}
+
+The origin of the different temporal profiles is clear: Di\'osi's model postulates a stochastic process with a white-noise spectrum, which produces exponential decoherence. The self-consistent calculation derives the noise from the quantum state; for a stationary center-of-mass superposition in the Newtonian limit, this noise is static (Section~\ref{sec:decoherence_derivation}), producing Gaussian decoherence. The physical content of the Di\'osi postulate---over and above what follows from semiclassical self-consistency---is therefore the temporal correlator of the noise, not its spatial structure or amplitude.
 
 This sharpens the theoretical landscape:
 \begin{itemize}
-\item If gravitational decoherence is observed at the Di\'osi--Penrose rate, it cannot be explained by semiclassical self-consistency. Either gravity must be quantized, or a fundamentally new noise source (beyond quantum stress-energy fluctuations) must exist.
-\item If gravitational decoherence is \emph{not} observed at the Di\'osi--Penrose rate in the accessible mass range ($m \sim 10^{-14}$~kg), this is consistent with the self-consistency framework but does not confirm it, since the framework's own decoherence rate is unobservably slow at these masses.
-\item The experimental program testing Di\'osi--Penrose is therefore probing physics \emph{beyond} semiclassical gravity, regardless of its outcome.
+\item Experiments testing gravitational decoherence at the $\tau_{DP}$ timescale \emph{are} testing semiclassical gravity, not physics beyond it.
+\item The discriminating observable is the \emph{temporal profile} of the decoherence: exponential (Di\'osi--Penrose, requiring postulated noise) versus Gaussian (self-consistent stochastic gravity).
+\item Observation of exponential decoherence at rate $E_\Delta/\hbar$ would support the Di\'osi model's additional postulate of white gravitational noise. Observation of Gaussian decoherence at the same timescale would support the self-consistency framework.
+\item Absence of any gravitational decoherence at the $E_\Delta$ timescale would falsify both frameworks.
 \end{itemize}
 
 %======================================================================
@@ -421,29 +438,30 @@ This prediction is independent of the decoherence timescale and does not require
 
 \subsection{Gravitational Decoherence Experiments}
 
-The framework predicts that experiments searching for gravitational decoherence at the Di\'osi--Penrose rate~\cite{diosi,penrose} will find no anomalous decoherence. The self-consistent decoherence rate (eq.~\ref{eq:gamma_sc}) is too slow to observe at any sub-Planckian mass.
+The framework predicts that experiments searching for gravitational decoherence at the Di\'osi--Penrose timescale~\cite{diosi,penrose} will observe Gaussian decoherence with coherence timescale $\tau_{\text{coh}} \approx 1.13\,\tau_{DP}$ (eq.~\ref{eq:tau_coh_exact}). For a microdiamond ($m \sim 10^{-14}$~kg, $R \sim 90$~nm), the extended-body timescale is $\tau_{\text{coh}} \approx 1.3$~ms.
 
-This is a prediction that the Di\'osi--Penrose community would dispute, making it falsifiable in both directions. The critical test involves placing a mass $m \sim 10^{-14}$~kg in superposition of size $d \sim 100~\mu$m with all environmental decoherence suppressed:
+The critical test involves placing a mass $m \sim 10^{-14}$~kg in superposition with all environmental decoherence suppressed, then measuring the fringe visibility as a function of time:
 \begin{itemize}
-\item If fringe visibility decays on a timescale $\sim \hbar d / Gm^2 \approx 1.6$~s, the Di\'osi--Penrose models are supported and our framework is falsified.
-\item If no anomalous decoherence is observed beyond environmental sources, the result is consistent with our framework.
+\item If fringe visibility decays as $e^{-t/\tau}$ (exponential) with $\tau \sim \hbar/E_\Delta$, the Di\'osi model's postulate of white gravitational noise is supported.
+\item If fringe visibility decays as $e^{-t^2/\tau^2}$ (Gaussian) with $\tau \sim \hbar/E_\Delta$, the self-consistency framework is supported.
+\item If no anomalous decoherence is observed beyond environmental sources at the $E_\Delta$ timescale, both frameworks are falsified.
 \end{itemize}
 
 \subsection{Distinguishing from Alternative Models}
 
 \begin{center}
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
 \toprule
-Model & Decoherence rate & $m$-scaling & $G$-scaling \\
+Model & Timescale & $G$-scaling & Profile & Noise origin \\
 \midrule
-This framework & $G^2 m^4 / (\hbar^2 c d)$ & $m^{4}$ & $G^2$ \\
-Di\'osi--Penrose & $G m^2 / (\hbar d)$ & $m^{2}$ & $G$ \\
-Kafri--Taylor--Milburn & $\sim G^2 m^3 / (\hbar D^5)$ & $m^{3}$ & $G^2$ \\
+This framework & $\hbar / E_\Delta$ & $1/G$ & Gaussian & Derived (quantum $\hat{T}_{\mu\nu}$) \\
+Di\'osi--Penrose & $\hbar / E_\Delta$ & $1/G$ & Exponential & Postulated (white) \\
+Kafri--Taylor--Milburn & $\sim \hbar D^5/(G^2 m^3)$ & $1/G^2$ & Exponential & Classical channel \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-The key discriminator is the $G$-scaling: models in which gravity introduces fundamental noise (Di\'osi, Penrose) predict rates proportional to $G^1$; models in which decoherence arises from quantum backreaction on classical geometry (this framework, KTM) predict $G^2$.
+The key discriminator between this framework and Di\'osi--Penrose is the temporal profile (Gaussian vs.\ exponential), not the timescale or $G$-scaling, which are shared. Both predict decoherence at the $E_\Delta$ timescale for extended bodies. The Kafri--Taylor--Milburn model~\cite{kafri} remains parametrically distinct, predicting a $G^2$ timescale. In all three models, the noise variance scales as $G^2$; the different timescale scalings arise from different assumptions about the noise correlation time.
 
 %======================================================================
 \section{Relation to Existing Work}
@@ -453,9 +471,9 @@ The key discriminator is the $G$-scaling: models in which gravity introduces fun
 
 \textbf{Stochastic gravity} (Hu, Verdaguer~\cite{hu_verdaguer,phillips_hu}): The Einstein--Langevin equation is the natural fluctuation extension of our framework. Our decoherence calculation (Section~\ref{sec:decoherence}) is performed within this formalism.
 
-\textbf{Penrose collapse}~\cite{penrose}: Predicts the same decoherence timescale as Di\'osi but from a different argument. Our framework shows this timescale does not follow from semiclassical self-consistency.
+\textbf{Penrose collapse}~\cite{penrose}: Predicts the same decoherence timescale as Di\'osi but from a different argument. Our framework recovers a comparable timescale but with Gaussian rather than exponential temporal profile (Section~\ref{sec:dp}).
 
-\textbf{Di\'osi model}~\cite{diosi}: Postulates fundamental gravitational noise at the Newtonian potential level. Our framework derives the noise from quantum stress-energy fluctuations, obtaining a rate suppressed by $(m/M_P)^2$.
+\textbf{Di\'osi model}~\cite{diosi}: Postulates fundamental white noise at the Newtonian potential level. Our framework derives the noise from quantum stress-energy fluctuations, obtaining the same decoherence timescale but with different temporal structure (Gaussian vs.\ exponential). The physical content of Di\'osi's additional postulate is the temporal correlator (white noise), not the spatial structure or amplitude.
 
 \textbf{Postquantum classical gravity} (Oppenheim~\cite{oppenheim}): The most developed modern framework for classical-gravity-coupled-to-quantum-matter. Oppenheim derives a decoherence-diffusion trade-off that constrains any theory in which gravity couples to quantum matter through a classical channel. Our framework is not in this class: the noise kernel (eq.~\ref{eq:noise_kernel}) is a quantum object---the symmetrized two-point correlator of stress-energy fluctuations---and the stochastic metric fluctuations it sources are isomorphic to tree-level graviton exchange, not to a classical communication channel. The framework therefore escapes Oppenheim's trade-off rather than satisfying it. What the fixed-point analysis adds is a constructive existence proof with a quantitative contraction constant $\kappa \sim (m/M_P)^2$, giving a derived Planck-scale validity boundary rather than an imposed one. The null BMV prediction is shared between frameworks.
 
@@ -475,9 +493,9 @@ The key discriminator is the $G$-scaling: models in which gravity introduces fun
 
 \item \textbf{Rigorous Schauder application.} The non-perturbative existence argument requires specifying the convex compact $\mathcal{F}$-invariant subset, including gauge fixing in Lorentzian signature.
 
-\item \textbf{Precise noise kernel evaluation.} The decoherence rate in eq.~\eqref{eq:gamma_sc} is estimated from scaling arguments. A precise calculation using the noise kernel of Phillips and Hu~\cite{phillips_hu} for specific experimental geometries would sharpen the prediction. In particular, the rate for composite objects (e.g., microdiamonds with $N \sim 10^{12}$ atoms) is extrapolated from single-particle results assuming coherent center-of-mass superposition ($\Gamma \propto m_{\text{total}}^4$). This scaling is expected for rigid-body superpositions where all constituents move together, but a noise kernel calculation for extended objects would confirm the prefactor. The $G^2$ scaling and $(m/M_P)^2$ suppression are robust regardless of the prefactor.
+\item \textbf{Noise kernel for interacting matter.} The noise kernel evaluation of Section~\ref{sec:noise_kernel_eval} treats the body as a rigid, non-interacting object. Internal stress-energy fluctuations from strong interactions (QCD composites, phonon modes near the gravitational frequency $\omega_g \sim E_\Delta/\hbar$) could introduce temporal structure in the noise kernel, modifying the Gaussian profile and affecting the numerical prefactor. This is relevant for soft or composite bodies but not for rigid crystalline solids (see Section~\ref{sec:noise_kernel_eval}).
 
-\item \textbf{Macroscopic definiteness.} The framework does not currently derive the emergence of definite macroscopic outcomes from the self-consistency condition alone. The stochastic extension provides decoherence but at an unobservably slow rate. Whether the global constraint (Axiom~3) provides additional selection of definite outcomes remains open.
+\item \textbf{Macroscopic definiteness.} The framework does not currently derive the emergence of definite macroscopic outcomes from the self-consistency condition alone. The stochastic extension provides Gaussian decoherence at the $E_\Delta$ timescale, which suppresses coherence for mesoscopic masses but does not by itself select a definite outcome. Whether the global constraint (Axiom~3) provides additional selection of definite outcomes remains open.
 
 \item \textbf{Black hole evaporation and the Page time.} The framework inherits the Hawking calculation, which predicts monotonically increasing radiation entropy. For large black holes---where curvature is small and $\kappa \ll 1$, well within the framework's stated validity domain---this conflicts with unitarity at the Page time~\cite{page_curve}. The island formula~\cite{penington,aemm} resolves this via topology-changing saddles in the gravitational path integral, but topology change amounts to summing over geometries, which the framework does not include.
 
@@ -496,12 +514,12 @@ The mathematical content of this thesis is:
 \begin{enumerate}
 \item \textbf{Self-consistent solutions exist} with quantitative control---exactly in cosmology, perturbatively near all classical solutions with contraction constant $\kappa \sim (m/M_P)^2 \ll 1$, and conditionally in the general case. The Planck scale emerges as the natural validity boundary where $\kappa \to 1$.
 
-\item \textbf{The Di\'osi--Penrose decoherence rate does not follow from self-consistency.} The stochastic extension yields a rate suppressed by $(m/M_P)^2$, arising from the $G^2$ scaling of gravitationally mediated quantum noise. Observation of gravitational decoherence at the Di\'osi--Penrose rate would require physics beyond the semiclassical Einstein equation.
+\item \textbf{The Di\'osi--Penrose timescale follows from self-consistency, but with Gaussian temporal profile.} The stochastic extension yields Gaussian decoherence at timescale $\tau_{\text{coh}} \approx 1.13\,\hbar/E_\Delta$---the same order as the Di\'osi--Penrose prediction. The $G^2$ scaling of the noise variance is real, but the Gaussian formula converts this to a $1/G$ timescale. The distinguishing prediction is the temporal profile: Gaussian (from static noise derived from the quantum state) rather than exponential (from white noise postulated in the Di\'osi model).
 
 \item \textbf{BMV entanglement experiments will not observe entanglement at the quantum gravity rate.} Semiclassical evolution preserves separability at the first-quantized level; QFT corrections allow only a suppressed channel distinguishable from quantum gravity predictions.
 \end{enumerate}
 
-The framework is falsifiable: observation of BMV entanglement at the quantum gravity rate, or gravitational decoherence at the Di\'osi--Penrose rate, would refute it. Its sharpest known limitation is black hole evaporation past the Page time, where topology change---absent from the tree-level description---becomes essential (Section~\ref{sec:open}).
+The framework is falsifiable: observation of BMV entanglement at the quantum gravity rate would refute it, as would the complete absence of gravitational decoherence at the $E_\Delta$ timescale. Observation of exponential (rather than Gaussian) decoherence at this timescale would support the Di\'osi model's additional postulate over the self-consistency framework. Its sharpest known limitation is black hole evaporation past the Page time, where topology change---absent from the tree-level description---becomes essential (Section~\ref{sec:open}).
 
 %======================================================================
 \begin{thebibliography}{99}
