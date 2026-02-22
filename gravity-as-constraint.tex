@@ -245,7 +245,7 @@ Planck mass & $2.2 \times 10^{-8}$ & 1 $\mu$m & $\sim 10^{-14}$ s & $\sim 10^{-1
 \end{tabular}
 \end{center}
 
-The two rates converge at the Planck mass ($M_P = 2.18 \times 10^{-8}$~kg), where $\kappa \sim 1$ and the framework reaches its validity boundary---the decoherence timescale drops to femtoseconds, consistent with Planck-scale physics. For all sub-Planckian masses, the self-consistent decoherence rate is unobservably slow: even for a microdiamond ($m \sim 10^{-14}$~kg), $\tau_{\text{sc}} \sim 10^{13}$~s ($\sim 240{,}000$ years), compared to the Di\'osi--Penrose prediction of 1.6~s.
+The two rates converge at the Planck mass ($M_P = 2.18 \times 10^{-8}$~kg), where $\kappa \sim 1$ and the framework reaches its validity boundary---the decoherence timescale drops to femtoseconds, consistent with Planck-scale physics. For all sub-Planckian masses, the self-consistent decoherence rate is unobservably slow: even for a microdiamond ($m \sim 10^{-14}$~kg), $\tau_{\text{sc}} \sim 10^{13}$~s ($\sim 317{,}000$ years), compared to the Di\'osi--Penrose prediction of 1.6~s.
 
 \subsection{Noise Kernel Evaluation for Experimental Geometries}
 \label{sec:noise_kernel_eval}
@@ -292,12 +292,12 @@ U(\mathbf{x}_L) - U(\mathbf{x}_R) = 2\!\left(\frac{3m}{2R} - \frac{m}{d}\right) 
 
 This result connects directly to the gravitational self-energy of $\Delta\rho$. Define:
 \begin{equation}
-E_\Delta \equiv G \!\int\!\!\int \frac{\Delta\rho(\mathbf{x}) \, \Delta\rho(\mathbf{x}')}{|\mathbf{x} - \mathbf{x}'|} \, d^3x \, d^3x' = G\!\left(\frac{6m^2}{5R} - \frac{2m^2}{d}\right) \quad (d > 2R)
+E_\Delta \equiv \frac{G}{2} \!\int\!\!\int \frac{\Delta\rho(\mathbf{x}) \, \Delta\rho(\mathbf{x}')}{|\mathbf{x} - \mathbf{x}'|} \, d^3x \, d^3x' = G\!\left(\frac{6m^2}{5R} - \frac{m^2}{d}\right) \quad (d > 2R)
 \label{eq:E_delta}
 \end{equation}
 which is the same integral that determines the Di\'osi--Penrose decoherence timescale $\tau_{DP} = \hbar / E_\Delta$. The potential difference variance~\eqref{eq:dV_variance} can be expressed as:
 \begin{equation}
-\langle (\delta V_L - \delta V_R)^2 \rangle = \frac{G^2 m^2}{4}\!\left(\frac{3m}{R} - \frac{2m}{d}\right)^{\!2} = \frac{25}{9} \, G \, m^2 \!\left(\frac{E_\Delta}{m}\right)^{\!2} \!\left(1 + \mathcal{O}(R/d)\right)
+\langle (\delta V_L - \delta V_R)^2 \rangle = \frac{G^2 m^2}{4}\!\left(\frac{3m}{R} - \frac{2m}{d}\right)^{\!2} = \frac{25}{16} \, E_\Delta^2 \!\left(1 + \mathcal{O}(R/d)\right)
 \end{equation}
 
 \subsubsection{Gravitational form factor {\normalfont (rigorous)}}
@@ -313,7 +313,7 @@ For a uniform sphere of radius $R$:
 \end{equation}
 with $\tilde{F}(0) = 1$ (normalization) and $\tilde{F}(kR) \to 0$ for $kR \gg 1$. The gravitational self-energy integral~\eqref{eq:E_delta} can be written in Fourier space as:
 \begin{equation}
-E_\Delta = \frac{4\pi G m^2}{\pi^2} \int_0^\infty |\tilde{F}(kR)|^2 \left(1 - \frac{\sin kd}{kd}\right) dk
+E_\Delta = \frac{2 G m^2}{\pi} \int_0^\infty |\tilde{F}(kR)|^2 \left(1 - \frac{\sin kd}{kd}\right) dk
 \label{eq:E_delta_fourier}
 \end{equation}
 The factor $(1 - \sin(kd)/(kd))$ encodes the incomplete overlap between branches: it vanishes at $k = 0$ (reflecting mass conservation, $\int \Delta\rho \, d^3x = 0$) and saturates to 1 for $kd \gg 1$. The form factor $|\tilde{F}|^2$ provides a UV cutoff at $k \sim 1/R$.
@@ -346,8 +346,8 @@ We evaluate $E_\Delta$ and the resulting timescales for three experimental platf
 Platform & $m$ (kg) & $R$ & $d$ & $d/R$ & $\tau_{DP}$ & $\tau_{\text{sc}}$ \\
 \midrule
 Microdiamond (BMV) & $10^{-14}$ & 90 nm & 250 $\mu$m & 2{,}800 & 1.2 ms & $\sim 6 \times 10^{9}$ s \\
-Nanosphere (levitated) & $5 \times 10^{-18}$ & 100 nm & 500 nm & 5 & 4.2 s & $\sim 8 \times 10^{20}$ s \\
-MAQRO test mass & $1.7 \times 10^{-17}$ & 200 nm & 100 nm & 0.5 & 840 s & $\sim 5 \times 10^{19}$ s \\
+Nanosphere (levitated) & $5 \times 10^{-18}$ & 100 nm & 500 nm & 5 & 6{,}300 s & $\sim 1.2 \times 10^{23}$ s \\
+MAQRO test mass & $1.7 \times 10^{-17}$ & 200 nm & 100 nm & 0.5 & 10{,}700 s & $\sim 1.8 \times 10^{22}$ s \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -356,11 +356,11 @@ MAQRO test mass & $1.7 \times 10^{-17}$ & 200 nm & 100 nm & 0.5 & 840 s & $\sim 
 \noindent Several features are notable:
 
 \begin{enumerate}
-\item The Di\'osi--Penrose timescales for extended bodies differ significantly from point-particle estimates. For the BMV microdiamond, the extended-body $\tau_{DP} \approx 1.2$~ms (dominated by the gravitational self-energy $6Gm^2/(5R)$) is much shorter than the point-particle estimate $\tau_{DP}^{(\text{pt})} = \hbar d/(Gm^2) \approx 1.6$~s commonly cited~\cite{bose}. This factor-of-$\sim\!1{,}400$ difference reflects the dominance of the self-energy over the interaction energy when $d \gg R$.
+\item The Di\'osi--Penrose timescales for extended bodies differ significantly from point-particle estimates. For the BMV microdiamond, the extended-body $\tau_{DP} \approx 1.2$~ms (dominated by the gravitational self-energy $6Gm^2/(5R)$) is much shorter than the point-particle estimate $\tau_{DP}^{(\text{pt})} = \hbar d/(Gm^2) \approx 4$~s at the same separation $d = 250\;\mu$m. This factor-of-$\sim\!3{,}300$ difference reflects the dominance of the self-energy over the interaction energy when $d \gg R$.
 
 \item The self-consistent timescale $\tau_{\text{sc}}$ remains unobservably long for all platforms. Even with the shorter $\tau_{DP}$ from the extended-body calculation, the $(M_P/m)^2$ suppression factor of $\sim 5 \times 10^{12}$ for the microdiamond pushes $\tau_{\text{sc}}$ to $\sim 200$~years.
 
-\item For MAQRO ($d/R \approx 0.5$), the form factor~\eqref{eq:form_factor} suppresses $E_\Delta$ by an additional factor of $\sim 10$ relative to the $d \gg R$ limit. The integral~\eqref{eq:E_delta_fourier} must be evaluated numerically for this geometry.
+\item For MAQRO ($d/R \approx 0.5$), the form factor~\eqref{eq:form_factor} suppresses $E_\Delta$ by an additional factor of $\sim 12$ relative to the $d \gg R$ limit. The integral~\eqref{eq:E_delta_fourier} must be evaluated numerically for this geometry.
 \end{enumerate}
 
 \subsubsection{Temporal structure of the decoherence {\normalfont (conjecture)}}
