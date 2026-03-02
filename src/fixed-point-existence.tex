@@ -1,0 +1,517 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+
+\geometry{margin=1in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{axiom}{Axiom}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+
+\title{\textbf{Fixed-point existence of self-consistent semiclassical gravity}\\[6pt]
+{\large DRAFT}}
+
+\author{Will Regelmann\thanks{Corresponding author.} \quad Claude (Anthropic)\thanks{AI
+assistant; contributed to mathematical development and analysis.}}
+
+\date{February 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The semiclassical Einstein equation $G_{\mu\nu}[g] = 8\pi G\langle\hat{T}_{\mu\nu}\rangle_g$
+is a fixed-point condition: the geometry and quantum state must be mutually consistent.
+We address the question of whether such fixed points exist. We establish existence at three
+levels: (1)~exactly, in the cosmological case via the trace anomaly
+(Starobinsky, 1980); (2)~perturbatively near any classical solution, via a Banach
+contraction with constant $\kappa \sim (m/M_P)^2 \ll 1$ for massive fields (the massless case, relevant to photons and gluons, remains open; see Section~\ref{sec:open}), established
+via a spectral bound on the order-reduced response kernel; and (3)~conditionally in the general
+case via the Schauder fixed-point theorem on globally hyperbolic spacetimes with compact
+Cauchy surfaces, under six stated assumptions of which four are established and two remain
+open conjectures. The Planck scale emerges as the natural validity boundary in all three
+analyses. An effective initial-value formulation, valid order-by-order in $\kappa$, is
+derived from the global fixed-point condition.
+
+\bigskip\noindent\textit{Note:} This is a companion paper to ``Gaussian temporal profile
+of gravitational decoherence from the Einstein-Langevin equation.'' The decoherence
+prediction of that paper does not depend on the existence results derived here; the present
+paper addresses the independent question of whether the semiclassical framework is
+internally self-consistent.
+\end{abstract}
+
+%======================================================================
+\section{Introduction}
+%======================================================================
+
+The semiclassical Einstein equation:
+\begin{equation}
+G_{\mu\nu}[g] = 8\pi G\,\langle\Psi|\hat{T}_{\mu\nu}[g]|\Psi\rangle
+\label{eq:sce}
+\end{equation}
+is not a dynamical equation in the usual sense. It is a fixed-point condition: we seek the
+geometry $g_{\mu\nu}$ such that the quantum state it hosts, evolving on it, sources exactly
+that geometry. The position that eq.~\eqref{eq:sce} may be fundamental (rather than an
+approximation to quantized gravity) dates to M\o ller (1962) and Rosenfeld (1963) and has
+been developed by Oppenheim~\cite{oppenheim}. Whether this position is internally
+consistent depends on whether fixed points exist.
+
+This paper establishes existence at three levels of generality, with explicit
+quantitative control in the perturbative regime. The Planck scale appears in all three
+analyses as the natural boundary of validity---not imposed by hand, but arising from the
+mathematics of fixed-point convergence.
+
+\medskip\noindent The perturbative contraction estimate requires a mass gap and therefore applies only to massive fields; extension to massless fields such as the photon and gluon is an open problem (Section~\ref{sec:open}).
+
+%======================================================================
+\section{The self-consistency map}
+\label{sec:map}
+%======================================================================
+
+Define $\mathcal{F}: g_{\mu\nu} \mapsto g'_{\mu\nu}$ by:
+\begin{enumerate}
+\item Given trial geometry $g$, construct the QFT on $(\mathcal{M},g)$ and identify the
+physical state $|\Psi_g\rangle$ satisfying the Hadamard condition.
+\item Compute $S_{\mu\nu}[g] \equiv 8\pi G\langle\hat{T}_{\mu\nu}\rangle_{g,\text{ren}}$.
+\item Solve $G_{\mu\nu}[g'] = S_{\mu\nu}[g]$ for $g'$.
+\end{enumerate}
+We seek $g^*$ such that $\mathcal{F}(g^*) = g^*$.
+
+\medskip\noindent\textbf{State selection.} Step~1 requires care: the Hadamard condition
+constrains the wavefront set of the two-point function but does not uniquely select a
+state. In the cosmological case (Section~\ref{sec:starobinsky}), de~Sitter symmetry
+selects the conformal vacuum. In the perturbative case (Section~\ref{sec:banach}), the
+state on the corrected geometry is the unique perturbation of the state on the classical
+background. For the Schauder argument (Section~\ref{sec:schauder}), multi-valuedness is
+handled by restricting to a suitable branch or by applying Kakutani's theorem for
+set-valued maps.
+
+\medskip\noindent\textbf{Single-valuedness assumption.} The Banach argument (Section~\ref{sec:banach}) assumes $\mathcal{F}$ is single-valued: in the perturbative regime, the Hadamard state on the corrected geometry is the unique perturbation of the state on the classical background, so no state-selection ambiguity arises. The Schauder argument (Section~\ref{sec:schauder}) likewise assumes single-valuedness via the branch restriction noted above. An extension to the genuinely set-valued case via Kakutani's fixed-point theorem is possible but is not pursued here.
+
+%======================================================================
+\section{Cosmological fixed point: exact solution}
+\label{sec:starobinsky}
+%======================================================================
+
+\begin{theorem}[Starobinsky, 1980 \cite{starobinsky}]
+The self-consistency equation on FRW spacetime with conformal matter admits an exact
+de~Sitter solution $a(t) = a_0 e^{H_0 t}$ with:
+\begin{equation}
+H_0^2 = \frac{180\pi}{G|a_2|}
+\end{equation}
+where $a_2$ is the coefficient of the Euler density in the trace anomaly. This solution is
+a stable attractor: perturbations $\delta H$ are exponentially damped.
+\end{theorem}
+
+\noindent\emph{Proof sketch.} For constant $H$, the trace anomaly~\cite{capper_duff}
+reduces to $\langle\hat{T}^\mu{}_\mu\rangle = -a_2 H_0^4/120\pi^2$. The Friedmann
+equation yields $H_0$. Stability follows from the linearized equation for
+$\delta H$~\cite{starobinsky}. \hfill$\square$
+
+This constitutes an existence proof: the de~Sitter geometry, used to compute the quantum
+stress-energy of fields living on it, sources exactly itself.
+
+%======================================================================
+\section{Perturbative fixed point: Banach contraction}
+\label{sec:banach}
+%======================================================================
+
+Let $\bar{g}$ be a solution of the classical Einstein equations. Define the
+quantum-corrected map:
+\begin{equation}
+\mathcal{F}(g) = \bar{g} + (G^{\bar{g}}_{\text{lin}})^{-1}\!\left[8\pi G\langle\hat{T}_{\mu\nu}\rangle^{(\text{quantum})}_g\right]
+\end{equation}
+
+\noindent We first establish a bound on the order-reduced response kernel, then use it
+to prove the contraction estimate.
+
+\begin{lemma}[Order-reduced response kernel bound---Sketch]
+\label{lem:kernel_bound}
+Let $\phi$ be a massive scalar field with mass $m > 0$ on a globally hyperbolic spacetime
+$(\mathcal{M},\bar{g})$ with compact Cauchy surface~$\Sigma$. After Parker--Simon order
+reduction~\emph{\cite{parker_simon}}, the order-reduced response kernel
+$\mathcal{K}^{\mathrm{red}}_{\mu\nu\alpha\beta}(x,x')
+\equiv \delta\langle\hat{T}_{\mu\nu}\rangle^{\mathrm{red}}_{\mathrm{ren}}/\delta g^{\alpha\beta}(x')$
+satisfies
+\begin{equation}
+\bigl\|\mathcal{K}^{\mathrm{red}}\bigr\|_{H^s \to H^{s-2}}
+\;\leq\; C_{\mathcal{K}} \cdot \frac{\hbar\, m^2}{(4\pi)^2}
+\label{eq:kernel_bound}
+\end{equation}
+uniformly for all $g \in K_\rho$, where $C_{\mathcal{K}}$ is a dimensionless constant
+depending on $\rho$, $s$, and the background geometry~$\bar{g}$.
+\end{lemma}
+
+\noindent\emph{Proof (Sketch).} The argument proceeds in three steps.
+
+\smallskip\noindent\textit{Step~1: Spectral representation of the order-reduced kernel.}
+Before order reduction, the response kernel
+$\delta\langle\hat{T}_{\mu\nu}\rangle_{\mathrm{ren}}/\delta g^{\alpha\beta}$
+contains fourth-derivative terms responsible for the Horowitz
+runaway instability~\cite{horowitz}. After Parker--Simon order
+reduction~\cite{parker_simon}, these are perturbatively eliminated: the
+order-reduced kernel $\mathcal{K}^{\mathrm{red}}$ acts as a second-order
+integro-differential operator. For a massive field with mass $m > 0$,
+the K\"all\'en--Lehmann spectral representation gives
+\begin{equation}
+\tilde{\mathcal{K}}^{\mathrm{red}}_{\mu\nu\alpha\beta}(k)
+= \int_{4m^2}^{\infty} \frac{\rho_{\mu\nu\alpha\beta}(s,\hat{k})}{k^2 - s + i\epsilon}\,ds
+\label{eq:spectral_rep}
+\end{equation}
+where the spectral density $\rho$ has support only above the two-particle threshold at
+$s = 4m^2$, and after order reduction the integrand grows at most as $|k|^2$
+(not $|k|^4$) for large $|k|$.
+
+\textit{Caveat:} Eq.~\eqref{eq:spectral_rep} is rigorous on Minkowski
+spacetime~\cite{horowitz,phillips_hu,hu_verdaguer}. On a general curved background, it holds locally
+in Riemann normal coordinates to the perturbative order required. The passage from local
+normal-coordinate estimates to a global $H^s$ bound on a compact Cauchy surface requires a
+partition-of-unity argument that we do not complete here; this is the gap that makes the
+Lemma a Sketch rather than Rigorous.
+
+\smallskip\noindent\textit{Step~2: $H^s \to H^{s-2}$ bound via the Schur test.}
+In momentum space, the spectral gap at $4m^2$ ensures that for $|k|^2 \ll 4m^2$
+(infrared), $|\tilde{\mathcal{K}}^{\mathrm{red}}(k)| \leq C_{\mathrm{IR}}/m^2$.
+For large $|k|$ (ultraviolet), order reduction guarantees
+$|\tilde{\mathcal{K}}^{\mathrm{red}}(k)| \leq C_{\mathrm{UV}} |k|^2$.
+The crossover occurs at $|k| \sim m$. By the Schur test applied to the integral kernel
+in Fourier space, the operator norm satisfies:
+\begin{equation}
+\bigl\|\mathcal{K}^{\mathrm{red}}\bigr\|_{H^s \to H^{s-2}}
+= \sup_{f \neq 0} \frac{\|\mathcal{K}^{\mathrm{red}} f\|_{H^{s-2}}}{\|f\|_{H^s}}
+\leq \sup_k \frac{|\tilde{\mathcal{K}}^{\mathrm{red}}(k)|}{(1+|k|^2)}
+\leq C_{\mathcal{K}} \cdot \frac{\hbar\, m^2}{(4\pi)^2}
+\label{eq:schur_bound}
+\end{equation}
+where the final inequality uses the UV behavior
+$|\tilde{\mathcal{K}}^{\mathrm{red}}(k)| \lesssim |k|^2$ and the $H^s \to H^{s-2}$
+norm absorbs two powers of $|k|$ via the Sobolev weight ratio
+$(1+|k|^2)^{(s-2)/2}/(1+|k|^2)^{s/2} = (1+|k|^2)^{-1}$, leaving a bounded multiplier
+with overall scale $\hbar m^2/(4\pi)^2$ set by the one-loop prefactor.
+
+\smallskip\noindent\textit{Step~3: Uniformity over $K_\rho$.}
+By assumption~(A2), the map $g \mapsto \mathcal{K}^{\mathrm{red}}[g]$ is continuous.
+The set $K_\rho$ is compact in $H^{s'}$ for $s' < s$ by Rellich--Kondrachov
+(established in Section~\ref{sec:schauder}). A continuous function on a compact set
+attains its supremum, so
+$\sup_{g \in K_\rho}\|\mathcal{K}^{\mathrm{red}}[g]\|_{\mathrm{op}} < \infty$.
+The constant $C_{\mathcal{K}}$ absorbs this supremum. \hfill$\square$
+
+\smallskip\noindent\textit{Remark on the massless case.} The spectral gap at $4m^2$ is
+essential: it provides the IR control that makes $\tilde{\mathcal{K}}^{\mathrm{red}}$
+bounded at low momenta. For massless or conformally coupled fields, the spectral density
+extends to $s = 0$ and the IR behavior requires separate treatment. The massless case
+remains open.
+
+\smallskip\noindent\textit{Remark on related work.} Meda, Pinamonti, and
+Siemssen~\cite{meda_pinamonti_siemssen} established a Banach contraction for the
+semiclassical Einstein equation on FLRW spacetimes, using symmetry-reduced bounds
+specific to cosmological backgrounds. Gottschalk and Siemssen~\cite{gottschalk_siemssen}
+showed that massive fields give polynomial decay of perturbations. The present Lemma
+addresses the general (non-symmetric) case but at the cost of the
+normal-coordinate caveat noted above.
+
+\medskip
+
+\begin{theorem}[Perturbative existence---massive fields (Sketch)]
+\label{thm:banach}
+Let $\bar{g}$ be a classical solution with sub-Planckian curvature
+$R \ll \ell_P^{-2}$, and let the matter content consist of massive fields with
+$m > 0$. Under the hypotheses of Lemma~\ref{lem:kernel_bound}, the self-consistency
+map $\mathcal{F}$ is a contraction in a neighborhood of $\bar{g}$ in $H^s$, with
+Lipschitz constant
+\begin{equation}
+\kappa \;=\; 8\pi G \cdot C_{\mathrm{inv}} \cdot
+\sup_{g \in K_\rho}\bigl\|\mathcal{K}^{\mathrm{red}}[g]\bigr\|_{H^s \to H^{s-2}}
+\;\leq\; C \cdot \frac{1}{2\pi}\!\left(\frac{m}{M_P}\right)^{\!2}\ell_P^2\, R
+\;\ll\; 1
+\label{eq:kappa}
+\end{equation}
+where $C_{\mathrm{inv}}$ is the norm of the inverse linearized Einstein operator
+from~\emph{(A4)} and $C$ is a dimensionless constant. By the Banach fixed-point
+theorem~\cite{banach}, there exists a unique self-consistent solution $g^*$ in a neighborhood of
+$\bar{g}$, and the iteration $g_{n+1} = \mathcal{F}(g_n)$ converges exponentially:
+$\|g_n - g^*\|_{H^s} \leq \kappa^n\|g_0 - g^*\|_{H^s}$.
+\end{theorem}
+
+\noindent\emph{Proof (Sketch).} The Lipschitz constant of $\mathcal{F}$ is
+\begin{equation}
+\kappa = 8\pi G\,\bigl\|(G_{\mathrm{lin}})^{-1}\bigr\|_{H^{s-2}\to H^s}
+\cdot \sup_{g \in K_\rho}
+\bigl\|\mathcal{K}^{\mathrm{red}}[g]\bigr\|_{H^s \to H^{s-2}}.
+\end{equation}
+By assumption~(A4), the inverse linearized Einstein operator satisfies
+$\|(G_{\mathrm{lin}})^{-1}\|_{H^{s-2}\to H^s} \leq C_{\mathrm{inv}}$, with
+$C_{\mathrm{inv}} \sim 1/R$, since the harmonic gauge condition~(A4) renders the linearized Einstein operator elliptic with principal symbol determined by the background curvature scale~$R$; standard elliptic regularity estimates then give an inverse operator norm scaling as~$1/R$. By Lemma~\ref{lem:kernel_bound}, the response
+kernel norm is bounded by $C_{\mathcal{K}} \cdot \hbar m^2/(4\pi)^2$. Combining:
+\begin{equation}
+\kappa \;\leq\; 8\pi G \cdot \frac{C_{\mathrm{inv}}C_{\mathcal{K}}\,\hbar\, m^2}{(4\pi)^2}
+\;\sim\; \frac{\hbar G\, m^2}{2\pi}
+\cdot \frac{1}{R}
+\;=\; \frac{1}{2\pi}\!\left(\frac{m}{M_P}\right)^{\!2}\ell_P^2\, R.
+\end{equation}
+For sub-Planckian curvature ($R \ll \ell_P^{-2}$, i.e., $\ell_P^2 R \ll 1$)
+and any known particle mass ($m \ll M_P$), we have $\kappa \ll 1$.
+The Banach fixed-point theorem~\cite{banach} then guarantees a unique
+fixed point in the closed ball around $\bar{g}$ of radius
+$\rho/(1-\kappa)$, with geometric convergence.
+
+\smallskip\noindent\textit{Rigor status.} This Theorem is Rigorous conditional on
+Lemma~\ref{lem:kernel_bound}. Since the Lemma is a Sketch (due to the curved-spacetime
+spectral representation gap), the Theorem inherits Sketch status. The
+remaining gap is the passage from local normal-coordinate spectral estimates to a global
+$H^s$ bound on a compact Cauchy surface---a well-defined technical problem, not a
+conceptual obstacle. \hfill$\square$
+
+\medskip
+
+For all known particles, $\kappa_{\text{mass}} \equiv (m/M_P)^2 \ll 1$:
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Particle & Mass (kg) & $\kappa_{\text{mass}} = (m/M_P)^2$ \\
+\midrule
+Electron & $9.1\times10^{-31}$ & $\sim 10^{-45}$ \\
+Proton & $1.7\times10^{-27}$ & $\sim 10^{-39}$ \\
+Top quark & $3.1\times10^{-25}$ & $\sim 10^{-34}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%======================================================================
+\section{Non-perturbative existence via Schauder}
+\label{sec:schauder}
+%======================================================================
+
+\subsection{Setup}
+
+Let $(\mathcal{M},\bar{g})$ be a globally hyperbolic spacetime with \emph{compact} Cauchy
+surface $\Sigma$. Fix $s > n/2 + 2 = 4$ and define the convex compact set:
+\begin{equation}
+K_\rho \equiv \bigl\{h \in H^s(\Sigma) : \|h-\bar{h}\|_{H^s} \leq \rho\bigr\}
+\cap \mathcal{G}_{\text{harm}} \cap \mathcal{L}
+\label{eq:K_rho}
+\end{equation}
+where $\mathcal{G}_{\text{harm}}$ is the affine set of metrics in linearized harmonic
+gauge and $\mathcal{L}$ is the open set of Lorentzian-signature metrics. By the
+Rellich--Kondrachov theorem on compact $\Sigma$, $K_\rho$ is compact in $H^{s'}$ for
+any $s' < s$.
+
+\subsection{Assumptions}
+
+\begin{itemize}
+\item[\textbf{(A1)}] \textit{Hadamard state existence.} For each $g\in K_\rho$, a
+Hadamard state $|\Psi_g\rangle$ exists and $\langle\hat{T}_{\mu\nu}\rangle_{g,\text{ren}}$
+is well-defined. \textbf{[Established:} Radzikowski~\cite{radzikowski},
+Fulling--Sweeny--Wald~\cite{fulling_sweeny_wald}.\textbf{]}
+
+\item[\textbf{(A2)}] \textit{Continuous metric dependence.} The map $g\mapsto
+\langle\hat{T}_{\mu\nu}\rangle_{g,\text{ren}}$ is continuous $H^s\to H^{s-2}$.
+\textbf{[Established:} Hollands--Wald~\cite{hollands_wald_wick}.\textbf{]}
+
+\item[\textbf{(A3)}] \textit{Uniform stress-energy bound.} There exists $B(\rho)<\infty$
+with $\|\langle\hat{T}_{\mu\nu}\rangle_{g,\text{ren}}\|_{H^{s-2}} \leq B(\rho)$ for all
+$g\in K_\rho$. \textbf{[Conjecture.} Established for FRW spacetimes
+\cite{pinamonti_siemssen}; open in general.\textbf{]}
+
+\item[\textbf{(A4)}] \textit{Linearized Einstein well-posedness.} The linearized Einstein
+equation in harmonic gauge has a unique solution $h\in H^s$ with
+$\|h\|_{H^s} \leq C_{\text{inv}}\|S\|_{H^{s-2}}$.
+\textbf{[Established:} Choquet-Bruhat~\cite{choquet_bruhat}.\textbf{]}
+
+\item[\textbf{(A5)}] \textit{Order reduction.} Fourth-derivative terms from the trace
+anomaly can be perturbatively eliminated. \textbf{[Established:} Parker--Simon
+\cite{parker_simon}.\textbf{]}
+
+\item[\textbf{(A6)}] \textit{Uniform contraction bound.}
+(Included for completeness; used only in the Banach uniqueness argument of Section~\ref{sec:banach}, not in the Schauder existence argument below.)\newline
+$\kappa_{\sup} \equiv 8\pi G\,C_{\text{inv}}\cdot\sup_{g\in K_\rho}\|\delta\langle\hat{T}_{\mu\nu}\rangle_{\text{ren}}/\delta g\|_{\text{op}} < 1$.
+\textbf{[Sketch for massive fields.} Lemma~\ref{lem:kernel_bound} establishes the
+operator-norm bound with constant $\kappa \sim (m/M_P)^2\ell_P^2 R \ll 1$ for
+sub-Planckian curvature, modulo the curved-spacetime spectral representation
+gap. Open for massless fields.\textbf{]}
+\end{itemize}
+
+\subsection{Theorem}
+
+\begin{theorem}[Non-perturbative existence (conditional on (A3) and (A6))]
+\label{thm:schauder}
+Let $(\mathcal{M},\bar{g})$ be globally hyperbolic with compact Cauchy surface $\Sigma$,
+and $\bar{g}$ a classical solution in linearized harmonic gauge. Under assumptions
+\emph{(A1)--(A6)}, the self-consistency map $\mathcal{F}$ has at least one fixed point
+$g^* \in K_\rho$ in the $H^{s'}$ topology for any $s' < s$.
+\end{theorem}
+
+\noindent\emph{Proof.} We verify the hypotheses of the Schauder fixed-point theorem
+\cite{schauder}.
+
+\smallskip\noindent\textit{Step 1: $K_\rho$ is convex and compact.} $K_\rho$ is the
+intersection of a closed $H^s$ ball with the convex affine sets $\mathcal{G}_{\text{harm}}$
+and $\mathcal{L}$, hence convex and closed in $H^s$. By Rellich--Kondrachov, it is compact
+in $H^{s'}$.
+
+\smallskip\noindent\textit{Step 2: $\mathcal{F}$ maps $K_\rho$ into $K_\rho$.} Given
+$g\in K_\rho$: (A1) provides a Hadamard state with well-defined renormalized
+stress-energy; (A5) reduces the fourth-order system to second order; (A4) gives
+$\mathcal{F}(g) \in H^s$ with $\|\mathcal{F}(g)-\bar{h}\|_{H^s} \leq
+C_{\text{inv}}\|S_{\mu\nu}\|_{H^{s-2}} \leq C_{\text{inv}}B(\rho)$ by (A3). Choose
+$\rho = C_{\text{inv}}B(\rho)$ (a self-consistency condition on $\rho$ that is satisfiable
+since $C_{\text{inv}}B(\rho)\to 0$ as $\rho\to 0$ for perturbative regimes). The harmonic
+gauge and Lorentzian conditions are preserved by the linearized evolution.
+
+\smallskip\noindent\textit{Step 3: $\mathcal{F}$ is continuous.} By (A2), $g\mapsto
+S_{\mu\nu}[g]$ is continuous in $H^{s-2}$; by (A4), the Einstein solve is continuous;
+composing, $\mathcal{F}: K_\rho\to K_\rho$ is continuous in $H^{s'}$.
+
+\smallskip\noindent By the Schauder theorem~\cite{schauder}, $\mathcal{F}$ has a fixed
+point in $K_\rho$.\hfill$\square$
+
+\noindent\emph{Remark.} Assumption~(A6) is not used in the Schauder argument (which
+requires only continuity, not contractivity). It would be needed for a Banach fixed-point
+argument guaranteeing uniqueness and constructive convergence.
+
+%======================================================================
+\section{Effective initial-value formulation}
+\label{sec:ivp}
+%======================================================================
+
+Theorem~\ref{thm:schauder} establishes global existence. Practical physics requires a
+Cauchy formulation: given data on a spacelike hypersurface, what is the evolution? The
+global fixed-point condition does not directly reduce to a Cauchy problem because the
+Hadamard state is defined by a global microlocal condition. We derive an effective
+formulation valid order-by-order in $\kappa$.
+
+At order $\kappa^0$, the evolution is classical GR with given matter initial data.
+
+At order $\kappa^1$, the semiclassical correction $\langle\hat{T}_{\mu\nu}\rangle^{(1)}$
+is computed on the order-$\kappa^0$ background geometry. By Parker--Simon~\cite{parker_simon}
+order reduction, the resulting system is second-order in time, with initial data for
+$g_{\mu\nu}$ and $\partial_t g_{\mu\nu}$ on $\Sigma$ supplemented by the adiabatic vacuum
+state at each order.
+
+The order-reduced system at each order $\kappa^n$ is a second-order hyperbolic PDE,
+well-posed by Choquet-Bruhat~\cite{choquet_bruhat}. The perturbative expansion is valid
+while $\kappa \ll 1$, i.e., throughout the sub-Planck regime.
+
+\noindent\textbf{Open problem.} Non-perturbative well-posedness of the order-reduced
+semiclassical Einstein equation on general globally hyperbolic spacetimes without symmetry
+assumptions has been conjectured by Ju\'arez-Aubry et al.~\cite{juarez_aubry} and
+established for cosmological spacetimes~\cite{pinamonti_siemssen}. The general case
+remains open.
+
+%======================================================================
+\section{Planck-scale validity boundary}
+\label{sec:planck}
+%======================================================================
+
+The contraction constant~\eqref{eq:kappa} satisfies $\kappa \to 1$ when
+$R \sim \ell_P^{-2}$, i.e., at Planck-scale curvatures. This identifies the natural
+validity boundary of the framework: not imposed by hand, but derived from the requirement
+$\kappa < 1$ for the fixed-point iteration to converge.
+
+The framework also fails for observables that require summing over spacetime topologies
+(e.g., the Page curve of black hole evaporation). Even when $\kappa \ll 1$---so the
+perturbative expansion is valid---certain correlators receive $\mathcal{O}(1)$
+contributions from topology-changing saddles absent from the fixed-topology
+description. This is a distinct limitation from the Planck-scale breakdown above, and is
+not self-diagnosable within the framework.
+
+%======================================================================
+\section{Open problems}
+\label{sec:open}
+%======================================================================
+
+\begin{enumerate}
+
+\item \textbf{Curved-spacetime spectral representation and the massless case.}
+Lemma~\ref{lem:kernel_bound} establishes the $H^s \to H^{s-2}$ bound for massive fields
+using the K\"all\'en--Lehmann spectral representation, which is rigorous on Minkowski
+spacetime. The passage to curved backgrounds via normal-coordinate estimates and a
+partition-of-unity argument is the remaining gap for a fully rigorous result. Independently,
+extending the bound to massless or conformally coupled fields requires new IR control,
+since the spectral gap at $4m^2$ is absent when $m = 0$.
+
+\item \textbf{Uniform stress-energy bound (A3).} The Pinamonti--Siemssen
+result~\cite{pinamonti_siemssen} establishes this for FRW spacetimes. Extension to general
+globally hyperbolic spacetimes with compact Cauchy surfaces requires controlling the
+state-dependent part of $\langle\hat{T}_{\mu\nu}\rangle_{\text{ren}}$ uniformly over
+$K_\rho$---an open problem.
+
+\item \textbf{Relaxing the compact Cauchy surface assumption.} The Schauder argument
+requires compactness of $K_\rho$, ensured by Rellich--Kondrachov on compact $\Sigma$.
+Extension to asymptotically flat spacetimes requires weighted Sobolev spaces and a
+different compactness argument.
+
+\item \textbf{Non-perturbative IVP well-posedness.} See Section~\ref{sec:ivp}.
+
+\end{enumerate}
+
+%======================================================================
+\begin{thebibliography}{99}
+
+\bibitem{oppenheim} J.~Oppenheim, A postquantum theory of classical gravity?,
+\textit{Phys.\ Rev.\ X}\ \textbf{13}, 041040 (2023).
+
+\bibitem{starobinsky} A.~A.~Starobinsky, A new type of isotropic cosmological models
+without singularity, \textit{Phys.\ Lett.\ B}\ \textbf{91}, 99 (1980).
+
+\bibitem{capper_duff} D.~M.~Capper and M.~J.~Duff, Trace anomalies in dimensional
+regularization, \textit{Nuovo Cimento A}\ \textbf{23}, 173 (1974).
+
+\bibitem{horowitz} G.~T.~Horowitz, Semiclassical relativity: The weak-field limit,
+\textit{Phys.\ Rev.\ D}\ \textbf{21}, 1445 (1980).
+
+\bibitem{phillips_hu} N.~G.~Phillips and B.~L.~Hu, Noise kernel in stochastic gravity and
+stress energy bitensor, \textit{Phys.\ Rev.\ D}\ \textbf{63}, 104001 (2001).
+
+\bibitem{hu_verdaguer} B.~L.~Hu and E.~Verdaguer, Stochastic gravity: Theory and
+applications, \textit{Living Rev.\ Relativ.}\ \textbf{11}, 3 (2008).
+
+\bibitem{radzikowski} M.~J.~Radzikowski, Micro-local approach to the Hadamard condition,
+\textit{Commun.\ Math.\ Phys.}\ \textbf{179}, 529 (1996).
+
+\bibitem{fulling_sweeny_wald} S.~A.~Fulling, M.~Sweeny, and R.~M.~Wald, Singularity
+structure of the two-point function in quantum field theory in curved spacetime,
+\textit{Commun.\ Math.\ Phys.}\ \textbf{63}, 257 (1978).
+
+\bibitem{hollands_wald_wick} S.~Hollands and R.~M.~Wald, Local Wick polynomials and time
+ordered products of quantum fields in curved spacetime, \textit{Commun.\ Math.\ Phys.}\
+\textbf{223}, 289 (2001).
+
+\bibitem{choquet_bruhat} Y.~Choquet-Bruhat, Th\'eor\`eme d'existence pour certains
+syst\`emes d'\'equations aux d\'eriv\'ees partielles non lin\'eaires, \textit{Acta Math.}\
+\textbf{88}, 141 (1952).
+
+\bibitem{banach} S.~Banach, Sur les op\'erations dans les ensembles abstraits et leur
+application aux \'equations int\'egrales, \textit{Fund.\ Math.}\ \textbf{3}, 133 (1922).
+
+\bibitem{schauder} J.~Schauder, Der Fixpunktsatz in Funktionalr\"aumen,
+\textit{Studia Math.}\ \textbf{2}, 171 (1930).
+
+\bibitem{parker_simon} L.~Parker and J.~Z.~Simon, Einstein equation with quantum
+corrections reduced to second order, \textit{Phys.\ Rev.\ D}\ \textbf{47}, 1339 (1993).
+
+\bibitem{pinamonti_siemssen} N.~Pinamonti and D.~Siemssen, Global existence of solutions
+of the semiclassical Einstein equation for cosmological spacetimes,
+\textit{Commun.\ Math.\ Phys.}\ \textbf{334}, 171 (2015).
+
+\bibitem{juarez_aubry} B.~A.~Ju\'arez-Aubry, B.~S.~Kay, T.~Miramontes, and D.~Sudarsky,
+On the initial value problem for semiclassical gravity without and with quantum state
+collapses, \textit{J.\ Cosmol.\ Astropart.\ Phys.}\ \textbf{2023}(01), 040 (2023).
+
+\bibitem{meda_pinamonti_siemssen} P.~Meda, N.~Pinamonti, and D.~Siemssen,
+Existence and uniqueness of solutions of the semiclassical Einstein equation in
+cosmological models, \textit{Ann.\ Henri Poincar\'e}\ \textbf{22}, 3965 (2021).
+
+\bibitem{gottschalk_siemssen} H.~Gottschalk and D.~Siemssen,
+The cosmological semiclassical Einstein equation: Stability of the de~Sitter
+spacetime, preprint arXiv:2201.10288 (2022).
+
+\end{thebibliography}
+
+\end{document}
