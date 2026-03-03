@@ -1,8 +1,8 @@
+The Einstein-Langevin equation predicts that gravitational decoherence of a rigid body in spatial superposition follows a Gaussian temporal profile — not the exponential profile of the Diosi-Penrose model — because the noise kernel for stationary matter is time-independent, and this static noise is a direct consequence of the semiclassical Einstein equation rather than an additional postulate about spacetime fluctuations.
+
 # Gaussian Gravitational Decoherence
 
 **Status:** Pre-submission draft
-
-Derives that the Einstein-Langevin equation predicts Gaussian (not exponential) decoherence at the Diosi-Penrose timescale for massive bodies in spatial superposition.
 
 ## Results
 

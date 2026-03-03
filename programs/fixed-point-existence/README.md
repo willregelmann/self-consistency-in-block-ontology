@@ -1,8 +1,8 @@
+The semiclassical Einstein equation admits self-consistent solutions at three levels of generality — exactly via the Starobinsky trace-anomaly fixed point, perturbatively via Banach contraction with kappa ~ (m/M_P)^2 for massive fields, and conditionally via Schauder on globally hyperbolic spacetimes. The Planck scale emerges as the natural validity boundary from the mathematics of convergence, not by assumption, establishing that semiclassical gravity is a self-consistent framework rather than a provisional approximation.
+
 # Fixed-Point Existence of Self-Consistent Semiclassical Gravity
 
 **Status:** Pre-submission draft
-
-Establishes that the semiclassical Einstein equation G_uv = 8piG <T_uv> has self-consistent solutions at three levels of generality.
 
 ## Results
 

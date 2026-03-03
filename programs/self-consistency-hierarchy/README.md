@@ -1,8 +1,8 @@
+A self-consistency hierarchy replaces the fundamental postulates of quantum gravity — Hilbert space, evolution parameter, background structure — with four nested geometric constraints on a block 4-manifold, and conjectures that Lorentzian signature, mass, local time, and local Hilbert space co-emerge as the unique cross-level self-consistent structure rather than as independent inputs.
+
 # A Self-Consistency Hierarchy for Timeless Quantum Gravity
 
 **Status:** Draft, mostly Conjecture
-
-Proposes a four-level framework for quantum gravity with no fundamental Hilbert space, no evolution parameter, and no background structure. The levels are coarse-graining resolutions of the same four-dimensional block, not temporal stages.
 
 ## The hierarchy
 
