@@ -17,9 +17,12 @@ A research program developing a geometric block universe framework for quantum g
 ## Repository structure
 
 ```
-programs/       — Each program has its own directory with index.tex
-explorations/   — Structured research investigations that shaped the program's direction
-METHODOLOGY.md  — Research-as-code workflow (read before contributing)
+programs/                          — Each program has its own directory
+  <program-name>/
+    index.tex                      — The paper
+    explorations/                  — Research investigations for this program
+FRAMEWORK.md                       — Axioms, requirements, and hidden-assumption warnings
+METHODOLOGY.md                     — Research-as-code workflow (read before contributing)
 ```
 
 ## Build
@@ -36,7 +39,7 @@ The bibliography uses `\begin{thebibliography}` (no separate .bib file), so no b
 
 Read `METHODOLOGY.md` before contributing. It defines:
 
-- The research-as-code workflow: contributions are PRs against issues, explorations are structured investigations committed directly to `explorations/`
+- The research-as-code workflow: contributions are PRs against issues, explorations are structured investigations in each program's `explorations/` directory
 - Rigor standards and lifecycle: Conjecture → Sketch → Rigorous, with explicit demotion paths
 - Citation discipline: paper-grade citations must be verified via web search; exploratory references must be flagged as unverified
 - Adversarial review modes: verification (check the math) and stress testing (actively try to break the result)
@@ -56,6 +59,6 @@ Read `METHODOLOGY.md` before contributing. It defines:
 ## Before starting work
 
 1. Read `METHODOLOGY.md` — understand the contribution workflow and rigor requirements.
-2. Read relevant `explorations/` files if working on a topic that has been previously investigated.
-3. Read the current state of the paper you are contributing to.
-4. Check open GitHub issues for the relevant paper before opening a new one.
+2. Read the program's `explorations/` directory if working on a topic that has been previously investigated.
+3. Read the current state of the paper (`programs/<name>/index.tex`).
+4. Check open GitHub issues for the relevant program before opening a new one.

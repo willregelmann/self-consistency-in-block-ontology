@@ -133,7 +133,7 @@ The `TeammateIdle` hook runs when a teammate is about to go idle. Exit code 2 ke
 
 ### Recording team outputs
 
-The output of a team debate is an Exploration (see below). Position files and the synthesis are committed to `explorations/` as a dated artifact. The positions themselves are part of the record — not just the synthesis — because a position that lost the debate may become relevant again if the synthesis's conclusion is later challenged.
+The output of a team debate is an Exploration (see below). Position files and the synthesis are committed to the program's `explorations/` directory as a dated artifact. The positions themselves are part of the record — not just the synthesis — because a position that lost the debate may become relevant again if the synthesis's conclusion is later challenged.
 
 ## Explorations
 
@@ -141,10 +141,10 @@ Some work reshapes the research direction rather than advancing a specific resul
 
 An Exploration is a structured investigation: a debate between competing positions, a literature survey, a synthesis that identifies where the project should go next, or a negative result that closes off a direction. The debate process is the canonical example — multiple agents take positions, an adversarial synthesis is run, and the output is a structured artifact that changes what issues get opened next.
 
-Explorations live in the `explorations/` directory, dated and titled:
+Explorations live in the program's `explorations/` directory, dated and titled:
 
 ```
-explorations/YYYY-MM-DD-short-title.md
+programs/<program-name>/explorations/YYYY-MM-DD-short-title.md
 ```
 
 They are committed directly to the main branch by the human author, not via a feature branch. An Exploration can produce:
@@ -155,7 +155,7 @@ They are committed directly to the main branch by the human author, not via a fe
 
 An Exploration does not produce a contribution to the paper directly. If it generates new mathematics, that mathematics must be developed in a subsequent issue-and-PR cycle with proper self-checks and adversarial review. The Exploration establishes direction; the PR establishes results.
 
-Explorations are first-class artifacts. They are not scratch notes or session logs — they are the record of how the project's research direction was shaped. Future agents should read relevant Explorations before starting work on related issues.
+Explorations are first-class artifacts. They are not scratch notes or session logs — they are the record of how the program's research direction was shaped. Future agents should read a program's Explorations before starting work on related issues.
 
 ## Contribution Workflow
 
@@ -196,7 +196,7 @@ Tags mark stable states of the paper where all self-checks pass and the content 
 
 **Ungrounded speculation.** Every PR must connect back to the paper's existing mathematical framework. If a contribution requires new postulates or assumptions beyond the three axioms in Section 2, this must be flagged explicitly in the PR description. The human author decides whether the new assumption is acceptable.
 
-**Lost context.** All substantive work happens on branches tied to issues. Agents must read the current state of the paper and relevant issue threads before starting work. Discoveries that bear on other open issues should be cross-referenced with a comment on those issues, using the relation types defined below.
+**Lost context.** All substantive work happens on branches tied to issues. Agents must read the current state of the program's paper (`programs/<name>/index.tex`) and its `explorations/` directory, as well as relevant issue threads, before starting work. Discoveries that bear on other open issues should be cross-referenced with a comment on those issues, using the relation types defined below.
 
 ### Issue Relations
 
