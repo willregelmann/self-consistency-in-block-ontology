@@ -8,11 +8,7 @@ A research program developing a geometric block universe framework for quantum g
 
 ## Programs
 
-**`programs/gaussian-gravitational-decoherence/`** — *Gaussian temporal profile of gravitational decoherence from the Einstein-Langevin equation.* Derives that the Einstein-Langevin equation predicts Gaussian (not exponential) decoherence at the Diosi-Penrose timescale, identifies the material-dependent profile transition, and gives experimental predictions for BMV and decoherence experiments.
-
-**`programs/fixed-point-existence/`** — *Fixed-point existence of self-consistent semiclassical gravity.* Establishes that the semiclassical Einstein equation has self-consistent solutions at three levels: exact (Starobinsky), perturbative (Banach contraction estimate), and conditional non-perturbative (Schauder theorem).
-
-**`programs/self-consistency-hierarchy/`** (DRAFT) — *A self-consistency hierarchy for timeless quantum gravity.* Proposes a four-level formulation: topological (PL 4-manifolds), smooth (exotic smooth structures), metric (semiclassical Einstein fixed point), and effective QM (density matrices as marginals of the smooth-structure measure). Central conjecture: Lorentzian signature is selected by the requirement that all levels be simultaneously consistent, mediated by mass.
+Each program has its own directory under `programs/` with a `README.md` describing its status, results, and relationship to other programs. Read the relevant README before starting work on a program.
 
 ## Repository structure
 
