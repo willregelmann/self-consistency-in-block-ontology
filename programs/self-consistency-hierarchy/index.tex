@@ -1,0 +1,813 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+
+\geometry{margin=1in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{axiom}{Axiom}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\title{\textbf{A self-consistency hierarchy for timeless quantum gravity}\\[6pt]
+{\large DRAFT}}
+
+\author{Will Regelmann\thanks{Corresponding author.} \quad Claude (Anthropic)\thanks{AI
+assistant; contributed to mathematical development and analysis.}}
+
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We propose a novel formulation of quantum gravity consistent with a block
+universe interpretation: no fundamental Hilbert space, no evolution parameter,
+no background structure. The proposal is organized as a hierarchy of
+self-consistency constraints at four levels of coarse-graining: topological
+(piecewise-linear 4-manifolds with intersection form constraint), smooth
+(exotic smooth structures on the topological type), metric (the semiclassical
+Einstein equation as a fixed point, studied in the companion
+paper~\cite{fixed_point}), and effective quantum mechanical (density matrices
+as marginals of the smooth-structure measure). The Hilbert space of standard
+quantum mechanics is not postulated---it is the derived structure of the
+marginal measure restricted to a subregion of the block. The four-dimensionality
+of the universe is not an input: four is the unique dimension where smooth
+structures are rich enough (uncountably many inequivalent structures on
+$\mathbb{R}^4$, versus exactly one in all other dimensions) to support the
+required self-consistency structure. The Banach contraction result of the
+companion paper~\cite{fixed_point} anchors the perturbative regime at the
+metric level. We identify four priority open problems, of which the bridge
+from intersection form signature to metric signature is the most critical.
+
+\bigskip\noindent\textit{Note:} This paper is a companion to ``Fixed-point
+existence of self-consistent semiclassical gravity'' and ``Gaussian temporal
+profile of gravitational decoherence from the Einstein--Langevin equation.''
+It proposes the quantum-gravitational framework within which the results of
+those papers are understood as the metric-level incarnation of a more
+fundamental topological self-consistency structure.
+\end{abstract}
+
+%======================================================================
+\section{Introduction}
+\label{sec:intro}
+%======================================================================
+
+The foundational tension in quantum gravity is well known: general relativity
+requires no preferred time parameter, while standard quantum mechanics requires
+one. The Wheeler--DeWitt equation $\hat{H}\Psi = 0$~\cite{dewitt,wheeler} is
+the canonical attempt at resolution---the Hamiltonian constraint makes the
+wave functional timeless. But every known formulation of $\hat{H}\Psi = 0$
+introduces hidden temporal or foliation structure at some stage of its
+derivation~\cite{kuchar}. The canonical ADM approach requires a $3+1$
+decomposition; the covariant path integral hides foliation dependence in the
+Wick rotation, boundary conditions, and measure ambiguity; the WKB
+semiclassical limit inserts time via Born--Oppenheimer
+adiabaticity~\cite{halliwell,banks}.
+
+The difficulty runs deeper than any specific implementation. Every existing
+formulation of quantum gravity inherits Hilbert space from quantum mechanics,
+and Hilbert space carries implicit temporal structure: states are vectors that
+``evolve,'' inner products require a time-slice to define, and the Born rule
+describes what happens ``when you measure.'' Taking the block universe
+requirement seriously---the universe is a four-dimensional geometric structure
+satisfying constraints, not a state evolving in time---forces a more radical
+conclusion: \emph{the Hilbert space cannot be fundamental}. It must emerge as
+an effective description for subsystems with limited access to the full block.
+
+This paper develops the formulation that follows from this conclusion. The
+organizing principle is:
+
+\begin{axiom}[No evolution parameter]
+\label{ax:timeless}
+The fundamental description contains no evolution parameter. All equations
+are constraints on the structure of the four-dimensional block, not rules for
+generating it. A formulation satisfies this axiom if and only if it can be
+stated entirely as a constraint on a four-dimensional geometric structure with
+no preferred slicing.
+\end{axiom}
+
+\begin{axiom}[Self-consistency]
+\label{ax:selfconsistency}
+The coarse-grained structure of the universe is the unique solution to its
+own consistency constraints. The solution has no closed-form expression but
+is the convergent limit of an iterative process~(Conjecture). Multiple
+fine-grained configurations are compatible with the same coarse-grained
+solution~(Conjecture).
+\end{axiom}
+
+\begin{axiom}[Geometric purity]
+\label{ax:geometric}
+The consistency constraints are purely geometric. No non-geometric entities
+appear in the fundamental description. At the deepest level, the constraints
+are topological: metric structure and matter both emerge from topology~(Conjecture).
+\end{axiom}
+
+The formulation we propose satisfies Axiom~\ref{ax:timeless} at every level.
+It is organized as a hierarchy of self-consistency constraints
+(Axiom~\ref{ax:selfconsistency}) that are purely geometric
+(Axiom~\ref{ax:geometric}).
+
+\medskip
+
+\noindent\textbf{What this paper is and is not.} This is a framework proposal,
+not a completed theory. Each level of the hierarchy rests on specific
+mathematical conjectures, which we label carefully. The metric level has the
+most rigorous support---it is the setting of the companion
+paper~\cite{fixed_point}. The topological and smooth-structure levels are
+research programs with clear mathematical agendas. We do not claim to have
+derived the Standard Model or explained consciousness. We claim to have
+identified the correct \emph{mathematical home} for the axioms, and to have
+made explicit what is required to fill it in.
+
+%======================================================================
+\section{Why Hilbert space cannot be fundamental}
+\label{sec:nohilbert}
+%======================================================================
+
+We record the argument that motivates abandoning Hilbert space as a
+fundamental object, since it drives the entire proposal.
+
+A Hilbert space $\mathcal{H}$ with inner product $\langle\cdot|\cdot\rangle$
+carries temporal structure in three ways, any one of which is fatal for
+Axiom~\ref{ax:timeless}:
+
+\begin{enumerate}
+
+\item \textbf{The inner product requires a time-slice.} In quantum field
+theory, $\langle\Psi_1|\Psi_2\rangle = \int \Psi_1^*[\phi]\Psi_2[\phi]
+\,\mathcal{D}\phi$ integrates over field configurations $\phi$ on a spatial
+hypersurface at a fixed time. Defining the inner product requires choosing that
+hypersurface. Different choices give inequivalent inner products and
+inequivalent quantum theories.
+
+\item \textbf{Unitary evolution requires a time parameter.} The statement
+$|\Psi(t_2)\rangle = U(t_2, t_1)|\Psi(t_1)\rangle$ requires a preferred
+parameter $t$. The Schr\"odinger equation $i\hbar\partial_t|\Psi\rangle =
+\hat{H}|\Psi\rangle$ is defined with respect to $t$. Even in the
+``frozen'' Wheeler--DeWitt formulation, the Hilbert space inner product
+is defined on a spatial slice, smuggling in the foliation through the
+back door.
+
+\item \textbf{The Born rule requires a preferred decomposition into outcomes.}
+The probability $|\langle\phi|\Psi\rangle|^2$ is defined relative to a
+measurement basis $\{|\phi\rangle\}$. Selecting this basis is an
+observer-dependent choice that the fundamental description should not require.
+
+\end{enumerate}
+
+\begin{proposition}[No Axiom-\ref{ax:timeless}-compliant Hilbert space formulation]
+\emph{(Rigorous for (1) and (2); Sketch for (3).)}
+\label{prop:nohilbert}
+Any formulation of quantum gravity that takes a Hilbert space with inner product
+as a fundamental input violates Axiom~\ref{ax:timeless}, because the inner
+product requires a preferred spatial hypersurface (point (1)) or a preferred
+time parameter (point (2)).
+\end{proposition}
+
+\noindent\emph{Argument.} Point (1) follows from the standard QFT definition of
+the Fock space inner product. The functional integral $\int\mathcal{D}\phi$ is
+over field configurations on a Cauchy surface. Different Cauchy surfaces give
+different inner products (Reeh-Schlieder theorem, Unruh effect). For
+Axiom~\ref{ax:timeless} compliance, no Cauchy surface can be preferred.
+Point (2) is immediate from the definition of unitary evolution. \hfill$\square$
+
+\medskip
+
+The conclusion is that a formulation satisfying Axiom~\ref{ax:timeless} must
+not take Hilbert space as input. The Hilbert space, if it appears at all, must
+be derived---a structure that emerges from the fundamental description for
+subsystems with limited access to the block.
+
+%======================================================================
+\section{The self-consistency hierarchy}
+\label{sec:hierarchy}
+%======================================================================
+
+We propose a four-level hierarchy of self-consistency constraints. The levels
+are organized by \emph{coarse-graining}: Level~0 is the coarsest description,
+Level~3 the finest accessible to a subsystem. The levels are not temporal
+stages. They are simultaneous aspects of the same four-dimensional block,
+described at different resolutions. The constraint operates simultaneously at
+all levels: a valid block must satisfy the constraints at every level, and these
+constraints are not independent---they interlock.
+
+\begin{definition}[The four-level hierarchy]
+\label{def:hierarchy}
+\quad
+\begin{itemize}
+\item[\emph{Level 0.}] \emph{Topological.} The fundamental object is a
+piecewise-linear (PL) 4-manifold $\mathcal{M}$, equipped with no additional
+structure. The consistency constraint selects an intersection form $Q_\mathcal{M}$
+on $H_2(\mathcal{M};\mathbb{Z})$.
+
+\item[\emph{Level 1.}] \emph{Smooth.} Given the topological type of
+$\mathcal{M}$, the space of compatible smooth structures $\mathrm{Sm}(\mathcal{M})$
+is the configuration space of the theory. A self-consistency measure $\mu^*$ on
+$\mathrm{Sm}(\mathcal{M})$ replaces both the wavefunction and the path integral
+measure of standard formulations.
+
+\item[\emph{Level 2.}] \emph{Metric.} Each smooth structure $\sigma$ constrains
+the space of compatible Riemannian metrics. The semiclassical Einstein equation
+$G_{\mu\nu} = 8\pi G\langle\hat{T}_{\mu\nu}\rangle_g$ is the fixed-point
+condition that selects the metric at this level; its existence is established in
+the companion paper~\cite{fixed_point}. The mechanism by which a smooth
+structure constrains the metric---beyond the requirement of compatibility---is
+not fully developed: the Yamabe problem provides a metric of constant scalar
+curvature within each conformal class, and Donaldson/Seiberg--Witten invariants
+distinguish smooth structures, but neither alone determines a unique metric.
+The claim that a smooth structure together with the self-consistency constraint
+determines a metric is a Conjecture.
+
+\item[\emph{Level 3.}] \emph{Effective quantum mechanics.} Marginalizing the
+smooth-structure measure $\mu^*$ over the complement of a subregion
+$\mathcal{R}\subset\mathcal{M}$ produces an effective measure on the
+configuration space of $\mathcal{R}$. This marginal is the effective density
+matrix of the subsystem. The Hilbert space $\mathcal{H}_\mathcal{R}$ is the
+$L^2$ space of this marginal.
+\end{itemize}
+\end{definition}
+
+The remainder of this section develops each level and specifies the
+self-consistency constraints that link them.
+
+%----------------------------------------------------------------------
+\subsection{Level 0: The topological constraint}
+\label{sec:level0}
+%----------------------------------------------------------------------
+
+Let $\mathcal{M}$ be a compact, oriented, simply-connected PL 4-manifold.
+(The simply-connected assumption is used below to invoke Freedman's
+classification theorem; extensions to non-simply-connected manifolds are an
+open problem.)
+
+The intersection form $Q_\mathcal{M}: H_2(\mathcal{M};\mathbb{Z}) \times
+H_2(\mathcal{M};\mathbb{Z}) \to \mathbb{Z}$ is defined by
+$Q_\mathcal{M}(\alpha,\beta) = \langle \alpha \cup \beta, [\mathcal{M}]\rangle$,
+the Kronecker pairing of the cup product with the fundamental class. For a
+closed oriented 4-manifold, $Q_\mathcal{M}$ is symmetric and unimodular (the
+latter by Poincar\'e duality).
+
+\begin{theorem}[Freedman, 1982~\cite{freedman}]
+\emph{(Rigorous.)}
+\label{thm:freedman}
+Every unimodular symmetric bilinear form over $\mathbb{Z}$ is realized as
+the intersection form of a simply-connected compact topological
+$4$-manifold. The topological type of the manifold is determined by the
+intersection form and the Kirby--Siebenmann invariant.
+\end{theorem}
+
+Freedman's theorem classifies topological 4-manifolds. Donaldson's theorem
+constrains which of these admit smooth structures:
+
+\begin{theorem}[Donaldson, 1983~\cite{donaldson}]
+\emph{(Rigorous.)}
+\label{thm:donaldson}
+If a simply-connected smooth closed $4$-manifold has definite intersection
+form $Q$, then $Q$ is diagonalizable over $\mathbb{Z}$ (i.e., $Q \cong
+\pm I$ in some basis). In particular, the $E_8$ form and other non-diagonalizable
+definite forms are not realized as intersection forms of smooth $4$-manifolds.
+\end{theorem}
+
+The gap between Theorems~\ref{thm:freedman} and~\ref{thm:donaldson}---topological
+manifolds that exist but admit no smooth structure---is where the richest physics
+lives. It is also where Axiom~\ref{ax:selfconsistency} does its first work:
+
+\begin{conjecture}[Topological self-consistency]
+\label{conj:level0}
+\emph{(Conjecture.)}
+The consistency constraints of Axiom~\ref{ax:selfconsistency}, applied at
+Level~0, select a specific unimodular form $Q^*$ as the intersection form of
+$\mathcal{M}$. The constraint is: $Q^*$ must be compatible with a smooth
+structure (by Donaldson's theorem, $Q^*$ must be indefinite or diagonalizable),
+and the smooth structures compatible with $Q^*$ must, at Level~1, produce a
+measure $\mu^*$ whose metric-level content is consistent with the matter
+content that determined $Q^*$ in the first place.
+\end{conjecture}
+
+The self-referential structure of Conjecture~\ref{conj:level0} is not a defect.
+It is the precise content of Axiom~\ref{ax:selfconsistency}: the universe is
+the unique solution to its own consistency constraints.
+
+%----------------------------------------------------------------------
+\subsection{Level 1: The smooth-structure measure}
+\label{sec:level1}
+%----------------------------------------------------------------------
+
+The most remarkable fact in four-dimensional topology is the following:
+
+\begin{theorem}[Donaldson, 1983; Taubes, 1987~\cite{donaldson,taubes}]
+\emph{(Rigorous.)}
+\label{thm:exotic}
+The smooth manifold $\mathbb{R}^4$ admits uncountably many mutually
+non-diffeomorphic smooth structures. In every other dimension $n \neq 4$,
+$\mathbb{R}^n$ admits a unique smooth structure up to diffeomorphism.
+\end{theorem}
+
+This is the mathematical fact that makes four dimensions special. The space
+$\mathrm{Sm}(\mathcal{M})$ of smooth structures compatible with the PL type
+of $\mathcal{M}$ is, for a four-dimensional $\mathcal{M}$, generically an
+uncountable set. In any other dimension, it is a finite set (often a single
+point).
+
+\begin{definition}[The smooth-structure measure]
+\emph{(Conjecture.)}
+\label{def:mu}
+The self-consistency measure $\mu^*$ on $\mathrm{Sm}(\mathcal{M})$ is the
+unique measure satisfying the self-consistency condition
+$\mathcal{F}(\mu^*) = \mu^*$, where $\mathcal{F}$ is the map defined by:
+given a trial measure $\mu$ on $\mathrm{Sm}(\mathcal{M})$, compute the
+induced metric and matter content at each smooth structure (via Level~2),
+compute the resulting stress-energy, solve the Einstein constraint for a
+new geometry, and update the weights on $\mathrm{Sm}(\mathcal{M})$
+accordingly.
+\end{definition}
+
+\begin{remark}[Relation to the path integral]
+The smooth-structure measure $\mu^*$ is an analogue of the gravitational path
+integral, but with a crucial structural difference. The standard gravitational
+path integral integrates over a space of metrics, which is a continuous
+infinite-dimensional space with an undefined measure. The measure $\mu^*$
+integrates over smooth structures on a fixed topological type. While
+$\mathrm{Sm}(\mathcal{M})$ may be uncountable, its structure as a moduli space
+of gauge-equivalence classes is better controlled than the space of all metrics.
+In particular, Donaldson and Seiberg--Witten theory provide invariants of smooth
+structures that can serve as weights in $\mu^*$, even if the full measure is not
+yet defined.
+\end{remark}
+
+\begin{remark}[Conjecture~1.2 and exotic smooth structures]
+Axiom~\ref{ax:selfconsistency} includes the conjecture that multiple
+fine-grained configurations are compatible with the same coarse-grained
+solution. Theorem~\ref{thm:exotic} is the mathematical realization of this
+conjecture at Level~1: a single PL 4-manifold (the coarse-grained description)
+admits uncountably many smooth structures (the fine-grained configurations).
+This is not an analogy. It is, at the smooth-structure level, the precise
+content of the conjecture.
+\end{remark}
+
+%----------------------------------------------------------------------
+\subsection{Level 2: The metric fixed point}
+\label{sec:level2}
+%----------------------------------------------------------------------
+
+Given a smooth structure $\sigma \in \mathrm{Sm}(\mathcal{M})$, the
+self-consistency constraint at the metric level is:
+
+\begin{equation}
+G_{\mu\nu}[g] = 8\pi G\,\langle\hat{T}_{\mu\nu}\rangle_{g,\mathrm{ren}}
+\label{eq:sce}
+\end{equation}
+
+This is the semiclassical Einstein equation, which is a fixed-point condition
+on the metric $g$: the geometry that hosts the quantum state must be sourced by
+that state. The companion paper~\cite{fixed_point} establishes existence of
+solutions at three levels of rigor:
+
+\begin{enumerate}
+
+\item \emph{Exactly}, in the cosmological case via the Starobinsky
+(1980) trace anomaly solution, with $H_0^2 = 180\pi/G|a_2|$ (Rigorous).
+
+\item \emph{Perturbatively}, near any classical solution, via a Banach
+contraction with constant $\kappa \sim (m/M_P)^2 \ll 1$ for massive fields
+(Sketch; the $H^s$ operator-norm bound is open). The extension to massless
+fields (photon, gluon) remains open: the spectral gap that controls the
+infrared behavior of the response kernel vanishes at $m = 0$.
+
+\item \emph{Conditionally non-perturbatively}, via the Schauder fixed-point
+theorem on globally hyperbolic spacetimes with compact Cauchy surfaces, under
+six stated assumptions of which four are established and two remain open
+(Sketch).
+
+\end{enumerate}
+
+The Planck scale emerges as the natural validity boundary: when $R \sim
+\ell_P^{-2}$, the contraction constant $\kappa \to 1$, the perturbative
+expansion breaks down, and the full smooth-structure measure $\mu^*$ becomes
+relevant.
+
+\begin{remark}[Level~2 is a coarse-graining of Level~1]
+The companion paper's self-consistency map $\mathcal{F}: g \mapsto g'$ operates
+on single metrics. This is the special case of the smooth-structure map
+$\mathcal{F}$ of Definition~\ref{def:mu} in which $\mu$ is a delta measure
+concentrated on a single smooth structure, and the smooth structure, together
+with the Level~2 fixed-point condition, is conjectured to determine a unique
+metric. The companion paper establishes that, in this limiting case,
+the fixed point exists. The full conjecture is that the fixed point of $\mathcal{F}$
+on the space of measures over smooth structures exists and is unique.
+\end{remark}
+
+%----------------------------------------------------------------------
+\subsection{Level 3: Effective quantum mechanics}
+\label{sec:level3}
+%----------------------------------------------------------------------
+
+\begin{conjecture}[Emergence of effective quantum mechanics]
+\emph{(Conjecture.)}
+\label{conj:qm}
+Let $\mathcal{R} \subset \mathcal{M}$ be a subregion (a ``laboratory'' in the
+block). Let $\mu^*$ be the self-consistency measure on
+$\mathrm{Sm}(\mathcal{M})$. The marginal of $\mu^*$ over the smooth structures
+of the complement $\mathcal{M} \setminus \mathcal{R}$, restricted to
+$\mathcal{R}$, defines an effective measure $\mu^*_\mathcal{R}$ on the local
+configuration space of $\mathcal{R}$.
+
+When $\mathcal{R}$ is much larger than the Planck scale but much smaller than
+the cosmological scale, and gravity within $\mathcal{R}$ is weak, $\mu^*_\mathcal{R}$
+is approximated by a density matrix $\rho_\mathcal{R}$ on the Hilbert space
+$\mathcal{H}_\mathcal{R} = L^2(\mathrm{Config}(\mathcal{R}), \mu^*_\mathcal{R})$.
+The quantum mechanical statistics seen by subsystems within $\mathcal{R}$ are
+a consequence of this marginalization.
+\end{conjecture}
+
+\begin{remark}[Why marginalization produces quantum statistics]
+The argument for Conjecture~\ref{conj:qm} parallels the derivation of the
+canonical ensemble from microcanonical statistics: integrating out the
+environment imposes linearity on the subsystem. In the present context, the
+consistency constraints on the full block, restricted to $\mathcal{R}$, become
+approximately linear in the degrees of freedom of $\mathcal{R}$ when the
+complement is integrated over, because the dominant contribution from the
+complement is the mean-field background, with fluctuations suppressed by
+$V_\mathcal{R}/V_{\mathrm{total}}$. The effective measure on $\mathcal{R}$ is
+thus a density matrix. The analogy to statistical mechanics is structural---in
+both cases, integrating out a large environment produces an approximately linear
+effective theory for the subsystem---but the mechanism differs. In statistical
+mechanics, the linearity of the canonical ensemble follows from the specific
+exponential (Boltzmann) form of the microcanonical distribution. The
+self-consistency measure $\mu^*$ has no \textit{a priori} reason to take
+exponential form; whether the marginalization of $\mu^*$ produces the same
+linearization is the content of Conjecture~\ref{conj:qm}, not a consequence of
+the analogy. This argument is a conjecture; it requires a proof that
+the self-consistency constraints, when restricted and marginalized, linearize
+in the subsystem's degrees of freedom.
+\end{remark}
+
+\begin{remark}[The Hilbert space is not fundamental]
+Conjecture~\ref{conj:qm} implies that the Hilbert space $\mathcal{H}_\mathcal{R}$
+is:
+\begin{enumerate}
+\item \emph{Derived}, not postulated: it is the $L^2$ space of the marginal measure.
+\item \emph{Subsystem-dependent}: different choices of $\mathcal{R}$ give different
+Hilbert spaces. There is no single Hilbert space of the universe.
+\item \emph{Approximate}: the density matrix approximation is valid only in the
+sub-Planckian, weak-gravity regime.
+\end{enumerate}
+This is consistent with the known difficulties of defining a universal Hilbert
+space in quantum gravity, and with the Page--Wootters result~\cite{page_wootters}
+that relational time emerges from a globally static state via conditioning on a
+subsystem.
+\end{remark}
+
+%----------------------------------------------------------------------
+\subsection{The interlocking constraint}
+\label{sec:interlock}
+%----------------------------------------------------------------------
+
+The four levels are not independent. The constraint is that the self-consistency
+chain must close:
+
+\begin{equation}
+\underbrace{Q^*}_{\text{Level 0}}
+\xrightarrow{\text{Freedman/Donaldson}}
+\underbrace{\mathrm{Sm}(\mathcal{M})}_{\text{Level 1}}
+\xrightarrow{\mu^* = \mathcal{F}(\mu^*)}
+\underbrace{g^*}_{\text{Level 2}}
+\xrightarrow{\text{Einstein}}
+\underbrace{\langle\hat{T}_{\mu\nu}\rangle}_{\text{Level 2}}
+\xrightarrow{\text{marginalize}}
+\underbrace{\rho_\mathcal{R}}_{\text{Level 3}}
+\xrightarrow{\text{trace back}}
+Q^*
+\label{eq:chain}
+\end{equation}
+
+The arrows represent logical constraints, not temporal sequences. A block
+satisfying the hierarchy satisfies all constraints simultaneously. The chain
+\eqref{eq:chain} is closed: the matter content derived from the effective
+quantum state $\rho_\mathcal{R}$ at Level~3 must be consistent with the
+intersection form $Q^*$ at Level~0 that initiated the chain.
+
+\begin{remark}[The chain is an epistemic decomposition, not ontological stages]
+The levels in \eqref{eq:chain} are introduced for human comprehensibility.
+They correspond to the precision at which we can currently do mathematics. The
+block does not ``proceed'' through these levels. It satisfies the constraint.
+The iteration suggested by Conjecture~1.1 of Axiom~\ref{ax:selfconsistency}
+is our procedure for computing the fixed point, not a description of how the
+universe came to be.
+\end{remark}
+
+\begin{remark}[The ``trace back'' arrow]
+\label{rem:traceback}
+The final arrow in~\eqref{eq:chain}, $\rho_\mathcal{R} \to Q^*$, is the least
+developed constraint in the chain. The claim is that the effective quantum state
+of subsystems, aggregated over all subregions, must be consistent with the
+global intersection form that initiated the chain. Formally, this requires:
+\begin{enumerate}
+\item[(i)] A reconstruction theorem showing that local density matrices
+determine a global metric (an inverse problem).
+\item[(ii)] A topological rigidity result showing that the global metric
+determines the intersection form (known for some classes of 4-manifolds).
+\item[(iii)] A self-consistency proof that the resulting $Q^*$ is the same one
+that initiated the chain.
+\end{enumerate}
+None of (i)--(iii) is established. The ``trace back'' arrow is a conjecture
+about a conjecture, and making it precise is prerequisite to any claim that the
+chain~\eqref{eq:chain} actually closes.
+\end{remark}
+
+%======================================================================
+\section{The dimensionality argument}
+\label{sec:dimensionality}
+%======================================================================
+
+The hierarchy of Section~\ref{sec:hierarchy} presupposes a 4-manifold. Here
+we argue that the four-dimensionality is not an input but a consequence: four
+is the unique dimension where the constraint structure of
+Definition~\ref{def:hierarchy} is nontrivial.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\toprule
+Dimension & Smooth structures on $\mathbb{R}^n$ & $h$-cobordism theorem & Level~0 richness \\
+\midrule
+$n < 4$ & Unique & Holds (Smale, $n \geq 6$; special cases $n = 5$) & Insufficient \\
+$n = 4$ & Uncountably many & \textbf{Fails} (Donaldson 1987) & Rich \\
+$n > 4$ & Unique ($n \geq 5$) & Holds & Insufficient \\
+\bottomrule
+\end{tabular}
+\caption{Topology by dimension. The failure of the $h$-cobordism theorem in
+dimension four is the root of the exotic structure richness.}
+\label{tab:dimensions}
+\end{table}
+
+\begin{proposition}[Four-dimensional uniqueness]
+\emph{(Sketch.)}
+\label{prop:4d}
+The self-consistency hierarchy of Definition~\ref{def:hierarchy} is trivial in
+every dimension other than four:
+\begin{enumerate}
+\item For $n \neq 4$: $\mathrm{Sm}(\mathcal{M})$ is a finite set (generically
+a single point for $\mathbb{R}^n$). The Level~1 measure $\mu^*$ is a finite
+sum, not an integral over a continuous moduli space. The effective quantum
+mechanics of Conjecture~\ref{conj:qm} collapses to classical statistics.
+
+\item For $n = 4$: $\mathrm{Sm}(\mathcal{M})$ is uncountably infinite.
+The Level~1 measure is a genuine integral over a continuous moduli space.
+The Level~0 constraint is nontrivial because the Freedman--Donaldson gap is
+maximal: many topological manifolds exist that admit no smooth structure at all.
+\end{enumerate}
+\end{proposition}
+
+\noindent\emph{Sketch.} Point (1) uses Theorem~\ref{thm:exotic}: smooth
+structures on $\mathbb{R}^n$ are unique for $n \neq 4$. The same conclusion
+holds for compact manifolds in dimensions $n \geq 5$ (Smale's $h$-cobordism
+theorem; see~\cite{smale}), and for $n \leq 3$ by classical surface and
+3-manifold theory. For $n = 4$, Theorems~\ref{thm:freedman}
+and~\ref{thm:donaldson} establish the Freedman--Donaldson gap, and
+Theorem~\ref{thm:exotic} gives the uncountable smooth structures.
+Point (2) is the content of these theorems. The identification of the
+uncountable smooth structure moduli space as the source of quantum statistics
+(Conjecture~\ref{conj:qm}) is a conjecture, not a theorem. \hfill$\square$
+
+\begin{remark}
+Proposition~\ref{prop:4d} does not \emph{prove} that the universe is four-dimensional.
+It establishes that the framework proposed here is nontrivial only in dimension
+four. If the framework is correct, four-dimensionality follows. Whether the
+framework is correct is an open question.
+\end{remark}
+
+%======================================================================
+\section{Connection to existing formulations}
+\label{sec:connection}
+%======================================================================
+
+\subsection{The Wheeler--DeWitt equation as a Level-2 projection}
+
+The Wheeler--DeWitt equation $\hat{H}\Psi[\gamma_{ij}] = 0$~\cite{dewitt} is
+the canonical quantization of the metric-level constraint. In the hierarchy of
+Section~\ref{sec:hierarchy}, it is an approximation to the Level~2 fixed-point
+condition, obtained by:
+
+\begin{enumerate}
+\item Concentrating the smooth-structure measure $\mu^*$ on a single smooth
+structure (ignoring the Level~1 sum over exotic structures).
+\item Performing a $3+1$ decomposition of the metric (introducing a preferred
+foliation).
+\item Replacing the Level~2 classical fixed-point condition with its quantum
+analogue via Dirac quantization.
+\end{enumerate}
+
+Each step introduces additional structure not present in the hierarchy. Step (2)
+is the primary source of Axiom~\ref{ax:timeless} violation~\cite{kuchar}.
+Steps (1) and (3) are simplifications
+that are valid in the sub-Planckian, single-smooth-structure regime.
+
+The Wheeler--DeWitt equation is thus the projection of the full hierarchy onto
+a single smooth structure and a single spatial foliation. It contains the
+correct physics at leading order in $\kappa \sim (m/M_P)^2$, but not the
+global, foliation-independent constraint structure of the full hierarchy.
+
+\subsection{The semiclassical Einstein equation as Level-2}
+
+The companion paper~\cite{fixed_point} studies eq.~\eqref{eq:sce} as a
+fixed-point condition in its own right. Within the present hierarchy, this is
+the Level~2 constraint evaluated on a single smooth structure. The Banach
+contraction result ($\kappa \ll 1$ for sub-Planckian curvatures) is the
+perturbative stability of the fixed point at this level. The Schauder existence
+result (conditional on two open conjectures) is non-perturbative existence.
+
+The hierarchy extends this program: Level~2 existence (established with caveats
+in the companion paper) is a necessary condition for the full hierarchy to have
+a fixed point, but not sufficient. Level~1 requires additionally that the
+measure over smooth structures has a fixed point. Level~0 requires that the
+intersection form is self-consistent with the matter content.
+
+\subsection{The Page--Wootters mechanism at Level~3}
+
+The Page--Wootters mechanism~\cite{page_wootters}---apparent time evolution
+of a subsystem recovered from a globally static state via conditioning on a
+``clock'' subsystem---is a Level~3 phenomenon in the present hierarchy. The
+globally static state is the smooth-structure measure $\mu^*$; the
+conditioning on a subsystem is the marginalization of Conjecture~\ref{conj:qm}.
+The apparent time evolution is a pattern in the correlations between
+$\mathcal{R}$ and its complement encoded in $\mu^*$.
+
+The observer-dependence identified by Kucha\v{r}~\cite{kuchar} and confirmed
+by Marletto and Vedral~\cite{marletto_vedral}---different choices of ``clock''
+subsystem give different dynamics---is, in the present hierarchy, a manifestation
+of the fact that different choices of $\mathcal{R}$ give different marginal
+measures $\mu^*_\mathcal{R}$ and hence different effective Hilbert spaces
+$\mathcal{H}_\mathcal{R}$. The observer-dependence is a feature, not a bug:
+it reflects the fact that the Hilbert space is emergent and subsystem-relative,
+not fundamental.
+
+%======================================================================
+\section{The metric-to-signature problem}
+\label{sec:signature}
+%======================================================================
+
+The most critical open problem in the hierarchy concerns the emergence of
+Lorentzian metric signature. We identify it precisely here because it is
+potentially fatal to the topological approach.
+
+The intersection form $Q_\mathcal{M}$ has \emph{type} $(b^+, b^-)$, where
+$b^\pm$ are the dimensions of the positive- and negative-definite subspaces,
+and \emph{signature} $\sigma(\mathcal{M}) = b^+ - b^-$. The Hirzebruch
+signature theorem~\cite{hirzebruch} gives $\sigma(\mathcal{M}) =
+\frac{1}{3}p_1(\mathcal{M})$, connecting the intersection form to the first
+Pontryagin class. The intersection form type $(b^+, b^-)$ is a global invariant
+of $H_2(\mathcal{M};\mathbb{Z})$. It must be carefully distinguished from the
+\emph{metric signature}---the sign pattern $(-,+,+,+)$ of the tangent-space
+metric---which is a pointwise property of a different mathematical object.
+
+The conjectured mechanism for Lorentzian signature emergence is:
+
+\begin{conjecture}[Signature emergence]
+\emph{(Conjecture.)}
+\label{conj:signature}
+An indefinite intersection form $Q_\mathcal{M}$ of type $(b^+, b^-)$ with
+$b^+ = 1$---one positive eigenvalue and $b^-$ negative eigenvalues---requires
+that any smooth metric compatible with the self-consistency constraint of
+Level~2 has Lorentzian metric signature $(-,+,+,+)$. No known theorem connects
+the intersection form type to the metric signature; bridging this gap between
+$H_2$ and the tangent bundle is the central mathematical obstacle.
+\end{conjecture}
+
+We emphasize that Conjecture~\ref{conj:signature} is the weakest link in the
+hierarchy. The intersection form is a global invariant on $H_2$; the metric
+signature is a local property of the tangent bundle. Connecting global topology
+to local geometry requires a theorem that, to our knowledge, does not currently
+exist in the mathematical literature.
+
+The direction in which such a theorem might go: an indefinite form of type
+$(1, b^-)$ has $b^+ = 1$, which is \emph{suggestive} of a single timelike
+direction, but this is an analogy between second homology and the tangent
+bundle that currently has no mathematical justification. Definite forms
+correspond to Riemannian (positive-definite) metrics; indefinite forms with
+different types correspond to other pseudo-Riemannian structures. The specific
+$b^+ = 1$ case is singled out by requiring:
+\begin{enumerate}
+\item The self-consistent manifold must admit a global timelike direction (for
+the notion of ``subsystem'' in Level~3 to be well-defined).
+\item The signature must be consistent with the causal structure required by the
+Level~2 Einstein equation.
+\end{enumerate}
+These requirements, formalized, might yield Conjecture~\ref{conj:signature}.
+The proof remains open.
+
+%======================================================================
+\section{Open problems}
+\label{sec:open}
+%======================================================================
+
+We list four priority open problems, in order of importance:
+
+\begin{enumerate}
+
+\item \textbf{The signature bridge (Section~\ref{sec:signature}).}
+Prove or disprove Conjecture~\ref{conj:signature}: that an indefinite
+intersection form of type $(1,b^-)$ with $b^+ = 1$ implies Lorentzian metric
+signature $(-,+,+,+)$ for the self-consistent metric. This requires bridging
+the gap between a global invariant on $H_2$ and a local property of the tangent
+bundle---a specific mathematical question in four-dimensional topology and
+Lorentzian geometry. A proof would
+validate the topological approach to signature emergence. A counterexample would
+require a different mechanism for signature emergence or a modification of the
+Level~0 constraint.
+
+\item \textbf{A natural measure on smooth structures.}
+Define a measure $\mu$ on $\mathrm{Sm}(\mathcal{M})$ for a compact
+4-manifold $\mathcal{M}$ that is:
+\begin{enumerate}
+\item Defined without reference to a metric (to avoid the circularity of the
+standard gravitational measure problem).
+\item Compatible with the self-consistency condition $\mathcal{F}(\mu) = \mu$.
+\item Invariant under the orientation-preserving diffeomorphism group.
+\end{enumerate}
+Donaldson--Witten theory and Seiberg--Witten invariants provide natural weights
+on smooth structures; assembling these into a well-defined measure on the full
+moduli space $\mathrm{Sm}(\mathcal{M})$ is the open problem.
+
+\item \textbf{The marginalization conjecture (Conjecture~\ref{conj:qm}).}
+Prove that the marginal of a self-consistent measure $\mu^*$ on
+$\mathrm{Sm}(\mathcal{M})$, restricted to a subregion $\mathcal{R}$ in
+the sub-Planckian, weak-gravity regime, is approximated by a density matrix
+on a Hilbert space. Even a toy model---a finite-dimensional analogue of the
+full measure theory---demonstrating that marginalization of a self-consistent
+measure produces quantum statistics would be significant.
+
+\item \textbf{Connecting the topological constraint to the Banach contraction.}
+The companion paper~\cite{fixed_point} establishes a Banach contraction at
+Level~2 with constant $\kappa \sim (m/M_P)^2$. Is there an analogous
+contraction estimate at Level~1 (on the space of smooth-structure measures)?
+Such an estimate would extend the companion paper's uniqueness and convergence
+results from single metrics to the full measure on smooth structures.
+
+\end{enumerate}
+
+%======================================================================
+\begin{thebibliography}{99}
+
+\bibitem{dewitt} B.~S.~DeWitt, Quantum theory of gravity.~I.~The canonical
+theory, \textit{Phys.\ Rev.}\ \textbf{160}, 1113 (1967).
+
+\bibitem{wheeler} J.~A.~Wheeler, Superspace and the nature of quantum
+geometrodynamics, in \textit{Battelle Rencontres: 1967 Lectures in
+Mathematics and Physics}, eds.\ C.~DeWitt and J.~A.~Wheeler (Benjamin,
+New York, 1968).
+
+\bibitem{freedman} M.~H.~Freedman, The topology of four-dimensional manifolds,
+\textit{J.\ Differential Geometry}\ \textbf{17}, 357--453 (1982).
+
+\bibitem{donaldson} S.~K.~Donaldson, An application of gauge theory to
+four-dimensional topology, \textit{J.\ Differential Geometry}\ \textbf{18},
+279--315 (1983).
+
+\bibitem{taubes} C.~H.~Taubes, Gauge theory on asymptotically periodic
+$4$-manifolds, \textit{J.\ Differential Geometry}\ \textbf{25}, 363--430 (1987).
+
+\bibitem{smale} S.~Smale, Generalized Poincar\'e's conjecture in dimensions
+greater than four, \textit{Ann.\ Math.}\ \textbf{74}, 391--406 (1961).
+
+\bibitem{hirzebruch} F.~Hirzebruch, \textit{Topological Methods in Algebraic
+Geometry}, 3rd ed., Springer, Berlin (1966).
+
+\bibitem{page_wootters} D.~N.~Page and W.~K.~Wootters, Evolution without
+evolution: Dynamics described by stationary observables,
+\textit{Phys.\ Rev.\ D}\ \textbf{27}, 2885 (1983).
+
+\bibitem{kuchar} K.~Kucha\v{r}, Time and interpretations of quantum
+gravity, in \textit{Proceedings of the 4th Canadian Conference on General
+Relativity and Relativistic Astrophysics}, eds.\ G.~Kunstatter,
+D.~Vincent, and J.~Williams (World Scientific, Singapore, 1992).
+
+\bibitem{marletto_vedral} C.~Marletto and V.~Vedral, Evolution without
+evolution and without ambiguities, \textit{Phys.\ Rev.\ D}\ \textbf{95},
+043510 (2017).
+
+\bibitem{fixed_point} W.~Regelmann and Claude (Anthropic), Fixed-point
+existence of self-consistent semiclassical gravity (2026). Companion paper.
+
+\bibitem{halliwell} J.~J.~Halliwell, Derivation of the Wheeler--DeWitt
+equation from a path integral for minisuperspace models,
+\textit{Phys.\ Rev.\ D}\ \textbf{38}, 2468 (1988).
+
+\bibitem{banks} T.~Banks, TCP, quantum gravity, the cosmological constant
+and all that\ldots, \textit{Nucl.\ Phys.\ B}\ \textbf{249}, 332 (1985).
+
+\end{thebibliography}
+
+\end{document}

@@ -4,22 +4,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 
 ## Project
 
-A research program developing a geometric block universe framework for quantum gravity. Papers are exploratory and at varying stages of completion. New papers are added as the program develops — do not assume the list below is exhaustive; check `src/` for the current set.
+A research program developing a geometric block universe framework for quantum gravity. Papers are organized into programs (each with its own directory) and live at varying stages of completion.
 
-## Current papers
+## Programs
 
-**`src/gaussian-gravitational-decoherence.tex`** — *Gaussian temporal profile of gravitational decoherence from the Einstein-Langevin equation.* Derives that the Einstein-Langevin equation predicts Gaussian (not exponential) decoherence at the Diosi-Penrose timescale, identifies the material-dependent profile transition, and gives experimental predictions for BMV and decoherence experiments.
+**`programs/gaussian-gravitational-decoherence/`** — *Gaussian temporal profile of gravitational decoherence from the Einstein-Langevin equation.* Derives that the Einstein-Langevin equation predicts Gaussian (not exponential) decoherence at the Diosi-Penrose timescale, identifies the material-dependent profile transition, and gives experimental predictions for BMV and decoherence experiments.
 
-**`src/fixed-point-existence.tex`** (DRAFT) — *Fixed-point existence of self-consistent semiclassical gravity.* Establishes that the semiclassical Einstein equation has self-consistent solutions at three levels: exact (Starobinsky), perturbative (Banach contraction estimate), and conditional non-perturbative (Schauder theorem).
+**`programs/fixed-point-existence/`** — *Fixed-point existence of self-consistent semiclassical gravity.* Establishes that the semiclassical Einstein equation has self-consistent solutions at three levels: exact (Starobinsky), perturbative (Banach contraction estimate), and conditional non-perturbative (Schauder theorem).
 
-**`src/wheeler-dewitt-block.tex`** (DRAFT) — *The Wheeler-DeWitt equation and the block universe: a diagnostic of hidden temporal structure.* Audits every known formulation of the WdW equation against Axiom 2 (no evolution parameter), identifies where each formulation reintroduces foliation or temporal structure, and states necessary conditions for a genuinely timeless formulation of quantum gravity.
-
-**`src/self-consistency-hierarchy.tex`** (DRAFT) — *A self-consistency hierarchy for timeless quantum gravity.* Proposes a novel four-level formulation: topological (PL 4-manifolds, intersection form constraint), smooth (exotic smooth structures), metric (semiclassical Einstein fixed point), and effective QM (density matrices as marginals of the smooth-structure measure). Derives four-dimensionality from the unique richness of 4D smooth structures.
+**`programs/self-consistency-hierarchy/`** (DRAFT) — *A self-consistency hierarchy for timeless quantum gravity.* Proposes a four-level formulation: topological (PL 4-manifolds), smooth (exotic smooth structures), metric (semiclassical Einstein fixed point), and effective QM (density matrices as marginals of the smooth-structure measure). Central conjecture: Lorentzian signature is selected by the requirement that all levels be simultaneously consistent, mediated by mass.
 
 ## Repository structure
 
 ```
-src/            — LaTeX source for all papers
+programs/       — Each program has its own directory with index.tex
 explorations/   — Structured research investigations that shaped the program's direction
 METHODOLOGY.md  — Research-as-code workflow (read before contributing)
 ```
@@ -29,7 +27,7 @@ METHODOLOGY.md  — Research-as-code workflow (read before contributing)
 Each paper compiles independently:
 
 ```bash
-pdflatex src/<paper-name>.tex
+pdflatex programs/<program-name>/index.tex
 ```
 
 The bibliography uses `\begin{thebibliography}` (no separate .bib file), so no bibtex step is needed.
