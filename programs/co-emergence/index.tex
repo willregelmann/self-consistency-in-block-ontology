@@ -589,8 +589,78 @@ What the conjecture does not achieve: it does not derive the field
 content, the curvature coupling constants, the mass spectrum, or fermion
 masses (which require additional mechanisms such as Yukawa couplings).
 The mass gap origin is partially answered---effective mass is generated,
-not assumed---but the deeper question of why non-conformal fields exist
-remains open (Section~\ref{sec:open}).
+not assumed---but the residual assumption ($\xi \neq 1/6$ for at least
+one species) deserves scrutiny: how strong is it?
+
+\begin{remark}[The residual assumption is weak]
+\label{rem:residual_weak}
+Conjecture~\ref{conj:mass_generation} does not require the Higgs
+field specifically or any particular fundamental scalar. It requires
+that at least one bosonic degree of freedom---fundamental or
+composite---has $\xi \neq 1/6$. Every scalar field on a curved
+background has a curvature coupling $\xi$; the conformal value
+$\xi = 1/6$ is a single point in the parameter space of each species.
+For the co-emergence chain to fail at this step, \emph{every} scalar
+degree of freedom in the effective field theory would need to sit at
+exactly the conformal value, with no known symmetry enforcing this
+condition.
+
+The argument extends beyond fundamental fields. Effective scalar
+degrees of freedom---condensates, order parameters, composite
+operators---also couple to curvature, and their effective $\xi$ values
+are not protected by conformal invariance. The co-emergence chain
+activates as soon as any one of these has $\xi \neq 1/6$. Universal
+conformal coupling across all bosonic degrees of freedom would itself
+be an extraordinary and unexplained fine-tuning.
+\end{remark}
+
+\begin{remark}[Why $\xi = 1/6$ is non-generic]
+\label{rem:xi_running}
+The remaining assumption can be further motivated by
+renormalization group considerations. In the Standard Model at one loop,
+the $\beta$-function for the non-minimal coupling
+is~\cite{markkanen_sm_curved}
+\begin{equation}
+16\pi^2 \beta_\xi = \left(\xi - \tfrac{1}{6}\right)
+\left[12\lambda + 2Y_2 - \tfrac{3}{2}(g')^2 - \tfrac{9}{2}g^2\right],
+\label{eq:beta_xi}
+\end{equation}
+where $\lambda$ is the Higgs self-coupling, $Y_2 = 3(y_t^2 + \cdots)$
+is the Yukawa trace, and $g$, $g'$ are the electroweak gauge couplings.
+The entire expression is proportional to $(\xi - 1/6)$: conformal
+coupling is an exact one-loop fixed point, even with the full Standard
+Model field content.
+
+This fixed point is a UV repeller. The bracket in
+eq.~\eqref{eq:beta_xi} evaluates to $\approx +4.8$ at the electroweak
+scale (dominated by the top Yukawa contribution $2Y_2 \approx 5.3$).
+Positive bracket means $\beta_\xi > 0$ for $\xi > 1/6$ and
+$\beta_\xi < 0$ for $\xi < 1/6$: the flow pushes $\xi$ toward $1/6$ in
+the infrared and away from $1/6$ in the ultraviolet. At the high
+curvatures where the trace anomaly operates, any deviation
+$|\xi - 1/6| > 0$ is amplified by the RG flow.
+
+Whether $\xi = 1/6$ is destabilized at two loops and beyond---i.e.,
+whether the fixed point itself shifts---is an open question. An explicit
+two-loop $\beta_\xi$ computation in curved spacetime has not been
+published for the Standard Model. If the fixed point shifts at higher
+orders, then $\xi = 1/6$ is not merely non-generic but
+\emph{inaccessible}, and the mass generation conjecture closes without
+any assumption about field content. If it persists to all orders, then
+$\xi = 1/6$ remains a measure-zero fixed point that requires
+fine-tuning to reach.
+
+In either case, the argument that non-conformal coupling is generic
+does not require RG instability. No known symmetry of the Standard Model
+mandates $\xi = 1/6$ for the Higgs field. Conformal invariance is
+anomalous in four-dimensional curved spacetime---the trace anomaly that
+drives the Starobinsky solution is itself a conformal anomaly. The
+symmetry that would protect $\xi = 1/6$ is the same symmetry whose
+breaking generates the curvature in the first place. This is a
+naturality argument, not a derivation: it establishes that
+$\xi \neq 1/6$ is the generic expectation, but does not exclude the
+possibility of exact conformal coupling.
+\end{remark}
 
 %======================================================================
 \section{The self-consistency hierarchy}
@@ -1301,6 +1371,12 @@ K.~Osterwalder and R.~Schrader,
 T.~Asselmeyer-Maluga and C.~H.~Brans,
 ``How to include fermions into general relativity by exotic smoothness,''
 \textit{Gen.\ Rel.\ Grav.} \textbf{47}, 30 (2015).
+
+\bibitem{markkanen_sm_curved}
+T.~Markkanen, S.~Nurmi, A.~Rajantie, and S.~Stopyra,
+``The 1-loop effective potential for the Standard Model in curved
+spacetime,''
+\textit{J.\ High Energy Phys.} \textbf{06}, 040 (2018).
 
 \end{thebibliography}
 
