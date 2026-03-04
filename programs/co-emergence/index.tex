@@ -1,0 +1,1034 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+
+\geometry{margin=1in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{axiom}{Axiom}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\title{\textbf{Co-emergence of mass, signature, time, and Hilbert space}\\[6pt]
+{\large DRAFT}}
+
+\author{Will Regelmann\thanks{Corresponding author.} \quad Claude (Anthropic)\thanks{AI
+assistant; contributed to mathematical development and analysis.}}
+
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We argue that mass, Lorentzian signature, local time, and local Hilbert
+space are four aspects of a single self-consistent structure: none exists
+without the others. Physical mass requires hyperbolicity (Wigner 1939);
+hyperbolicity provides local proper time along timelike geodesics; local
+proper time enables a local Hilbert space via the Page--Wootters mechanism;
+and the resulting quantum stress-energy sources gravity, closing the
+self-consistency loop. We formalize this co-emergence within a four-level
+hierarchy of geometric constraints on a block 4-manifold with no evolution
+parameter, no background structure, and no fundamental Hilbert space.
+The semiclassical Einstein equation --- the hierarchy's metric level ---
+is signature-blind: self-consistent solutions exist for both Lorentzian
+and Riemannian metrics, for both massive and massless field content.
+Signature selection operates not at any single level but at the
+cross-level constraint, where only Lorentzian metrics with massive field
+content support the full hierarchy.
+
+\bigskip\noindent\textit{Note:} Companion to ``Fixed-point existence of
+self-consistent semiclassical gravity''~\cite{fixed_point}, whose results
+are cited but not re-derived.
+\end{abstract}
+
+%======================================================================
+\section{Introduction}
+\label{sec:intro}
+%======================================================================
+
+Every formulation of fundamental physics assumes Lorentzian signature.
+The distinction between one timelike and three spacelike directions---the
+$(-,+,+,+)$ sign pattern in the metric---is an input, not a derivation.
+If the universe is a four-dimensional geometric block satisfying
+constraints rather than a state evolving in time, this distinction should
+be a consequence of the constraints, not a separate postulate.
+
+The most natural route to deriving signature would be topological: the
+intersection form $Q_\mathcal{M}$ of a 4-manifold has a type $(b^+, b^-)$
+that mirrors the $(1,3)$ split of Lorentzian signature. But this route is
+obstructed. The intersection form is a global invariant on
+$H_2(\mathcal{M};\mathbb{Z})$, while metric signature is a pointwise
+property of the tangent bundle; no theorem connects them. Worse, closed
+simply-connected 4-manifolds with nontrivial intersection forms have
+Euler characteristic $\chi \geq 3$, while a closed manifold admits a
+Lorentzian metric only if $\chi = 0$~\cite{geroch}. The manifold class
+where the Freedman--Donaldson machinery~\cite{freedman,donaldson} is
+strongest cannot carry a Lorentzian metric at all.
+
+The semiclassical Einstein equation (SCE) provides no help either. The
+companion paper~\cite{fixed_point} establishes that the perturbative
+self-consistency map has contraction constant $\kappa \sim (m/M_P)^2$
+regardless of metric signature. The Banach contraction is
+signature-blind: self-consistent solutions exist for both Lorentzian and
+Riemannian metrics. The Starobinsky de Sitter solution~\cite{starobinsky}
+extends this blindness to massless conformal matter. Level by level,
+signature is not selected.
+
+The foundational tension in quantum gravity is well known: general
+relativity requires no preferred time parameter, while standard quantum
+mechanics requires one. The Wheeler--DeWitt equation
+$\hat{H}\Psi = 0$~\cite{dewitt,wheeler} is the canonical attempt at
+resolution---the Hamiltonian constraint makes the wave functional
+timeless. But every known formulation of $\hat{H}\Psi = 0$ introduces
+hidden temporal or foliation structure at some stage of its
+derivation~\cite{kuchar}. The canonical ADM approach requires a $3+1$
+decomposition; the covariant path integral hides foliation dependence in
+the Wick rotation, boundary conditions, and measure ambiguity; the WKB
+semiclassical limit inserts time via Born--Oppenheimer
+adiabaticity~\cite{halliwell,banks}.
+
+This paper proposes that signature and time are two faces of the same
+coin, and that neither can be derived in isolation. Mass, Lorentzian
+signature, local time, and local Hilbert space are four aspects of a
+single self-consistent structure: each requires the others, and all
+emerge together from the requirement that the geometric block satisfy
+constraints at every level simultaneously. We call this the
+\emph{co-emergence thesis}. It is formalized as a four-level hierarchy
+of geometric constraints (Section~\ref{sec:hierarchy}) whose joint
+solution space is restricted to Lorentzian signature with massive field
+content (Conjecture~\ref{conj:coemergence}).
+
+The paper is organized as follows. Section~\ref{sec:axioms} states the
+three axioms. Section~\ref{sec:coemergence} presents the co-emergence
+thesis: four links forming a closed chain, each with its rigor level.
+Section~\ref{sec:hierarchy} develops the four-level hierarchy.
+Section~\ref{sec:dimensions} argues that four-dimensionality is derived,
+not assumed. Section~\ref{sec:connections} connects the hierarchy to
+Wheeler--DeWitt, the SCE, Page--Wootters, and Osterwalder--Schrader
+reconstruction. Section~\ref{sec:open} lists priority open problems.
+
+%======================================================================
+\section{Axioms}
+\label{sec:axioms}
+%======================================================================
+
+\begin{axiom}[No evolution parameter]
+\label{ax:timeless}
+The fundamental description contains no evolution parameter. All equations
+are constraints on the structure of the four-dimensional block, not rules for
+generating it. A formulation satisfies this axiom if and only if it can be
+stated entirely as a constraint on a four-dimensional geometric structure with
+no preferred slicing.
+\end{axiom}
+
+\begin{axiom}[No background structure]
+\label{ax:nobackground}
+The fundamental description contains no fixed metric, no preferred
+foliation, no assumed symmetry group, and no presupposed dimensionality
+or signature. The consistency constraints are purely geometric: at the
+deepest level, metric structure and matter both emerge from
+topology~(Conjecture).
+\end{axiom}
+
+\begin{axiom}[No fundamental Hilbert space]
+\label{ax:nohilbert}
+The fundamental description does not take a Hilbert space as input.
+Hilbert space, if it appears, is derived---an effective description for
+subsystems with limited access to the full block.
+\end{axiom}
+
+Axiom~\ref{ax:nohilbert} requires justification, since every existing
+formulation of quantum gravity starts from a Hilbert space.
+
+A Hilbert space $\mathcal{H}$ with inner product
+$\langle\cdot|\cdot\rangle$ carries temporal structure in three ways,
+any one of which conflicts with Axiom~\ref{ax:timeless}:
+
+\begin{enumerate}
+
+\item \textbf{The inner product requires a time-slice.} In quantum field
+theory, $\langle\Psi_1|\Psi_2\rangle = \int \Psi_1^*[\phi]\Psi_2[\phi]
+\,\mathcal{D}\phi$ integrates over field configurations $\phi$ on a spatial
+hypersurface at a fixed time. Different choices of hypersurface give
+inequivalent inner products and inequivalent quantum theories.
+
+\item \textbf{Unitary evolution requires a time parameter.} The statement
+$|\Psi(t_2)\rangle = U(t_2, t_1)|\Psi(t_1)\rangle$ requires a preferred
+parameter $t$. Even in the ``frozen'' Wheeler--DeWitt formulation, the
+Hilbert space inner product is defined on a spatial slice, smuggling in
+the foliation through the back door.
+
+\item \textbf{The Born rule requires a preferred decomposition.}
+The probability $|\langle\phi|\Psi\rangle|^2$ is defined relative to a
+measurement basis $\{|\phi\rangle\}$. Selecting this basis is an
+observer-dependent choice that the fundamental description should not
+require.
+
+\end{enumerate}
+
+\begin{proposition}[Hilbert space violates Axiom~\ref{ax:timeless}]
+\emph{(Rigorous for (1) and (2); Sketch for (3).)}
+\label{prop:nohilbert}
+Any formulation of quantum gravity that takes a Hilbert space with inner
+product as a fundamental input violates Axiom~\ref{ax:timeless}, because the
+inner product requires a preferred spatial hypersurface (point~(1)) or a
+preferred time parameter (point~(2)).
+\end{proposition}
+
+\noindent\emph{Argument.} Point~(1) follows from the standard QFT
+definition of the Fock space inner product: the functional integral
+$\int\mathcal{D}\phi$ is over field configurations on a Cauchy surface,
+and different Cauchy surfaces give different inner products. Point~(2) is
+immediate from the definition of unitary evolution. \hfill$\square$
+
+\medskip
+
+The conclusion is that a formulation satisfying Axiom~\ref{ax:timeless}
+must not take Hilbert space as input. If Hilbert space appears at all,
+it must emerge as a structure for subsystems---the content of
+Section~\ref{sec:coemergence}.
+
+\medskip
+
+\noindent\textbf{What this paper is and is not.} This is a framework
+proposal, not a completed theory. The co-emergence thesis
+(Section~\ref{sec:coemergence}) rests on specific mathematical claims at
+stated rigor levels. The metric level has the most rigorous support---it
+is the setting of the companion paper~\cite{fixed_point}. The
+topological, smooth-structure, and effective-QM levels are research
+programs with clear mathematical agendas. We do not claim to have derived
+the Standard Model. We claim to have identified the structure that
+connects mass, signature, time, and Hilbert space, and to have made
+explicit what is required to prove the connection rigorously.
+
+%======================================================================
+\section{The co-emergence thesis}
+\label{sec:coemergence}
+%======================================================================
+
+Four concepts that are usually treated as independent---mass, Lorentzian
+signature, local time, and local Hilbert space---form a closed logical
+chain. Each link has a stated rigor level and citation. The chain reads
+as a causal sequence; it is not. The four concepts are simultaneous
+aspects of the self-consistent block (see Remark~\ref{rem:temporal}
+below).
+
+%----------------------------------------------------------------------
+\subsection{Mass requires Lorentzian signature}
+\label{sec:mass_signature}
+%----------------------------------------------------------------------
+
+\emph{(Rigorous.)}
+
+\medskip
+
+\noindent The distinction between physical mass and the parameter $m^2$
+is categorical. On a Lorentzian manifold, the dispersion relation
+$E^2 = \mathbf{p}^2 + m^2$ defines a mass shell $p_\mu p^\mu = -m^2$---a
+hyperboloid in momentum space. Massive particles are irreducible
+representations of the Poincar\'e group $\mathrm{ISO}(3,1)$, classified
+by mass and spin (Wigner~\cite{wigner}). The mass shell, the dispersion
+relation, and the particle classification all require the $(-,+,+,+)$
+split.
+
+On a Riemannian manifold, the parameter $m^2$ appears in the field
+equation $(\Delta + m^2)\phi = 0$ but does not define a mass shell, a
+dispersion relation, or propagating degrees of freedom. The wave operator
+$\Delta + m^2$ is elliptic: its solutions decay exponentially rather than
+propagate. The Euclidean group $\mathrm{ISO}(4)$ has no analogous
+classification of particles by mass and spin. The parameter $m^2$ exists;
+the physics of mass does not.
+
+%----------------------------------------------------------------------
+\subsection{Lorentzian signature provides local time}
+\label{sec:signature_time}
+%----------------------------------------------------------------------
+
+\emph{(Rigorous; Geroch~\cite{geroch}, Hawking--Ellis~\cite{hawking_ellis}.)}
+
+\medskip
+
+\noindent Lorentzian signature distinguishes timelike, spacelike, and null
+directions. This trichotomy is the physical content of the $(-,+,+,+)$
+sign pattern: it is what makes the metric a causal structure and not merely
+a distance function. Massive particles follow timelike geodesics, along
+which proper time
+\begin{equation}
+d\tau^2 = -g_{\mu\nu}\,dx^\mu dx^\nu > 0
+\label{eq:propertime}
+\end{equation}
+is well-defined and positive. Massless particles follow null geodesics,
+along which $d\tau = 0$.
+
+General relativity prohibits universal time: clocks at different locations
+in a gravitational field tick at different rates. But mass provides
+\emph{local} time: worldline-dependent clocks carried by massive objects.
+Without hyperbolicity, there is no causal structure, no
+timelike/spacelike distinction, and no proper time for any object.
+
+%----------------------------------------------------------------------
+\subsection{Local time enables local Hilbert space}
+\label{sec:time_hilbert}
+%----------------------------------------------------------------------
+
+\emph{(Sketch.)}
+
+\medskip
+
+\noindent The Schr\"odinger equation $i\hbar\,\partial|\psi\rangle/\partial t
+= H|\psi\rangle$ requires a time parameter $t$. The inner product
+$\langle\psi|\phi\rangle$ is defined on a spatial slice at fixed $t$.
+Unitarity requires that the inner product be preserved under evolution in
+$t$. If there is no universal time (Section~\ref{sec:signature_time}),
+there is no universal Hilbert space---the content of
+Axiom~\ref{ax:nohilbert}.
+
+But if mass provides local time, a local Hilbert space exists for massive
+subsystems that carry their own clocks. The Page--Wootters
+mechanism~\cite{page_wootters} makes this precise: apparent time evolution
+is recovered from a globally static state by conditioning on a clock
+subsystem. The clock must be massive---it must experience proper time along
+a timelike worldline. Without mass, the conditioning has no temporal
+reference and the mechanism fails.
+
+This is how Axiom~\ref{ax:nohilbert} is realized: Hilbert space is not
+fundamental but is derived via the Page--Wootters mechanism from mass and
+Lorentzian signature.
+
+\begin{remark}[Acknowledged gap]
+\label{rem:pw_gap}
+The Page--Wootters mechanism as standardly formulated presupposes a total
+Hilbert space $\mathcal{H} = \mathcal{H}_{\mathrm{clock}} \otimes
+\mathcal{H}_{\mathrm{system}}$ and a global Hamiltonian constraint
+$\hat{H}|\Psi\rangle = 0$. This conflicts with Axiom~\ref{ax:nohilbert}:
+the total Hilbert space is assumed, not derived. A fully consistent
+treatment requires reformulating the Page--Wootters mechanism without a
+fundamental Hilbert space---using instead the marginal of the
+smooth-structure measure $\mu^*$ (Section~\ref{sec:level3}). This
+reformulation is an open problem (Section~\ref{sec:open}).
+\end{remark}
+
+%----------------------------------------------------------------------
+\subsection{Local Hilbert space closes the loop}
+\label{sec:hilbert_mass}
+%----------------------------------------------------------------------
+
+\emph{(Sketch.)}
+
+\medskip
+
+\noindent The Hilbert space for massive quantum fields produces the
+quantum stress-energy $\langle\hat{T}_{\mu\nu}\rangle$ that sources
+gravity via the semiclassical Einstein equation
+\begin{equation}
+G_{\mu\nu}[g] = 8\pi G\,\langle\hat{T}_{\mu\nu}\rangle_{g,\mathrm{ren}}.
+\label{eq:sce}
+\end{equation}
+The companion paper~\cite{fixed_point} establishes that eq.~\eqref{eq:sce}
+has a self-consistent solution (Rigorous for massive fields with
+$m \ll M_P$). Without mass, the only stress-energy source is the conformal
+trace anomaly, which drives the Starobinsky de Sitter
+solution~\cite{starobinsky}. This solution is self-consistent at the
+metric level (Section~\ref{sec:level2}), but it supports no massive
+particles, no local clocks, no local Hilbert space, and no effective
+quantum mechanics for subsystems. It is a geometry in equilibrium with
+vacuum fluctuations---consistent but physically uninhabited.
+
+Mass makes the self-consistent geometry physically inhabited: it provides
+the matter content that sources gravity, the timelike worldlines that
+define local time, and the clock subsystems that enable local quantum
+mechanics. The loop closes:
+\begin{equation}
+\text{mass} \;\longleftrightarrow\; \text{Lorentzian signature}
+\;\longleftrightarrow\; \text{local time}
+\;\longleftrightarrow\; \text{local Hilbert space}
+\;\longleftrightarrow\; \langle\hat{T}_{\mu\nu}\rangle
+\;\longleftrightarrow\; \text{gravity}
+\;\longleftrightarrow\; \text{mass}
+\label{eq:co_emergence}
+\end{equation}
+In the framework of Axiom~\ref{ax:timeless}, this is not a circularity
+but a self-consistency constraint: the block must satisfy all these
+conditions simultaneously.
+
+%----------------------------------------------------------------------
+\subsection{The formal statement}
+\label{sec:formal_coemergence}
+%----------------------------------------------------------------------
+
+\begin{conjecture}[Co-emergence]
+\label{conj:coemergence}
+Cross-level self-consistency of the four-level hierarchy
+(Definition~\ref{def:hierarchy}) has nontrivial solutions---solutions
+supporting effective quantum mechanics for subsystems---only for
+Lorentzian metric signature with massive field content. Riemannian
+and/or massless solutions exist at the metric level but are physically
+degenerate: they do not support the Level~3 structure.
+\end{conjecture}
+
+The evidence for Conjecture~\ref{conj:coemergence} is summarized in
+Table~\ref{tab:signature}. The semiclassical Einstein equation (Level~2)
+is completely signature-blind: self-consistent fixed points exist for
+all four combinations of signature and field content. The selection
+operates at Level~3, where only the Lorentzian-massive combination
+supports local time, local Hilbert space, and effective quantum
+mechanics.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+& \multicolumn{2}{c}{Massive fields} & \multicolumn{2}{c}{Massless conformal} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+& Level~2 & Level~3 & Level~2 & Level~3 \\
+\midrule
+Lorentzian & $\checkmark$ (Rigorous) & $\checkmark$ (Sketch) & $\checkmark$ (Rigorous) & $\times$ \\
+Riemannian & $\checkmark$ (Sketch) & $\times$ & $\checkmark$ (Rigorous) & $\times$ \\
+\bottomrule
+\end{tabular}
+\caption{Signature selection operates at the cross-level constraint. Level~2
+(the SCE) is signature-blind for both massive and massless fields. Only
+Lorentzian signature with massive field content supports Level~3.
+The Lorentzian massive Level~2 entry is Rigorous (Banach contraction,
+$\kappa \sim (m/M_P)^2$, companion paper~\cite{fixed_point}); the
+Riemannian massive entry is Sketch (same contraction argument applies to
+elliptic operators); the massless entries use the Starobinsky de Sitter /
+round $S^4$ solutions~\cite{starobinsky,bunch_davies}.}
+\label{tab:signature}
+\end{table}
+
+\begin{remark}[The chain is not causal]
+\label{rem:temporal}
+The co-emergence chain~\eqref{eq:co_emergence} reads as a causal
+sequence: mass ``produces'' signature, signature ``provides'' time, time
+``enables'' Hilbert space. This temporal reading must be resisted. The
+block does not first acquire mass, then a signature, then time, then
+quantum mechanics. It satisfies all constraints at all levels
+simultaneously. The chain is our explanation of the constraint structure,
+expressed in the only order available to linear text, not a description
+of how the block came to be.
+\end{remark}
+
+%======================================================================
+\section{The self-consistency hierarchy}
+\label{sec:hierarchy}
+%======================================================================
+
+We propose a four-level hierarchy of self-consistency constraints. The
+levels are organized by \emph{coarse-graining}: Level~0 is the coarsest
+description, Level~3 the finest accessible to a subsystem. The levels
+are not temporal stages. They are simultaneous aspects of the same
+four-dimensional block, described at different resolutions. A valid block
+must satisfy the constraints at every level, and these constraints
+interlock.
+
+\begin{definition}[The four-level hierarchy]
+\label{def:hierarchy}
+\quad
+\begin{itemize}
+\item[\emph{Level 0.}] \emph{Topological.} The fundamental object is a
+piecewise-linear (PL) 4-manifold $\mathcal{M}$, equipped with no
+additional structure.
+
+\item[\emph{Level 1.}] \emph{Smooth.} Given the topological type of
+$\mathcal{M}$, the space of compatible smooth structures
+$\mathrm{Sm}(\mathcal{M})$ is the configuration space of the theory. A
+self-consistency measure $\mu^*$ on $\mathrm{Sm}(\mathcal{M})$ replaces
+both the wavefunction and the path integral measure of standard
+formulations.
+
+\item[\emph{Level 2.}] \emph{Metric.} Each smooth structure constrains
+the space of compatible metrics. The semiclassical Einstein
+equation~\eqref{eq:sce} is the fixed-point condition that selects the
+metric at this level; its existence is established in the companion
+paper~\cite{fixed_point}.
+
+\item[\emph{Level 3.}] \emph{Effective quantum mechanics.} Marginalizing
+the smooth-structure measure $\mu^*$ over the complement of a subregion
+$\mathcal{R} \subset \mathcal{M}$ produces an effective density matrix
+$\rho_\mathcal{R}$ on a local Hilbert space
+$\mathcal{H}_\mathcal{R}$. This level functions only for Lorentzian
+signature with massive field content (Section~\ref{sec:coemergence}).
+\end{itemize}
+\end{definition}
+
+The remainder of this section develops each level and specifies the
+constraints that link them.
+
+%----------------------------------------------------------------------
+\subsection{Level 0: The topological constraint}
+\label{sec:level0}
+%----------------------------------------------------------------------
+
+The manifold $\mathcal{M}$ must satisfy two requirements simultaneously:
+it must admit a Lorentzian metric, and it must support nontrivial smooth
+structures. These requirements are in tension.
+
+A closed manifold admits a Lorentzian metric if and only if its Euler
+characteristic vanishes: $\chi(\mathcal{M}) = 0$~\cite{geroch}. For
+closed simply-connected 4-manifolds---the class where Freedman's
+classification theorem~\cite{freedman} is strongest---the Euler
+characteristic is $\chi = 2 + b_2$, where $b_2 = \mathrm{rank}(Q_\mathcal{M})$
+is the second Betti number. Whenever the intersection form $Q_\mathcal{M}$ is
+nontrivial ($b_2 \geq 1$), we have $\chi \geq 3$. The manifold class
+where the Freedman--Donaldson machinery provides the richest structure
+\emph{cannot carry a Lorentzian metric}.
+
+This obstruction forces the Level~0 manifold away from the closed
+simply-connected class. Three alternatives admit both $\chi = 0$ and
+nontrivial smooth structures:
+
+\begin{enumerate}
+\item \textbf{Non-compact manifolds (exotic $\mathbb{R}^4$).} The
+standard $\mathbb{R}^4$ admits uncountably many exotic smooth
+structures~\cite{donaldson,taubes}. It has $\chi = 0$ and admits
+Lorentzian metrics. However, $H_2(\mathbb{R}^4;\mathbb{Z}) = 0$, so
+the intersection form is trivial. The rich topological structure is
+carried by the smooth structures themselves, not by the homology.
+
+\item \textbf{Manifolds with boundary (cobordisms).} Compact manifolds
+with boundary can have $\chi = 0$ and nontrivial smooth structures. The
+boundary data may carry topological information that compensates for the
+loss of the closed-manifold intersection form.
+
+\item \textbf{Non-simply-connected manifolds.} Manifolds with nontrivial
+fundamental group (e.g., $T^4$) can have $\chi = 0$ and admit Lorentzian
+metrics. The theory of exotic structures on non-simply-connected
+4-manifolds is less developed than for simply-connected ones.
+\end{enumerate}
+
+Which class of 4-manifolds serves as the correct Level~0 input is an
+open problem (Section~\ref{sec:open}). The co-emergence thesis does not
+depend on the resolution: it requires only that $\mathcal{M}$ admits a
+Lorentzian metric and supports enough smooth structures for Level~1 to
+be nontrivial.
+
+%----------------------------------------------------------------------
+\subsection{Level 1: The smooth-structure measure}
+\label{sec:level1}
+%----------------------------------------------------------------------
+
+The most remarkable fact in four-dimensional topology is the following:
+
+\begin{theorem}[Donaldson, 1983; Taubes, 1987~\cite{donaldson,taubes}]
+\emph{(Rigorous.)}
+\label{thm:exotic}
+The smooth manifold $\mathbb{R}^4$ admits uncountably many mutually
+non-diffeomorphic smooth structures. In every other dimension $n \neq 4$,
+$\mathbb{R}^n$ admits a unique smooth structure up to diffeomorphism.
+\end{theorem}
+
+The space $\mathrm{Sm}(\mathcal{M})$ of smooth structures compatible
+with the PL type of a four-dimensional $\mathcal{M}$ is generically an
+uncountable set. In any other dimension, it is a finite set (often a
+single point).
+
+\begin{definition}[The smooth-structure measure]
+\emph{(Conjecture.)}
+\label{def:mu}
+The self-consistency measure $\mu^*$ on $\mathrm{Sm}(\mathcal{M})$ is
+the unique measure satisfying the self-consistency condition
+$\mathcal{F}(\mu^*) = \mu^*$, where $\mathcal{F}$ is the map defined
+by: given a trial measure $\mu$ on $\mathrm{Sm}(\mathcal{M})$, compute
+the induced metric and matter content at each smooth structure (via
+Level~2), compute the resulting stress-energy, solve the Einstein
+constraint for a new geometry, and update the weights on
+$\mathrm{Sm}(\mathcal{M})$ accordingly.
+\end{definition}
+
+\begin{remark}[Relation to the path integral]
+The smooth-structure measure $\mu^*$ is an analogue of the gravitational
+path integral, but with a structural difference. The standard
+gravitational path integral integrates over metrics---a continuous
+infinite-dimensional space with an undefined measure. The measure $\mu^*$
+integrates over smooth structures on a fixed topological type. While
+$\mathrm{Sm}(\mathcal{M})$ may be uncountable, its structure as a moduli
+space of gauge-equivalence classes is better controlled than the space of
+all metrics. Donaldson and Seiberg--Witten theory provide invariants of
+smooth structures that can serve as weights in $\mu^*$, even if the full
+measure is not yet defined.
+\end{remark}
+
+%----------------------------------------------------------------------
+\subsection{Level 2: The metric fixed point}
+\label{sec:level2}
+%----------------------------------------------------------------------
+
+Given a smooth structure $\sigma \in \mathrm{Sm}(\mathcal{M})$, the
+self-consistency constraint at the metric level is
+eq.~\eqref{eq:sce}: the geometry that hosts the quantum state must be
+sourced by that state. The companion paper~\cite{fixed_point} establishes
+existence of solutions at three levels of rigor:
+
+\begin{enumerate}
+
+\item \emph{Exactly}, in the cosmological case via the Starobinsky
+(1980) trace anomaly solution~\cite{starobinsky}, with
+$H_0^2 = 180\pi/G|a_2|$ (Rigorous).
+
+\item \emph{Perturbatively}, near any classical solution, via a Banach
+contraction with constant $\kappa \sim (m/M_P)^2 \ll 1$ for massive
+fields (Rigorous). The extension to massless fields remains open: the
+spectral gap that controls the infrared behavior of the response kernel
+vanishes at $m = 0$.
+
+\item \emph{Conditionally non-perturbatively}, via the Schauder
+fixed-point theorem on globally hyperbolic spacetimes with compact Cauchy
+surfaces, under six stated assumptions of which four are established and
+two remain open (Sketch).
+
+\end{enumerate}
+
+The Planck scale emerges as the natural validity boundary: when
+$R \sim \ell_P^{-2}$, the contraction constant $\kappa \to 1$, the
+perturbative expansion breaks down, and the full smooth-structure measure
+$\mu^*$ becomes relevant.
+
+\begin{remark}[Level~2 is signature-blind]
+\label{rem:signature_blind}
+The contraction constant $\kappa \sim (m/M_P)^2$ is identical for
+Lorentzian and Riemannian metrics. The Banach contraction establishes
+existence of self-consistent solutions regardless of signature. For
+massless conformal matter, the Starobinsky de Sitter solution
+(Lorentzian) and the round $S^4$ (Riemannian) are both exact
+self-consistent fixed points~\cite{starobinsky,bunch_davies}. Level~2
+does not distinguish signatures for any field content. This is not a
+deficiency---it is informative: it demonstrates that signature selection
+must operate at the cross-level constraint
+(Conjecture~\ref{conj:coemergence}), not at any single level.
+\end{remark}
+
+%----------------------------------------------------------------------
+\subsection{Level 3: Effective quantum mechanics}
+\label{sec:level3}
+%----------------------------------------------------------------------
+
+\begin{conjecture}[Emergence of effective quantum mechanics]
+\emph{(Conjecture.)}
+\label{conj:qm}
+Let $\mathcal{R} \subset \mathcal{M}$ be a subregion of the block. Let
+$\mu^*$ be the self-consistency measure on $\mathrm{Sm}(\mathcal{M})$.
+The marginal of $\mu^*$ over the smooth structures of the complement
+$\mathcal{M} \setminus \mathcal{R}$, restricted to $\mathcal{R}$, defines
+an effective measure $\mu^*_\mathcal{R}$ on the local configuration space
+of $\mathcal{R}$.
+
+When $\mathcal{R}$ is much larger than the Planck scale but much smaller
+than the cosmological scale, and gravity within $\mathcal{R}$ is weak,
+$\mu^*_\mathcal{R}$ is approximated by a density matrix
+$\rho_\mathcal{R}$ on a Hilbert space $\mathcal{H}_\mathcal{R} =
+L^2(\mathrm{Config}(\mathcal{R}), \mu^*_\mathcal{R})$.
+\end{conjecture}
+
+The Hilbert space $\mathcal{H}_\mathcal{R}$ is derived, not
+postulated: it is the $L^2$ space of the marginal measure.
+It is subsystem-dependent: different choices of $\mathcal{R}$ give
+different Hilbert spaces. There is no single Hilbert space of the
+universe. It is approximate: the density matrix approximation is valid
+only in the sub-Planckian, weak-gravity regime.
+
+This level functions only for Lorentzian signature with massive field
+content. On a Riemannian manifold, the wave operator $\Delta + m^2$ is
+elliptic: there are no propagating modes, no mass shell, no particle
+interpretation, and no timelike geodesics to provide the local proper
+time required for the Page--Wootters mechanism~\cite{page_wootters}. The
+parameter $m^2$ is present in the field equation but is not
+\emph{mass}: it generates no dispersion, no propagation, no local
+clocks. For massless conformal matter on a Lorentzian background, proper
+time exists along timelike geodesics, but without massive clock
+subsystems the Page--Wootters conditioning has no temporal reference.
+Level~3 collapses.
+
+\begin{remark}[Why marginalization produces quantum statistics]
+The argument for Conjecture~\ref{conj:qm} parallels the derivation of the
+canonical ensemble from microcanonical statistics: integrating out the
+environment imposes linearity on the subsystem. In the present context,
+the consistency constraints on the full block, restricted to
+$\mathcal{R}$, become approximately linear in the degrees of freedom of
+$\mathcal{R}$ when the complement is integrated over, because the
+dominant contribution from the complement is the mean-field background.
+The analogy to statistical mechanics is structural---in both cases,
+integrating out a large environment produces an approximately linear
+effective theory---but the mechanism differs. Whether the marginalization
+of $\mu^*$ produces the same linearization is the content of
+Conjecture~\ref{conj:qm}, not a consequence of the analogy.
+\end{remark}
+
+%----------------------------------------------------------------------
+\subsection{The interlocking constraint}
+\label{sec:interlock}
+%----------------------------------------------------------------------
+
+The four levels are not independent. The constraint is that the
+self-consistency chain must close:
+\begin{equation}
+\underbrace{\mathcal{M}}_{\text{Level 0}}
+\xrightarrow{\text{smooth}}
+\underbrace{\mathrm{Sm}(\mathcal{M})}_{\text{Level 1}}
+\xrightarrow{\mu^* = \mathcal{F}(\mu^*)}
+\underbrace{g^*}_{\text{Level 2}}
+\xrightarrow{\text{Einstein}}
+\underbrace{\langle\hat{T}_{\mu\nu}\rangle}_{\text{Level 2}}
+\xrightarrow{\text{marginalize}}
+\underbrace{\rho_\mathcal{R}}_{\text{Level 3}}
+\xrightarrow{\text{consistency}}
+\mathcal{M}
+\label{eq:chain}
+\end{equation}
+
+The arrows represent logical constraints, not temporal sequences. A
+block satisfying the hierarchy satisfies all constraints simultaneously.
+The co-emergence thesis (Conjecture~\ref{conj:coemergence}) is the claim
+that the joint solution space of this chain is restricted to Lorentzian
+signature with massive field content: this is the only combination for
+which all four levels are simultaneously nontrivial.
+
+\begin{remark}[The chain is an epistemic decomposition]
+The levels in~\eqref{eq:chain} are introduced for human
+comprehensibility. They correspond to the precision at which we can
+currently do mathematics. The block does not ``proceed'' through these
+levels. It satisfies the constraint. The iteration suggested by
+Axiom~\ref{ax:timeless} is our procedure for computing the fixed point,
+not a description of how the universe came to be.
+\end{remark}
+
+%======================================================================
+\section{Why four dimensions}
+\label{sec:dimensions}
+%======================================================================
+
+The hierarchy of Section~\ref{sec:hierarchy} operates on a 4-manifold.
+Here we argue that the four-dimensionality is not an input but a
+consequence: four is the unique dimension where the constraint structure
+of Definition~\ref{def:hierarchy} is nontrivial.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\toprule
+Dimension & Smooth structures on $\mathbb{R}^n$ & $h$-cobordism theorem & Level~1 richness \\
+\midrule
+$n < 4$ & Unique & Holds (Smale, $n \geq 6$; special cases $n = 5$) & Insufficient \\
+$n = 4$ & Uncountably many & \textbf{Fails} (Donaldson 1987) & Rich \\
+$n > 4$ & Unique ($n \geq 5$) & Holds & Insufficient \\
+\bottomrule
+\end{tabular}
+\caption{Topology by dimension. The failure of the $h$-cobordism theorem in
+dimension four is the root of the exotic structure richness.}
+\label{tab:dimensions}
+\end{table}
+
+\begin{proposition}[Four-dimensional uniqueness]
+\emph{(Sketch.)}
+\label{prop:4d}
+The self-consistency hierarchy of Definition~\ref{def:hierarchy} is trivial
+in every dimension other than four:
+\begin{enumerate}
+\item For $n \neq 4$: $\mathrm{Sm}(\mathcal{M})$ is a finite set
+(generically a single point for $\mathbb{R}^n$). The Level~1 measure
+$\mu^*$ is a finite sum, not an integral over a continuous moduli space.
+The effective quantum mechanics of Conjecture~\ref{conj:qm} collapses to
+classical statistics.
+
+\item For $n = 4$: $\mathrm{Sm}(\mathcal{M})$ is uncountably infinite.
+The Level~1 measure is a genuine integral over a continuous moduli space.
+\end{enumerate}
+\end{proposition}
+
+\noindent\emph{Sketch.} Point~(1) uses Theorem~\ref{thm:exotic}: smooth
+structures on $\mathbb{R}^n$ are unique for $n \neq 4$. The same
+conclusion holds for compact manifolds in dimensions $n \geq 5$ (Smale's
+$h$-cobordism theorem; see~\cite{smale}), and for $n \leq 3$ by
+classical surface and 3-manifold theory. For $n = 4$,
+Theorem~\ref{thm:exotic} gives the uncountable smooth structures.
+The identification of the uncountable smooth structure moduli space as
+the source of quantum statistics (Conjecture~\ref{conj:qm}) is a
+conjecture, not a theorem. \hfill$\square$
+
+\begin{remark}
+Proposition~\ref{prop:4d} does not \emph{prove} that the universe is
+four-dimensional. It establishes that the framework proposed here is
+nontrivial only in dimension four. If the framework is correct,
+four-dimensionality follows. Whether the framework is correct is an open
+question.
+\end{remark}
+
+%======================================================================
+\section{Connection to existing formulations}
+\label{sec:connections}
+%======================================================================
+
+\subsection{The Wheeler--DeWitt equation as a Level-2 projection}
+
+The Wheeler--DeWitt equation $\hat{H}\Psi[\gamma_{ij}] =
+0$~\cite{dewitt} is the canonical quantization of the metric-level
+constraint. In the hierarchy of Section~\ref{sec:hierarchy}, it is an
+approximation to the Level~2 fixed-point condition, obtained by:
+
+\begin{enumerate}
+\item Concentrating the smooth-structure measure $\mu^*$ on a single
+smooth structure (ignoring the Level~1 sum over exotic structures).
+\item Performing a $3+1$ decomposition of the metric (introducing a
+preferred foliation).
+\item Replacing the Level~2 classical fixed-point condition with its
+quantum analogue via Dirac quantization.
+\end{enumerate}
+
+Each step introduces additional structure not present in the hierarchy.
+Step~(2) is the primary source of Axiom~\ref{ax:timeless}
+violation~\cite{kuchar}. Steps~(1) and~(3) are simplifications that are
+valid in the sub-Planckian, single-smooth-structure regime.
+
+The Wheeler--DeWitt equation is thus the projection of the full hierarchy
+onto a single smooth structure and a single spatial foliation. It
+contains the correct physics at leading order in $\kappa \sim (m/M_P)^2$,
+but not the global, foliation-independent constraint structure of the
+full hierarchy.
+
+\subsection{The semiclassical Einstein equation as Level-2}
+
+The companion paper~\cite{fixed_point} studies eq.~\eqref{eq:sce} as a
+fixed-point condition in its own right. Within the present hierarchy,
+this is the Level~2 constraint evaluated on a single smooth structure.
+The Banach contraction result ($\kappa \ll 1$ for sub-Planckian
+curvatures) is the perturbative stability of the fixed point at this
+level. The Schauder existence result (conditional on two open conjectures)
+is non-perturbative existence.
+
+The hierarchy extends this program: Level~2 existence (established with
+caveats in the companion paper) is a necessary condition for the full
+hierarchy to have a fixed point, but not sufficient. Level~1 requires
+additionally that the measure over smooth structures has a fixed point.
+Level~0 requires that the manifold type is self-consistent with the
+matter content.
+
+\subsection{The Page--Wootters mechanism at Level~3}
+
+The Page--Wootters mechanism~\cite{page_wootters}---apparent time
+evolution of a subsystem recovered from a globally static state via
+conditioning on a ``clock'' subsystem---is a Level~3 phenomenon in the
+present hierarchy. The globally static state is the smooth-structure
+measure $\mu^*$; the conditioning on a subsystem is the marginalization
+of Conjecture~\ref{conj:qm}. The apparent time evolution is a pattern
+in the correlations between $\mathcal{R}$ and its complement encoded in
+$\mu^*$.
+
+The clock subsystem must be massive: it must experience proper time
+along a timelike worldline (Section~\ref{sec:time_hilbert}). This
+requirement connects Level~3 directly to the co-emergence thesis:
+without mass, no clock; without a clock, no conditioning; without
+conditioning, no effective time evolution and no local Hilbert space.
+
+The observer-dependence identified by Kucha\v{r}~\cite{kuchar} and
+confirmed by Marletto and Vedral~\cite{marletto_vedral}---different
+choices of ``clock'' subsystem give different dynamics---is, in the
+present hierarchy, a manifestation of the fact that different choices
+of $\mathcal{R}$ give different marginal measures $\mu^*_\mathcal{R}$
+and hence different effective Hilbert spaces
+$\mathcal{H}_\mathcal{R}$. The observer-dependence is a feature:
+it reflects the emergent, subsystem-relative nature of Hilbert space.
+
+\subsection{Osterwalder--Schrader reconstruction as flat-space evidence}
+
+The Osterwalder--Schrader (OS) reconstruction
+theorem~\cite{osterwalder_schrader} provides independent evidence for the
+mass-signature link: if a Euclidean quantum field theory has a mass gap
+and satisfies reflection positivity, the theory reconstructs uniquely to
+a Lorentzian QFT. The chain is: mass gap $\to$ reflection positivity
+$\to$ Lorentzian theory. This is a rigorous result on flat space.
+
+However, the OS theorem cannot serve as the \emph{mechanism} for
+signature selection in the hierarchy, for two reasons. First, the OS
+axioms require a flat Euclidean background with $E(4)$ invariance and a
+global reflection hyperplane---fixed background structure that violates
+Axiom~\ref{ax:nobackground}. Second, the reflection hyperplane defines a
+preferred direction that becomes time after Wick rotation, which violates
+Axiom~\ref{ax:timeless}.
+
+The OS theorem is evidence, not mechanism: it demonstrates that the
+connection between mass and Lorentzian signature is a rigorous
+mathematical phenomenon, not verbal hand-waving. In the hierarchy, it
+applies as a consistency check in the flat-space (weak-gravity) limit
+of Level~2. The effective QFT obtained by marginalizing $\mu^*$ should
+satisfy reflection positivity---a nontrivial constraint on the
+self-consistency measure.
+
+%======================================================================
+\section{Open problems}
+\label{sec:open}
+%======================================================================
+
+We list four priority open problems, in order of importance.
+
+\begin{enumerate}
+
+\item \textbf{The mass gap origin.}
+The co-emergence thesis is conditional: \emph{if} mass, \emph{then}
+signature, time, and Hilbert space co-emerge. Where does mass come from?
+The hierarchy's proven results do not depend on answering this question---they
+hold for any mass input satisfying the perturbative bound $m \ll M_P$.
+But the framework aspires to derive mass from topology
+(Axiom~\ref{ax:nobackground}).
+
+Mass enters the hierarchy at Level~2 as a parameter of the matter field
+content. Cross-level consistency requires at least some massive fields
+(Conjecture~\ref{conj:coemergence}): without mass, there are no timelike
+geodesics, no local proper time, no local Hilbert space, and therefore
+no Level~3 structure. Whether the mass spectrum can be derived from
+Levels~0--1 is the hierarchy's deepest open problem.
+
+\item \textbf{Level~3 formalization.}
+Make ``local Hilbert space requires local time requires mass''
+mathematically precise. The Page--Wootters mechanism provides a partial
+model, but as standardly formulated it presupposes a total Hilbert
+space (Remark~\ref{rem:pw_gap}). The needed result: reformulate
+Page--Wootters using the marginal of $\mu^*$ rather than a fundamental
+Hilbert space, and show that the conditioning on a massive clock
+subsystem requires the metric to be Lorentzian. This would promote the
+co-emergence thesis from Conjecture to Sketch.
+
+\item \textbf{The Level~0 manifold class.}
+Which 4-manifolds admit both Lorentzian metrics ($\chi = 0$) and
+nontrivial smooth structures? The Euler characteristic obstruction
+(Section~\ref{sec:level0}) rules out closed simply-connected manifolds
+with nontrivial intersection forms. The candidates---exotic
+$\mathbb{R}^4$, manifolds with boundary, non-simply-connected
+manifolds---each have different mathematical properties. Identifying the
+correct class is prerequisite to making Level~0 precise.
+
+\item \textbf{A natural measure on smooth structures.}
+Define a measure $\mu$ on $\mathrm{Sm}(\mathcal{M})$ for a 4-manifold
+$\mathcal{M}$ that is:
+\begin{enumerate}
+\item Defined without reference to a metric (to avoid the circularity of
+the standard gravitational measure problem).
+\item Compatible with the self-consistency condition
+$\mathcal{F}(\mu) = \mu$.
+\item Invariant under the orientation-preserving diffeomorphism group.
+\end{enumerate}
+Donaldson--Witten theory and Seiberg--Witten invariants provide natural
+weights on smooth structures; assembling these into a well-defined
+measure on the full moduli space $\mathrm{Sm}(\mathcal{M})$ is the open
+problem.
+
+\end{enumerate}
+
+%======================================================================
+\section*{Acknowledgments}
+%======================================================================
+
+% [placeholder]
+
+\begin{thebibliography}{99}
+
+\bibitem{fixed_point}
+W.~Regelmann and Claude (Anthropic),
+``Fixed-point existence of self-consistent semiclassical gravity,''
+companion paper (2026).
+
+\bibitem{dewitt}
+B.~S.~DeWitt,
+``Quantum theory of gravity. I. The canonical theory,''
+\textit{Phys.\ Rev.} \textbf{160}, 1113 (1967).
+
+\bibitem{wheeler}
+J.~A.~Wheeler,
+``Superspace and the nature of quantum geometrodynamics,''
+in \textit{Battelle Rencontres}, eds.\ C.~M.~DeWitt and J.~A.~Wheeler
+(Benjamin, New York, 1968), pp.~242--307.
+
+\bibitem{kuchar}
+K.~V.~Kucha\v{r},
+``Time and interpretations of quantum gravity,''
+in \textit{Proc.\ 4th Canadian Conference on General Relativity and
+Relativistic Astrophysics}, eds.\ G.~Kunstatter, D.~Vincent, and
+J.~Williams (World Scientific, 1992), pp.~211--314.
+
+\bibitem{page_wootters}
+D.~N.~Page and W.~K.~Wootters,
+``Evolution without evolution: Dynamics described by stationary observables,''
+\textit{Phys.\ Rev.\ D} \textbf{27}, 2885 (1983).
+
+\bibitem{wigner}
+E.~P.~Wigner,
+``On unitary representations of the inhomogeneous Lorentz group,''
+\textit{Ann.\ Math.} \textbf{40}, 149--204 (1939).
+
+\bibitem{geroch}
+R.~Geroch,
+``Spinor structure of space-times in general relativity.\ I,''
+\textit{J.\ Math.\ Phys.} \textbf{9}, 1739--1744 (1968).
+
+\bibitem{starobinsky}
+A.~A.~Starobinsky,
+``A new type of isotropic cosmological models without singularity,''
+\textit{Phys.\ Lett.\ B} \textbf{91}, 99--102 (1980).
+
+\bibitem{bunch_davies}
+T.~S.~Bunch and P.~C.~W.~Davies,
+``Quantum field theory in de Sitter space: Renormalization by point-splitting,''
+\textit{Proc.\ R.\ Soc.\ Lond.\ A} \textbf{360}, 117--134 (1978).
+
+\bibitem{freedman}
+M.~H.~Freedman,
+``The topology of four-dimensional manifolds,''
+\textit{J.\ Diff.\ Geom.} \textbf{17}, 357--453 (1982).
+
+\bibitem{donaldson}
+S.~K.~Donaldson,
+``An application of gauge theory to four-dimensional topology,''
+\textit{J.\ Diff.\ Geom.} \textbf{18}, 279--315 (1983).
+
+\bibitem{smale}
+S.~Smale,
+``On the structure of manifolds,''
+\textit{Amer.\ J.\ Math.} \textbf{84}, 387--399 (1962).
+
+\bibitem{taubes}
+C.~H.~Taubes,
+``Gauge theory on asymptotically periodic $4$-manifolds,''
+\textit{J.\ Diff.\ Geom.} \textbf{25}, 363--430 (1987).
+
+\bibitem{hawking_ellis}
+S.~W.~Hawking and G.~F.~R.~Ellis,
+\textit{The Large Scale Structure of Space-Time}
+(Cambridge University Press, 1973).
+
+\bibitem{halliwell}
+J.~J.~Halliwell,
+``Derivation of the Wheeler--DeWitt equation from a path integral for
+minisuperspace models,''
+\textit{Phys.\ Rev.\ D} \textbf{38}, 2468 (1988).
+
+\bibitem{banks}
+T.~Banks,
+``TCP, quantum gravity, the cosmological constant and all that\ldots,''
+\textit{Nucl.\ Phys.\ B} \textbf{249}, 332 (1985).
+
+\bibitem{marletto_vedral}
+C.~Marletto and V.~Vedral,
+``Evolution without evolution and without ambiguities,''
+\textit{Phys.\ Rev.\ D} \textbf{95}, 043510 (2017).
+
+\bibitem{osterwalder_schrader}
+K.~Osterwalder and R.~Schrader,
+``Axioms for Euclidean Green's functions,''
+\textit{Commun.\ Math.\ Phys.} \textbf{31}, 83--112 (1973);
+``Axioms for Euclidean Green's functions.\ II,''
+\textit{Commun.\ Math.\ Phys.} \textbf{42}, 281--305 (1975).
+
+\end{thebibliography}
+
+\end{document}
