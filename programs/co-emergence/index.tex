@@ -671,29 +671,161 @@ there is no universal Hilbert space---the content of
 Axiom~\ref{ax:nohilbert}.
 
 But if mass provides local time, a local Hilbert space exists for massive
-subsystems that carry their own clocks. The Page--Wootters
-mechanism~\cite{page_wootters} makes this precise: apparent time evolution
-is recovered from a globally static state by conditioning on a clock
-subsystem. The clock must be massive---it must experience proper time along
-a timelike worldline. Without mass, the conditioning has no temporal
-reference and the mechanism fails.
+subsystems that carry their own clocks. The standard Page--Wootters
+mechanism~\cite{page_wootters} recovers apparent time evolution from a
+globally static state by conditioning on a clock subsystem. However, it
+presupposes a total Hilbert space $\mathcal{H} = \mathcal{H}_{\mathrm{clock}}
+\otimes \mathcal{H}_{\mathrm{system}}$, conflicting with
+Axiom~\ref{ax:nohilbert}. The measure-theoretic reformulation below
+resolves this circularity.
+
+\begin{definition}[Measure-theoretic clock conditioning]
+\label{def:measure_pw}
+Let $\Sigma = S_1 \times S_2 \times \cdots \times S_k$ be the configuration
+space of smooth structures, and let $\psi^* = F(\psi^*)$ be the
+self-consistency fixed point (Section~\ref{sec:level2}). Define:
+\begin{enumerate}
+\item \textbf{Complex measure.} $\mu(\sigma) = \psi^*_\sigma$ for each
+  $\sigma \in \Sigma$. This is a complex measure determined by
+  self-consistency, not by a Hilbert space inner product.
+\item \textbf{Configuration partition.} Choose a clock subsystem $C = S_1$
+  and system $S = S_2 \times \cdots \times S_k$. This partitions the
+  configuration index set, not a Hilbert space tensor product.
+\item \textbf{Conditional measure.} For each clock value $c \in S_1$,
+  the conditional measure on $S$ is
+  $\mu_{S|c}(s) = \psi^*_{(c,s)}$---the slice of $\psi^*$ with first
+  index fixed to $c$.
+\item \textbf{Conditional density matrix.}
+\begin{equation}
+\rho_{S|c} = \frac{|\mu_{S|c}\rangle\langle\mu_{S|c}|}
+  {\langle\mu_{S|c}|\mu_{S|c}\rangle}\,,
+\label{eq:cond_dm}
+\end{equation}
+where $|\mu_{S|c}\rangle$ denotes the conditional measure viewed as an
+$L^2$ vector. The $L^2$ structure arises from the normalization
+$\|\psi^*\|_2 = 1$, not from a presupposed Hilbert space.
+\end{enumerate}
+The partial-trace density matrix $\rho_S = \mathrm{Tr}_C(|\psi^*\rangle
+\langle\psi^*|)$ is recovered as the mixture
+$\rho_S = \sum_c p(c)\,\rho_{S|c}$, where $p(c) = \|\mu_{S|c}\|^2$.
+\end{definition}
+
+\begin{proposition}[Mixture decomposition]
+\textbf{(Rigorous.)}
+\label{prop:mixture}
+For any $\psi \in \mathbb{C}^N$ with $\|\psi\| = 1$ and any partition
+$\Sigma = C \times S$ with $|C| = d_C$, $|S| = d_S$, $N = d_C d_S$:
+\[
+\sum_{c=1}^{d_C} p(c)\, \rho_{S|c} =
+\mathrm{Tr}_C\!\left(|\psi\rangle\langle\psi|\right),
+\]
+where $\rho_{S|c}$ and $p(c)$ are as in Definition~\ref{def:measure_pw}.
+\end{proposition}
+
+\begin{proof}
+Write $\psi_{(c,s)}$ for the component of $\psi$ at clock value $c$
+and system value $s$. The left side is
+\[
+\sum_c p(c)\,\rho_{S|c} = \sum_c p(c) \cdot
+\frac{\sum_{s,s'} \psi_{(c,s)}\,\overline{\psi_{(c,s')}}\,
+|s\rangle\langle s'|}{p(c)}
+= \sum_c \sum_{s,s'} \psi_{(c,s)}\,\overline{\psi_{(c,s')}}\,
+|s\rangle\langle s'|.
+\]
+The right side, by the definition of partial trace, is
+\[
+\mathrm{Tr}_C(|\psi\rangle\langle\psi|)_{ss'}
+= \sum_c \psi_{(c,s)}\,\overline{\psi_{(c,s')}}.
+\]
+These are identical.
+\end{proof}
+
+\begin{proposition}[Riemannian conditioning is classical]
+\textbf{(Rigorous.)}
+\label{prop:riem_classical}
+Let $\gamma \in \mathbb{R}$ (i.e., $\theta = 0$) and $h \in
+\mathbb{R}^N$. Then the self-consistency fixed point $\psi^*$ is
+real-valued, and every conditional density matrix $\rho_{S|c}$ has
+real entries. In particular, $\mathrm{Im}(\rho_{S|c}) = 0$ for all~$c$.
+\end{proposition}
+
+\begin{proof}
+The curvature $R_\sigma(\psi) = h_\sigma + \sum_j \alpha_j M_j(\sigma_j) +
+\beta\,|\psi_\sigma|^2$ depends on $\psi$ only through $|\psi_\sigma|^2$,
+so $R_\sigma(\psi) \in \mathbb{R}$ for all $\psi$. With $\gamma \in
+\mathbb{R}$, the self-consistency map $F(\psi)_\sigma = e^{\gamma
+R_\sigma} / \|e^{\gamma R}\|_2$ sends $\mathbb{R}^N$ to $\mathbb{R}^N$.
+The real subspace is therefore invariant under $F$. Since the Banach
+contraction (Section~\ref{sec:level2}) guarantees a unique fixed point in
+$L^2$, and the iteration starting from any real initial condition remains
+real, the fixed point $\psi^* \in \mathbb{R}^N$.
+
+Each conditional slice $\mu_{S|c}(s) = \psi^*_{(c,s)} \in \mathbb{R}$,
+so $\rho_{S|c} = |\mu_{S|c}\rangle\langle\mu_{S|c}| /
+\langle\mu_{S|c}|\mu_{S|c}\rangle$ is a real outer product divided by a
+real scalar.
+\end{proof}
+
+\begin{proposition}[Lorentzian conditioning produces quantum coherences]
+\textbf{(Rigorous.)}
+\label{prop:lor_quantum}
+Let $\theta \neq 0$ and suppose the external field $h$ satisfies the
+genericity condition: there exist clock values $c, c'$ and system
+values $s, s'$ such that
+\begin{equation}
+R_{(c,s)} - R_{(c,s')} \neq R_{(c',s)} - R_{(c',s')} \pmod{2\pi/\theta}.
+\label{eq:genericity}
+\end{equation}
+Then $\arg(\rho_{S|c})_{ss'} \neq \arg(\rho_{S|c'})_{ss'}$: the
+conditional density matrices carry $c$-dependent complex phases.
+\end{proposition}
+
+\begin{proof}
+The fixed point has the form $\psi^*_\sigma \propto \exp((-1 +
+i\theta)\,R_\sigma)$, so $\psi^*_\sigma = |\psi^*_\sigma|\,
+e^{i\theta R_\sigma}$. The off-diagonal entries of $\rho_{S|c}$ are
+\[
+(\rho_{S|c})_{ss'} \propto \psi^*_{(c,s)}\,\overline{\psi^*_{(c,s')}}
+= |\psi^*_{(c,s)}|\,|\psi^*_{(c,s')}|\,
+e^{i\theta(R_{(c,s)} - R_{(c,s')})}.
+\]
+The phase of this entry is $\theta(R_{(c,s)} - R_{(c,s')})$. The
+genericity condition~(\ref{eq:genericity}) states precisely that this
+phase differs between $c$ and $c'$, so
+$\arg(\rho_{S|c})_{ss'} \neq \arg(\rho_{S|c'})_{ss'}$.
+
+The condition holds generically: since $R_\sigma = h_\sigma + \sum_j
+\alpha_j M_j(\sigma_j) + \beta\,|\psi^*_\sigma|^2$ and $h_\sigma$
+depends on all indices of $\sigma$ including the clock index, the
+curvature differences $R_{(c,s)} - R_{(c,s')}$ and $R_{(c',s)} -
+R_{(c',s')}$ are equal only if $h_{(c,s)} - h_{(c,s')} = h_{(c',s)} -
+h_{(c',s')}$ (modulo corrections from $\alpha$, $\beta$ terms). For
+generic $h$, this is a codimension-1 condition and therefore fails.
+
+The toy model (Section~\ref{sec:toy_model}) confirms this across
+$N = 4$ to $32$: Lorentzian $\rho_{S|c}$ has
+$\|\mathrm{Im}(\rho_{S|c})\|_F \sim 0.2$--$0.3$ with $c$-dependent
+variation, while Riemannian $\rho_{S|c}$ has identically zero imaginary
+content.
+\end{proof}
+
+\begin{remark}[Physical interpretation]
+\label{rem:pw_lorentzian}
+Propositions~\ref{prop:riem_classical} and~\ref{prop:lor_quantum}
+together establish that measure conditioning distinguishes signatures:
+Riemannian conditioning produces only classical conditional
+distributions (real $\rho_{S|c}$, no interference), while Lorentzian
+conditioning produces genuinely different quantum states for different
+clock values (complex coherences that vary with $c$). The latter is the
+algebraic content of ``time evolution''---the clock-conditioned state
+carries $c$-dependent quantum information. No total Hilbert space was
+assumed; only the configuration space partition and $L^2$ normalization
+of the self-consistency measure were used.
+\end{remark}
 
 This is how Axiom~\ref{ax:nohilbert} is realized: Hilbert space is not
-fundamental but is derived via the Page--Wootters mechanism from mass and
+fundamental but is derived via measure conditioning from mass and
 Lorentzian signature.
-
-\begin{remark}[Acknowledged gap]
-\label{rem:pw_gap}
-The Page--Wootters mechanism as standardly formulated presupposes a total
-Hilbert space $\mathcal{H} = \mathcal{H}_{\mathrm{clock}} \otimes
-\mathcal{H}_{\mathrm{system}}$ and a global Hamiltonian constraint
-$\hat{H}|\Psi\rangle = 0$. This conflicts with Axiom~\ref{ax:nohilbert}:
-the total Hilbert space is assumed, not derived. A fully consistent
-treatment requires reformulating the Page--Wootters mechanism without a
-fundamental Hilbert space---using instead the marginal of the
-smooth-structure measure $\mu^*$ (Section~\ref{sec:level3}). This
-reformulation is an open problem (Section~\ref{sec:open}).
-\end{remark}
 
 %----------------------------------------------------------------------
 \subsection{Local Hilbert space closes the loop}
@@ -1156,6 +1288,13 @@ time exists along timelike geodesics, but without massive clock
 subsystems the Page--Wootters conditioning has no temporal reference.
 Level~3 collapses.
 
+The measure-theoretic conditioning of Definition~\ref{def:measure_pw}
+refines the marginal $\mu^*_\mathcal{R}$: where marginalization averages
+over all clock values to produce $\rho_\mathcal{R}$, conditioning on a
+specific clock value $c$ yields $\rho_{\mathcal{R}|c}$, recovering the
+Page--Wootters structure without a total Hilbert space. The marginal is the
+mixture $\rho_\mathcal{R} = \sum_c p(c)\,\rho_{\mathcal{R}|c}$.
+
 \begin{remark}[Why marginalization produces quantum statistics]
 The argument for Conjecture~\ref{conj:qm} parallels the derivation of the
 canonical ensemble from microcanonical statistics: integrating out the
@@ -1440,12 +1579,19 @@ whether quantum \emph{algebraic structure} emerges (it does) to whether
 \emph{dynamical} aspects---unitary time evolution, the measurement
 process---can be derived from self-consistency.
 
-Separately, the Page--Wootters mechanism as standardly formulated
-presupposes a total Hilbert space (Remark~\ref{rem:pw_gap}). Reformulating
-it as an operation on measures rather than Hilbert space vectors, and
-showing that the conditioning on a massive clock subsystem requires the
-metric to be Lorentzian, would promote the co-emergence thesis from
-Conjecture to Sketch.
+The measure-theoretic clock conditioning
+(Definition~\ref{def:measure_pw}) resolves the circularity in the
+Page--Wootters mechanism: the conditioning is reformulated as an
+operation on the self-consistency measure $\mu^*$, without presupposing
+a total Hilbert space. The mixture decomposition
+(Proposition~\ref{prop:mixture}), the classical character of Riemannian
+conditioning (Proposition~\ref{prop:riem_classical}), and the quantum
+character of Lorentzian conditioning
+(Proposition~\ref{prop:lor_quantum}) are all Rigorous. The remaining
+open question is whether the conditional density matrix $\rho_{S|c}$
+(eq.~\ref{eq:cond_dm}) converges to the standard Page--Wootters form in
+appropriate limits---i.e., whether the $c$-dependence reduces to unitary
+time evolution for semiclassical clock subsystems.
 
 \item \textbf{The Level~0 manifold class.}
 Which 4-manifolds admit both Lorentzian metrics ($\chi = 0$) and
