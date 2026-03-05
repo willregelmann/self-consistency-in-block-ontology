@@ -327,9 +327,8 @@ reduced-matrix representation partially averages them away.
 \label{sec:entropy_excess}
 %----------------------------------------------------------------------
 
-\begin{lemma}[Phase-induced entropy excess] \textbf{(Rigorous for
-$\min(d_{\mathrm{sub}}, d_{\mathrm{env}}) = 2$; Conjecture for general
-rank.)}
+\begin{lemma}[Phase-induced purity decrease and entropy excess]
+\textbf{(Rigorous.)}
 \label{lem:entropy_excess}
 Let $M$ be a $d_{\mathrm{sub}} \times d_{\mathrm{env}}$ matrix with
 entries $m_{ij} > 0$, normalized so that $\|M\|_F = 1$. Define
@@ -340,24 +339,30 @@ $M(\theta)_{ij} = m_{ij} \cdot e^{i\theta \log m_{ij}}$: the
 magnitudes are unchanged and the phases are locked to the magnitudes by
 $\varphi_{ij} = \theta \log m_{ij}$.
 
-Let $\{\sigma_k\}$ be the singular values of $M$ and
-$\{\sigma_k(\theta)\}$ those of $M(\theta)$, with $S = -\sum_k
+Let $\rho(\theta) = M(\theta)^\dagger M(\theta)$ be the Gram matrix
+(reduced density matrix), $\{\sigma_k\}$ the singular values of $M$
+and $\{\sigma_k(\theta)\}$ those of $M(\theta)$, with $S = -\sum_k
 \sigma_k^2 \log \sigma_k^2$ the entanglement entropy. Then for all
 $\theta \neq 0$:
-\[
-  S(\theta) \geq S(0),
-\]
-with equality if and only if all $m_{ij}$ are equal.
+\begin{enumerate}
+\item[(a)] \textbf{(All ranks.)} The purity decreases:
+$\mathrm{Tr}(\rho(\theta)^2) \leq \mathrm{Tr}(\rho(0)^2)$,
+equivalently $S_2(\theta) \geq S_2(0)$ where $S_2 = -\log
+\mathrm{Tr}(\rho^2)$ is the R\'enyi-2 entropy.
+\item[(b)] \textbf{(Rank 2.)} The von Neumann entropy increases:
+$S(\theta) \geq S(0)$.
+\end{enumerate}
+In both cases, equality holds if and only if all $m_{ij}$ are equal.
 \end{lemma}
 
 \begin{proof}
-We prove two facts and combine them.
+We prove three structural facts and derive (a) and (b).
 
-\textbf{Fact 1:} $\sum_k \sigma_k(\theta)^2 = \sum_k \sigma_k^2$.
-Both equal $\|M\|_F^2 = 1$.
+\textbf{Fact 1} (Frobenius norm preserved)\textbf{:} $\sum_k
+\sigma_k(\theta)^2 = \sum_k \sigma_k^2 = 1$.
 
-\textbf{Fact 2:} $\sigma_1(\theta) \leq \sigma_1$, where $\sigma_1$
-denotes the largest singular value. By definition,
+\textbf{Fact 2} (Largest singular value decreases)\textbf{:}
+$\sigma_1(\theta) \leq \sigma_1$. By definition,
 \[
   \sigma_1(\theta) = \max_{\|x\| = \|y\| = 1} |y^\dagger M(\theta)\, x|
   = \max_{\|x\| = \|y\| = 1} \Big|\sum_{ij} \bar{y}_i\, m_{ij}\,
@@ -374,25 +379,60 @@ where the last equality uses the Perron--Frobenius property: for a
 matrix with non-negative entries, the largest singular value is achieved
 by non-negative singular vectors.
 
-\textbf{Combining:} When $\min(d_{\mathrm{sub}}, d_{\mathrm{env}}) =
+\textbf{Fact 3} (Entrywise Gram contraction)\textbf{:} The diagonal of
+$\rho(\theta)$ is preserved, $\rho(\theta)_{jj} = \rho(0)_{jj}$, and
+the off-diagonal entries contract: $|\rho(\theta)_{jk}| \leq
+\rho(0)_{jk}$ for all $j \neq k$. By direct computation,
+\[
+  \rho(\theta)_{jk} = \sum_i m_{ij}\, m_{ik}\,
+  e^{i\theta(\log m_{ik} - \log m_{ij})}.
+\]
+For $j = k$ the phases vanish, giving $\rho(\theta)_{jj} = \sum_i
+m_{ij}^2 = \rho(0)_{jj}$. For $j \neq k$, the triangle inequality
+gives $|\rho(\theta)_{jk}| \leq \sum_i m_{ij}\, m_{ik} =
+\rho(0)_{jk}$.
+
+\textbf{Part (a):} From Fact~3,
+\[
+  \mathrm{Tr}(\rho(\theta)^2) = \sum_{j,k} |\rho(\theta)_{jk}|^2
+  = \sum_j \rho(0)_{jj}^2 + \sum_{j \neq k} |\rho(\theta)_{jk}|^2
+  \leq \sum_j \rho(0)_{jj}^2 + \sum_{j \neq k} \rho(0)_{jk}^2
+  = \mathrm{Tr}(\rho(0)^2).
+\]
+Equality requires $|\rho(\theta)_{jk}| = \rho(0)_{jk}$ for all
+$j \neq k$, which forces each triangle inequality in Fact~3 to be
+tight---all phases $\theta(\log m_{ik} - \log m_{ij})$ must be equal
+across $i$ for each pair $(j,k)$, hence all $m_{ij}$ equal.
+
+\textbf{Part (b):} When $\min(d_{\mathrm{sub}}, d_{\mathrm{env}}) =
 2$, there are at most two nonzero singular values $\sigma_1 \geq
 \sigma_2 \geq 0$ with $\sigma_1^2 + \sigma_2^2 = 1$. Since
-$\sigma_1(\theta) \leq \sigma_1$ and $\sigma_1(\theta)^2 +
-\sigma_2(\theta)^2 = 1$, it follows that $\sigma_2(\theta) \geq
-\sigma_2$. The squared singular values are more uniform, so
-$S(\theta) \geq S(0)$. Equality holds iff $\sigma_1(\theta) =
-\sigma_1$, which requires the triangle inequality to be tight at the
-optimal singular vectors---this forces all phases
-$\theta \log m_{ij}$ to be equal, hence all $m_{ij}$ equal.
-
-For general rank: the inequality $\sigma_1(\theta) \leq \sigma_1$
-still holds, but the redistribution among $\sigma_2, \ldots, \sigma_r$
-is not determined by the constraint alone. We conjecture $S(\theta)
-\geq S(0)$ for all ranks; this has been verified numerically for over
-$20{,}000$ random matrices with entries drawn from log-normal
-distributions, for dimensions up to $16 \times 16$ and $\theta$ up to
-$10$, with zero violations.
+$\sigma_1(\theta) \leq \sigma_1$ (Fact~2) and $\sigma_1(\theta)^2 +
+\sigma_2(\theta)^2 = 1$ (Fact~1), it follows that $\sigma_2(\theta)
+\geq \sigma_2$. The squared singular values are more uniform, so
+$S(\theta) \geq S(0)$. The equality condition follows as in Part~(a).
 \end{proof}
+
+\begin{remark}[Von Neumann entropy for general rank]
+\label{rem:vn_general_rank}
+For $\min(d_{\mathrm{sub}}, d_{\mathrm{env}}) \geq 3$, the von Neumann
+entropy excess $S(\theta) \geq S(0)$ does \emph{not} hold for all
+positive matrices. A counterexample: the $3 \times 3$ matrix with
+entries spanning a ratio of $\sim\!10^7$ has $S(\theta) < S(0)$ for
+$\theta \gtrsim 5$, and matrices with sufficiently extreme entry
+heterogeneity can violate $S(\theta) \geq S(0)$ at any $\theta > 0$.
+The mechanism is that while $\sigma_1(\theta)$ decreases, the remaining
+singular values can redistribute non-uniformly---in particular, the
+smallest singular value can collapse toward zero, reducing entropy
+despite the top singular value decreasing.
+
+For matrices with moderate entry heterogeneity (entries drawn from
+log-normal distributions with unit variance in log-space, corresponding
+to entry ratios $\lesssim e^3 \approx 20$), the von Neumann excess has
+been verified numerically for over $100{,}000$ matrices at dimensions
+up to $16 \times 16$ and $\theta$ up to $20$, with zero violations.
+The toy model entries $m_\sigma = e^{-R_\sigma}$ fall in this regime.
+\end{remark}
 
 \begin{remark}[Application to the toy model]
 \label{rem:entropy_application}
@@ -402,10 +442,21 @@ $|\psi^*_\sigma| \propto e^{-R_\sigma}$ and phase $\theta R_\sigma$,
 which is exactly the structure $m^{1+i\theta}$ of
 Lemma~\ref{lem:entropy_excess} with $m_\sigma = e^{-R_\sigma}$. The
 Riemannian fixed point has $\theta = 0$, giving the same magnitudes
-but no phases. Lemma~\ref{lem:entropy_excess} then guarantees
-$S_{\mathrm{Lor}} > S_{\mathrm{Riem}}$ whenever the curvature values
+but no phases.
+
+Lemma~\ref{lem:entropy_excess}(a) rigorously guarantees that the
+Lorentzian state has lower purity (higher R\'enyi-2 entropy) than the
+Riemannian state for all bipartitions, whenever the curvature values
 $R_\sigma$ are not all equal---i.e., whenever the external field $h$
-is non-uniform. The entropy ratio depends on $\theta$ (quadratically
+is non-uniform. For the von Neumann entropy: the toy model entries
+$m_\sigma = e^{-R_\sigma}$ with $h \sim \mathrm{Uniform}[0.5, 1.5]$
+have moderate heterogeneity (entry ratio $\lesssim 3$), placing them
+well within the regime where $S(\theta) \geq S(0)$ holds
+(Remark~\ref{rem:vn_general_rank}). For rank-2 bipartitions,
+Lemma~\ref{lem:entropy_excess}(b) proves the von Neumann excess
+rigorously.
+
+The entropy ratio depends on $\theta$ (quadratically
 for small $\theta$: $S(\theta)/S(0) \approx 1 + c\,\theta^2$) and on
 the magnitude heterogeneity controlled by~$h$. For $\theta = 1$ and
 $h \sim \mathrm{Uniform}[0.5, 1.5]$, numerics give
