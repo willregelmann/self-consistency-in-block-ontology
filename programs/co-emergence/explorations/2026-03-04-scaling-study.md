@@ -165,7 +165,59 @@ In the physical theory: θ = 1 corresponds to the Lorentzian Wick rotation; h re
 
 5. ~~**Decaying imaginary coherence.**~~ RESOLVED: The N^{-0.6} decay is a projection artifact of the fixed dim-2 window. With proportional subsystem scaling, Im/Re plateaus.
 
-6. **Plateau depends on d_env.** Im/Re ≈ 0.27 for d_env=2, ≈ 0.21 for d_env=3. In the physical theory, d_env corresponds to the number of smooth structures traced out. The continuum limit (d_env → ∞) is not tested and may behave differently.
+6. ~~**Plateau depends on d_env.**~~ RESOLVED: The reduced-density-matrix Im/Re ratio does decay as ~d_env^{-0.6}, but this is a partial-trace averaging effect, not a loss of quantum structure. See "d_env → ∞ test" below.
+
+## d_env → ∞ test (2026-03-05)
+
+### Setup
+
+The Im/Re ratio of the reduced density matrix decays as ~d_env^{-0.6}:
+
+| d_env | Im/Re plateau | S_lor/S_riem |
+|------:|:-------------|:------------|
+| 2 | 0.264 ± 0.029 | 1.656 |
+| 3 | 0.220 ± 0.024 | 1.663 |
+| 4 | 0.184 ± 0.018 | 1.681 |
+| 6 | 0.155 ± 0.031 | 1.687 |
+| 8 | 0.120 ± 0.014 | 1.698 |
+| 12 | 0.085 ± 0.026 | 1.698 |
+| 16 | 0.081 ± 0.011 | 1.704 |
+
+Power law fit: Im/Re = 0.408 · d_env^{-0.58}. This appeared to threaten the mechanism.
+
+### Resolution: examine ψ* directly
+
+The key test: look at the full fixed-point wavefunction ψ*, not the reduced density matrix. Compare Lorentzian and Riemannian phase structure.
+
+**Imaginary fraction of ψ* (after global phase alignment):**
+
+| d_env | d_sub | N | im_frac (Lor) | im_frac (Riem) |
+|------:|------:|---:|:-------------|:-------------|
+| 4 | 16 | 64 | 0.234 ± 0.016 | 0 (exact) |
+| 8 | 16 | 128 | 0.246 ± 0.010 | 0 (exact) |
+| 16 | 16 | 256 | 0.250 ± 0.003 | 0 (exact) |
+
+The Lorentzian ψ* retains ~25% of its norm in the imaginary part at every d_env tested. The fraction **converges upward** toward ~0.25 with contracting variance. The Riemannian ψ* is exactly real.
+
+**Critical test — stripping phases kills the entropy excess:**
+
+| d_env | S_lor | S_riem | S_nophase | S_lor/S_riem | S_nophase/S_riem |
+|------:|------:|-------:|----------:|-------------:|-----------------:|
+| 4 | 0.374 | 0.223 | 0.223 | 1.679 | 1.000 |
+| 8 | 0.536 | 0.316 | 0.316 | 1.697 | 1.000 |
+| 12 | 0.605 | 0.357 | 0.357 | 1.697 | 1.000 |
+
+Setting all phases to zero (ψ → |ψ|, then renormalize) exactly reproduces the Riemannian entropy. The Lorentzian and Riemannian fixed points have **identical magnitude profiles** |ψ_σ|. They differ only in their phase structure. The entire 68% entropy excess comes from the phases.
+
+### Interpretation
+
+The reduced-density-matrix Im/Re decay is a partial-trace averaging effect: when tracing out a large environment, off-diagonal elements of the reduced density matrix sum contributions with different phases, which partially cancel. But:
+
+1. The **full wavefunction** retains its complex character completely (~25% imaginary norm, stable/growing with d_env)
+2. The **entanglement entropy** — which depends on singular values of the state reshaped as a matrix, not on phases in individual matrix elements — captures the full effect of the complex structure
+3. **Phase removal exactly reproduces Riemannian entropy**, proving the entropy excess IS the footprint of the phase structure
+
+The Im/Re decay in the reduced density matrix is the same category of artifact as the original |Im(ρ)| ~ N^{-0.6} decay: a projection effect that makes the quantum signal look weaker than it is, without actually weakening the underlying mechanism.
 
 ## What this changes
 
@@ -173,10 +225,52 @@ The co-emergence conjecture's status for the "derives quantum mechanics" claim:
 - Before this study: mechanism works at finite N, unknown scaling → **uncertain**
 - After visibility correction: the original visibility metric was wrong (classical correlations)
 - After Im(ρ) decay analysis: appeared concerning (N^{-0.6} decay)
-- **After proportional-scaling test: RESOLVED.** The decay was a projection artifact. Im/Re ratio plateaus at ~0.2–0.3 with proportional subsystem scaling. → **positive, mechanism survives**
+- After proportional-scaling test: Im/Re ratio plateaus with proportional scaling → **partially resolved**
+- After d_env scaling: Im/Re in reduced density matrix decays, appeared concerning again
+- **After ψ* phase analysis: RESOLVED.** The full wavefunction retains ~25% imaginary content at all d_env. The entropy excess (S_lor/S_riem ≈ 1.68) IS the footprint of this phase structure. → **positive, mechanism survives**
 
-The next steps:
-1. **Analytical argument** for the Im/Re ratio plateau — why does it stabilize, and what sets the plateau value?
-2. **d_env → ∞ limit** — does the Im/Re plateau value approach 0 as d_env grows? If Im/Re → 0 as d_env → ∞, the projection-artifact concern resurfaces in a subtler form.
-3. **Comparison with Haar-random states** — for random pure states in ℂ^N, what is the expected Im/Re ratio? If self-consistent fixed points have less or more imaginary content than random, that reveals whether the mechanism creates or suppresses quantum phases.
-4. **S_lor/S_riem ≈ 1.67** — why this value? Is it universal or parameter-dependent?
+## Analytical result: phase-induced entropy excess (2026-03-05)
+
+### The mechanism
+
+The Lorentzian fixed point has ψ*_σ ∝ exp((-1+iθ)R_σ), so |ψ*_σ| = exp(-R_σ) and phase_σ = θR_σ. Equivalently, ψ*_σ = |ψ*_σ|^{1+iθ} — the phases are **locked to the magnitudes**. (Correlation between phase and -log|ψ| is exactly 1.000000.)
+
+Reshaping ψ* into a d_sub × d_env matrix M, the Lorentzian M(θ) has entries m_{ij}^{1+iθ} while the Riemannian M(0) has entries m_{ij}.
+
+**Key facts:**
+1. **||M(θ)||_F = ||M(0)||_F** — the Frobenius norm is invariant (phases don't change magnitudes), so Σσ_k² is the same.
+2. **σ₁(M(θ)) ≤ σ₁(M(0))** — the largest singular value decreases. Proof: by the triangle inequality and Perron-Frobenius (the max of |y†M(θ)x| over unit vectors can't exceed the max of Σ|y_i|m_{ij}|x_j|, which equals σ₁(M) since M has non-negative entries).
+3. **For rank 2** (d_sub=2 or d_env=2): with only two singular values, Σσ² fixed and σ₁ decreased forces σ₂ to increase → more uniform → higher entropy. **This proves S_Lor > S_Riem.**
+
+For the 2×2 case, we also have the explicit formula:
+|det M(θ)|² - |det M(0)|² = 2·(ad)(bc)·(1 - cos(θ log(ad/bc))) ≥ 0
+
+**Equality** holds iff all m_{ij} are equal (i.e., h_σ = const → trivial uniform fixed point).
+
+### The general rank conjecture
+
+For rank > 2, the redistribution of singular values is not determined by σ₁ decreasing alone (majorization fails in ~2% of random matrices). However, the entropy inequality S(θ) ≥ S(0) holds in every test: 20,000+ random matrices, dimensions up to 16×16, θ up to 10, zero violations. This is conjectured to hold for all positive matrices.
+
+### What determines the ratio value
+
+The ratio S_Lor/S_Riem ≈ 1.68 is **not universal**. It depends on:
+- **θ** — quadratically for small θ: S(θ)/S(0) ≈ 1 + c·θ². At θ=0 the ratio is exactly 1; at θ=1 it's ~1.69 for our parameters.
+- **h-spread** — controls magnitude heterogeneity. Narrow h ([0.95,1.05]) → ratio ~1.87. Wide h ([0.01,3.0]) → ratio ~1.36. Our default h~U[0.5,1.5] gives ~1.69.
+- **NOT dimensions** — the ratio is independent of d_sub and d_env (confirmed across shapes from 4×4 to 24×8 to 16×16).
+
+Random phases (uniform [0,2π]) on the same magnitudes give ratio ~5.5. The Lorentzian phase structure is very specific — phases are narrowly distributed (std ~0.29 rad) and deterministically locked to magnitudes. The self-consistency map does not produce random phases; it produces the minimal phase structure consistent with the Lorentzian coupling.
+
+### Physical meaning
+
+In the physical theory: θ = 1 (the Wick rotation angle), h represents intrinsic Einstein-Hilbert actions of smooth structures (unknown distribution). The prediction is not the specific ratio value but that:
+1. S_Lor/S_Riem > 1 for any θ > 0 and any non-uniform h (proved for rank 2)
+2. The ratio depends smoothly on θ and the h-distribution
+3. The phases are the sole source of the entropy excess (proved by the stripping test)
+
+This is now Lemma (Phase-induced entropy excess) in the paper, Rigorous for min(d_sub, d_env) = 2 and Conjecture for general rank.
+
+The remaining open steps:
+1. **General rank proof** — extend the entropy inequality beyond rank 2. The obstacle is that majorization fails, so a different proof strategy is needed (perhaps via Schur convexity of entropy composed with a specific singular-value map).
+2. **Analytical formula for the ratio** — express S(θ)/S(0) in terms of the magnitude distribution and θ. The small-θ expansion S(θ)/S(0) ≈ 1 + c·θ² has a coefficient c that depends on the magnitude profile.
+3. **Comparison with Haar-random states** — for random pure states in ℂ^N, what is the expected im_frac? If self-consistent fixed points match Haar, the mechanism produces generic complex states. The ~25% imaginary fraction and ~0.29 rad phase std should be compared to Haar expectations.
+4. **Destructive interference at large d_env** — the reduced density matrix becomes effectively real as d_env grows. Does destructive interference survive in subsystem measurements, or must one access multi-subsystem correlations?
